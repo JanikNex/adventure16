@@ -6,6 +6,8 @@
   
   > Lost Sister - A Mysterious Story
   
+  > Lost Brother - The choice is yours
+  
 ## Ideen
 - Person bekommt Brief von Bruder  / Schwester
 - Brief ist unverständlich Protagonist begibt sich auf Reise in Heimatstadt
