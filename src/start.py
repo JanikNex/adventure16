@@ -1,5 +1,5 @@
-from gui_start import *
-from controller_game import *
+from src.gui_start import *
+from src.controller_game import *
 
 
 class Starter(object):

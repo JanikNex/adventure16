@@ -1,5 +1,5 @@
-from gui_game import *
-from cgame import *
+from src.gui_game import *
+from src.cgame import *
 
 
 class GameController(object):
