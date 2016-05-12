@@ -4,8 +4,10 @@ from sys import exit
 
 
 class GUIStart():
-    def __init__(self, cGameStart):
+    def __init__(self, cGameStart, cTutorialStart, cCreditStart):
         self.cGameStart = cGameStart
+        self.cTutorialStart = cTutorialStart
+        self.cCreditStart = cCreditStart
         try:
             self.fenster = Tk()
             self.fenster.title("Lost Brother")
@@ -17,7 +19,11 @@ class GUIStart():
             self.picture = Label(master=self.masterFrame, image=self.logo)
             self.picture.place(x=0, y=0)
             self.buttonStartGame = Button(master=self.masterFrame, text='Spiel starten', command=self.cGameStart)
-            self.buttonStartGame.place(x=250, y=550)
+            self.buttonStartGame.place(x=300, y=550)
+            self.buttonTutorial = Button(master=self.masterFrame, text='Tutorial', command=self.cTutorialStart)
+            self.buttonTutorial.place(x=100, y=550)
+            self.buttonCredits = Button(master=self.masterFrame, text='Credits', command=self.cCreditStart)
+            self.buttonCredits.place(x=500, y=550)
         except:
             # Kommt es beim erstellen des Fensters zu einem Fehler wird das Programm mit einem Fehler geschlossen
             messagebox.showerror('Fehler', 'Ein Fehler ist aufgetreten und das Programm muss beendet werden!')
