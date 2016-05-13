@@ -10,7 +10,7 @@ class TutorialController(object):
                      'Die Textausgaben, aus denen der größte Teil des Spieles besteht werden in diesem Fenster angezeigt!',
                      'Dein aktueller Aufenthaltsort wird hier angezeigt',
                      'Hier wird dein Ruhm angezeigt. Dieser kann positiv, jedoch auch negativ sein! Dies hängt von DEINEN Entscheidungen ab!',
-                     'dein Inventar kann Gegenstände beinhalten, welche du aufgesammelt hast. Klicke auf einen von diesen um dir Informationen über ihn anzeigen zu lassen',
+                     'Dein Inventar kann Gegenstände beinhalten, welche du aufgesammelt hast. Klicke auf einen von diesen um dir Informationen über ihn anzeigen zu lassen',
                      'Mit den Knöpfen in diesem Feld kannst du dich umschauen und bewegen. Klicke eine der Pfeiltasten an um in die gedrückte Richtung zu schauen!',
                      'Durch betätigen der "Bewegen" Taste kannst du dann dann in die Richtung, in die duu zuletzt geschaut hast bewegen.',
                      'Möchtest du dich nur an deinem Aktuellen Standpunkt umschauen nutze die "Umschauen" Taste',
@@ -84,9 +84,6 @@ class TutorialController(object):
         messagebox.showinfo('Tutorial', 'Ob diese Entscheidung weise war.....wer weiß!')
         self.gui.fenster.quit()
         self.gui.fenster.destroy()
-
-    def textFormat(self, text, every=64):
-        return '\n'.join(text[i:i + every] for i in range(0, len(text), every))
 
     def setText(self, text):
         self.gui.vTextOutput.set(text)
