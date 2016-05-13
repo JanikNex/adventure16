@@ -1,5 +1,5 @@
 from src.gui_credits import *
-import time, threading
+
 
 
 class CreditController(object):
