@@ -21,20 +21,21 @@ class GUIGame():
             self.fenster.title("Lost Brother")
             self.fenster.geometry("1024x600")
             self.fenster.resizable(0, 0)
+            self.fenster.attributes("-topmost", 1)
             # Erstellt alle Elemente der GUI
             # MasterFrame
-            self.masterFrame = Frame(master=self.fenster, bg='black')
+            self.masterFrame = Frame(master=self.fenster)
             self.masterFrame.place(x=0, y=0, width=1024, height=600)
             # LeftFrame
             self.leftFrame = Frame(master=self.masterFrame, width=512, height=600)
             # RightFrame with PArtFrames
             self.rightFrame = Frame(master=self.masterFrame, width=512, height=600)
-            self.rightUpperFrame = Frame(master=self.rightFrame, width=512, height=150, bg='black')
-            self.rightControlFrame = LabelFrame(master=self.rightFrame, width=512, height=225, bg='black', fg='white', text='Steuerung')
-            self.rightChoiceFrame = LabelFrame(master=self.rightFrame, width=512, height=225, bg='black', text='Antwortwahl', fg='white')
-            self.rightUpperInfoFrame = LabelFrame(master=self.rightUpperFrame, width=512, height=75, bg='black', fg='white', text='Spielerinformationen')
-            self.rightUpperInventoryFrame = LabelFrame(master=self.rightUpperFrame, width=512, height=75, bg='black', fg='white', text='Inventar')
-            self.rightControlLookAroundFrame = LabelFrame(master=self.rightControlFrame, text='Bewegung', bg='black', fg='white')
+            self.rightUpperFrame = Frame(master=self.rightFrame, width=512, height=150)
+            self.rightControlFrame = LabelFrame(master=self.rightFrame, width=512, height=225, fg='black', text='Steuerung')
+            self.rightChoiceFrame = LabelFrame(master=self.rightFrame, width=512, height=225, text='Antwortwahl', fg='black')
+            self.rightUpperInfoFrame = LabelFrame(master=self.rightUpperFrame, width=512, height=75, fg='black', text='Spielerinformationen')
+            self.rightUpperInventoryFrame = LabelFrame(master=self.rightUpperFrame, width=512, height=75, fg='black', text='Inventar')
+            self.rightControlLookAroundFrame = LabelFrame(master=self.rightControlFrame, text='Bewegung', fg='black')
             # Positioning onscreen
             self.leftFrame.pack(side="left")
             self.leftFrame.pack_propagate(False)
@@ -63,13 +64,13 @@ class GUIGame():
             self.buttonNext = Button(master=self.leftFrame, height=3, text='Weiter', command=self.cNext)
             self.buttonNext.pack(side='top', fill='x')
             # Infolabels
-            self.placeLabel = Label(master=self.rightUpperInfoFrame,     font=('Arial', 16), text='Ort', fg='white', bg='black')
+            self.placeLabel = Label(master=self.rightUpperInfoFrame,     font=('Arial', 16), text='Ort', fg='black')
             self.placeLabel.grid(row=0, column=0)
-            self.placeOutput = Label(master=self.rightUpperInfoFrame,    font=('Arial', 16), text='irgendwo', fg='white', bg='black')
+            self.placeOutput = Label(master=self.rightUpperInfoFrame,    font=('Arial', 16), text='irgendwo', fg='black')
             self.placeOutput.grid(row=0, column=1)
-            self.prestigeLabel = Label(master=self.rightUpperInfoFrame,  font=('Arial', 16), text='Ruhm', fg='white', bg='black')
+            self.prestigeLabel = Label(master=self.rightUpperInfoFrame,  font=('Arial', 16), text='Ruhm', fg='black')
             self.prestigeLabel.grid(row=1, column=0)
-            self.prestigeOutput = Label(master=self.rightUpperInfoFrame, font=('Arial', 16), text='0', fg='white', bg='black')
+            self.prestigeOutput = Label(master=self.rightUpperInfoFrame, font=('Arial', 16), text='0', fg='black')
             self.prestigeOutput.grid(row=1, column=1)
             # Movement Buttons
             self.buttonNorth = Button(master=self.rightControlLookAroundFrame, width=15, height=2, text='↑', command=self.cNorth)

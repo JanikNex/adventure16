@@ -10,6 +10,7 @@ class GUICredits():
             self.fenster.title("Lost Brother")
             self.fenster.geometry("600x600")
             self.fenster.resizable(0, 0)
+            self.fenster.attributes("-topmost", 1)
             self.background = PhotoImage(file='clouds.gif')
             self.masterFrame = Frame(master=self.fenster)
             self.masterFrame.place(x=0, y=0, width=600, height=600)

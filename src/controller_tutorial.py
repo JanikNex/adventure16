@@ -18,6 +18,7 @@ class TutorialController(object):
                      'Betätige den "Weiter" Button während eines Dialoges um dein Gegenüber weiterreden zu lassen',
                      'Während mancher Dialoge hast du die Möglichkeit eine Entscheidung zu Treffen, nutze dafür einfach einen dieser Buttons',
                      'Wähle Weise! Die Entscheidungen wirken sich auf deinen Ruhm und auf den Verlauf der Geschichte aus!',
+                     'Für das optimale Spielerlebniss sollten Sounds aktiviert sein!',
                      'Viel Spaß']
         # Neues GUI-Objekt
         self.gui = GUIGame(self.buttonLookNorth, self.buttonLookEast, self.buttonLookSouth, self.buttonLookWest,

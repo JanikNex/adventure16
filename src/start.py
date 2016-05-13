@@ -45,7 +45,7 @@ class Starter(object):
         credits = CreditController()
         # Nach beenden der Credits wird der Button wieder aktiviert
         self.start.buttonStartGame.config(state='active')
-        self.start.buttonCredits.config(text='Tutorial', state='active')
+        self.start.buttonCredits.config(text='Credits', state='active')
         self.start.buttonTutorial.config(state='active')
 
 
