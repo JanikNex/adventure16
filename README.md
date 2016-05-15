@@ -27,3 +27,4 @@
 
 ## Sources
 - http://opengameart.org/textures/all
+- https://www.iconfinder.com/icons/60943/cross_delete_remove_x_icon#size=40
