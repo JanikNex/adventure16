@@ -38,6 +38,9 @@ class TutorialController(object):
         self.gui.buttonAnswerB.config(state='disabled')
         self.gui.buttonAnswerC.config(state='disabled')
         self.gui.textInput.config(state='disabled')
+        self.gui.vPrestigeOutput.set(0)
+        self.gui.vPlaceOutput.set('Tutorial')
+        self.tutorial()
         # Aktivierung des Fensters
         self.gui.fenster.mainloop()
 

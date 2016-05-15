@@ -15,3 +15,7 @@ class AudioHandler(object):
         if self.playing:
             self.playing = False
             winsound.PlaySound(None, 0)
+
+    def setFilePath(self, filepath):
+        self.stop()
+        self.file = filepath

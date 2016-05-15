@@ -31,10 +31,14 @@ class GUIGame():
             # RightFrame with PArtFrames
             self.rightFrame = Frame(master=self.masterFrame, width=512, height=600)
             self.rightUpperFrame = Frame(master=self.rightFrame, width=512, height=150)
-            self.rightControlFrame = LabelFrame(master=self.rightFrame, width=512, height=225, fg='black', text='Steuerung')
-            self.rightChoiceFrame = LabelFrame(master=self.rightFrame, width=512, height=225, text='Antwortwahl', fg='black')
-            self.rightUpperInfoFrame = LabelFrame(master=self.rightUpperFrame, width=512, height=75, fg='black', text='Spielerinformationen')
-            self.rightUpperInventoryFrame = LabelFrame(master=self.rightUpperFrame, width=512, height=75, fg='black', text='Inventar')
+            self.rightControlFrame = LabelFrame(master=self.rightFrame, width=512, height=225, fg='black',
+                                                text='Steuerung')
+            self.rightChoiceFrame = LabelFrame(master=self.rightFrame, width=512, height=225, text='Antwortwahl',
+                                               fg='black')
+            self.rightUpperInfoFrame = LabelFrame(master=self.rightUpperFrame, width=512, height=75, fg='black',
+                                                  text='Spielerinformationen')
+            self.rightUpperInventoryFrame = LabelFrame(master=self.rightUpperFrame, width=512, height=75, fg='black',
+                                                       text='Inventar')
             self.rightControlLookAroundFrame = LabelFrame(master=self.rightControlFrame, text='Bewegung', fg='black')
             # Positioning onscreen
             self.leftFrame.pack(side="left")
@@ -49,13 +53,16 @@ class GUIGame():
             # VarStrings
             self.vTextOutput = StringVar(master=self.leftFrame)
             self.vTextInput = StringVar(master=self.leftFrame)
+            self.vPlaceOutput = StringVar(master=self.rightUpperInfoFrame)
+            self.vPrestigeOutput = StringVar(master=self.rightUpperInfoFrame)
             # Logo laden
             self.image = PhotoImage(file='placeholder.gif')
             # Logo einfügen
             self.pictureLabel = Label(master=self.leftFrame, height=150, width=512, image=self.image)
             self.pictureLabel.pack(side='top', fill='x')
             # TextAnzeige
-            self.textOutput = Label(master=self.leftFrame, height=25, width=512, bg='#A3B1B5', textvariable=self.vTextOutput, wraplength=500)
+            self.textOutput = Label(master=self.leftFrame, height=25, width=512, bg='#A3B1B5',
+                                    textvariable=self.vTextOutput, wraplength=500)
             self.textOutput.pack(side='top', fill='x')
             # Texteingabe
             self.textInput = Entry(master=self.leftFrame, bg='grey', fg='white', textvariable=self.vTextInput)
@@ -64,33 +71,70 @@ class GUIGame():
             self.buttonNext = Button(master=self.leftFrame, height=3, text='Weiter', command=self.cNext)
             self.buttonNext.pack(side='top', fill='x')
             # Infolabels
-            self.placeLabel = Label(master=self.rightUpperInfoFrame,     font=('Arial', 16), text='Ort', fg='black')
+            self.placeLabel = Label(master=self.rightUpperInfoFrame, font=('fixedsys', 13), width=5, justify=RIGHT,
+                                    text='Ort:', fg='black')
             self.placeLabel.grid(row=0, column=0)
-            self.placeOutput = Label(master=self.rightUpperInfoFrame,    font=('Arial', 16), text='irgendwo', fg='black')
+            self.placeOutput = Label(master=self.rightUpperInfoFrame, font=('fixedsys', 10), width=20, justify=LEFT,
+                                     textvariable=self.vPlaceOutput, fg='black')
             self.placeOutput.grid(row=0, column=1)
-            self.prestigeLabel = Label(master=self.rightUpperInfoFrame,  font=('Arial', 16), text='Ruhm', fg='black')
+            self.prestigeLabel = Label(master=self.rightUpperInfoFrame, font=('fixedsys', 13), width=5, justify=LEFT,
+                                       text='Ruhm:', fg='black')
             self.prestigeLabel.grid(row=1, column=0)
-            self.prestigeOutput = Label(master=self.rightUpperInfoFrame, font=('Arial', 16), text='0', fg='black')
+            self.prestigeOutput = Label(master=self.rightUpperInfoFrame, font=('fixedsys', 10), width=20, justify=RIGHT,
+                                        textvariable=self.vPrestigeOutput, fg='black')
             self.prestigeOutput.grid(row=1, column=1)
+            # Inventory Buttons
+            self.imageNoIcon = PhotoImage(file='noItem.gif')  # 40x40
+            self.buttonInventory1 = Button(master=self.rightUpperInventoryFrame, image=self.imageNoIcon)
+            self.buttonInventory1.pack(side='left')
+            self.buttonInventory2 = Button(master=self.rightUpperInventoryFrame, image=self.imageNoIcon)
+            self.buttonInventory2.pack(side='left')
+            self.buttonInventory3 = Button(master=self.rightUpperInventoryFrame, image=self.imageNoIcon)
+            self.buttonInventory3.pack(side='left')
+            self.buttonInventory4 = Button(master=self.rightUpperInventoryFrame, image=self.imageNoIcon)
+            self.buttonInventory4.pack(side='left')
+            self.buttonInventory5 = Button(master=self.rightUpperInventoryFrame, image=self.imageNoIcon)
+            self.buttonInventory5.pack(side='left')
+            self.buttonInventory6 = Button(master=self.rightUpperInventoryFrame, image=self.imageNoIcon)
+            self.buttonInventory6.pack(side='left')
+            self.buttonInventory7 = Button(master=self.rightUpperInventoryFrame, image=self.imageNoIcon)
+            self.buttonInventory7.pack(side='left')
+            self.buttonInventory8 = Button(master=self.rightUpperInventoryFrame, image=self.imageNoIcon)
+            self.buttonInventory8.pack(side='left')
+            self.buttonInventory9 = Button(master=self.rightUpperInventoryFrame, image=self.imageNoIcon)
+            self.buttonInventory9.pack(side='left')
+            self.buttonInventory10 = Button(master=self.rightUpperInventoryFrame, image=self.imageNoIcon)
+            self.buttonInventory10.pack(side='left')
+            self.buttonInventory11 = Button(master=self.rightUpperInventoryFrame, image=self.imageNoIcon)
+            self.buttonInventory11.pack(side='left')
             # Movement Buttons
-            self.buttonNorth = Button(master=self.rightControlLookAroundFrame, width=15, height=2, text='↑', command=self.cNorth)
+            self.buttonNorth = Button(master=self.rightControlLookAroundFrame, width=15, height=2, text='↑',
+                                      command=self.cNorth)
             self.buttonNorth.grid(row=0, column=1)
-            self.buttonEast = Button(master=self.rightControlLookAroundFrame, width=15, height=2, text='→', command=self.cEast)
+            self.buttonEast = Button(master=self.rightControlLookAroundFrame, width=15, height=2, text='→',
+                                     command=self.cEast)
             self.buttonEast.grid(row=1, column=2)
-            self.buttonSouth = Button(master=self.rightControlLookAroundFrame, width=15, height=2, text='↓', command=self.cSouth)
+            self.buttonSouth = Button(master=self.rightControlLookAroundFrame, width=15, height=2, text='↓',
+                                      command=self.cSouth)
             self.buttonSouth.grid(row=2, column=1)
-            self.buttonWest = Button(master=self.rightControlLookAroundFrame, width=15, height=2, text='←', command=self.cWest)
+            self.buttonWest = Button(master=self.rightControlLookAroundFrame, width=15, height=2, text='←',
+                                     command=self.cWest)
             self.buttonWest.grid(row=1, column=0)
             # Look Button
-            self.buttonLook = Button(master=self.rightControlFrame, width=45, height=2, text='Umschauen', command=self.cLook)
+            self.buttonLook = Button(master=self.rightControlFrame, width=45, height=2, text='Umschauen',
+                                     command=self.cLook)
             self.buttonLook.pack()
             # Move Button
-            self.buttonMove = Button(master=self.rightControlLookAroundFrame, width=15, height=2, text='Bewegen', command=self.cMove)
+            self.buttonMove = Button(master=self.rightControlLookAroundFrame, width=15, height=2, text='Bewegen',
+                                     command=self.cMove)
             self.buttonMove.grid(row=1, column=1)
             # Reaction Buttons
-            self.buttonAnswerA = Button(master=self.rightChoiceFrame, width=15, height=1, text='Antwort A', state='disabled', command=self.cAnswerA)
-            self.buttonAnswerB = Button(master=self.rightChoiceFrame, width=15, height=1, text='Antwort B', state='disabled', command=self.cAnswerB)
-            self.buttonAnswerC = Button(master=self.rightChoiceFrame, width=15, height=1, text='Antwort C', state='disabled', command=self.cAnswerC)
+            self.buttonAnswerA = Button(master=self.rightChoiceFrame, width=15, height=1, text='Antwort A',
+                                        state='disabled', command=self.cAnswerA)
+            self.buttonAnswerB = Button(master=self.rightChoiceFrame, width=15, height=1, text='Antwort B',
+                                        state='disabled', command=self.cAnswerB)
+            self.buttonAnswerC = Button(master=self.rightChoiceFrame, width=15, height=1, text='Antwort C',
+                                        state='disabled', command=self.cAnswerC)
             self.buttonAnswerA.pack(pady=20)
             self.buttonAnswerB.pack(pady=20)
             self.buttonAnswerC.pack(pady=20)

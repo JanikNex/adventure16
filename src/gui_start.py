@@ -31,5 +31,3 @@ class GUIStart():
             self.fenster.quit()
             self.fenster.destroy()
             sys.exit(0)
-
-

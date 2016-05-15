@@ -23,7 +23,7 @@
 - Dialoge bieten unterschiedliche Entscheidungsmöglichkeiten, welche den Verlauf der Story beeinflussen
 - *Spielstand soll in Datei (JSON Format?) gespeichert werden*
 - *Spielstand soll aus Datei (durch Filebrowser selektierbar) geladen werden können*
-- ~~Texte sollen extern in einer Datei (JSON?) gespeichert werden und daraus ausgelesen werden~~
+- *Texte sollen extern in einer Datei (JSON?) gespeichert werden und daraus ausgelesen werden*
 
 ## Sources
 - http://opengameart.org/textures/all

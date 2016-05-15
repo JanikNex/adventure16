@@ -22,7 +22,7 @@ class CreditController(object):
         self.gui.fenster.protocol("WM_DELETE_WINDOW", self.windowCloseEvent)
         self.gui.fenster.bind("<Return>", self.windowCloseEvent)
         # Beginnen der Präsentation
-        self.gui.fenster.after(2500, self.nextPhase)
+        self.gui.fenster.after(6000, self.nextPhase)
         # Aktivierung des Fensters
         self.gui.fenster.mainloop()
 
@@ -39,7 +39,7 @@ class CreditController(object):
         if self.phase <= (len(self.text)-1):
             self.setText(self.text[self.phase])
             self.phase += 1
-            self.gui.fenster.after(2500, self.nextPhase)
+            self.gui.fenster.after(4000, self.nextPhase)
 
 
 if __name__ == '__main__':
