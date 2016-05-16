@@ -4,7 +4,7 @@ from sys import exit
 
 
 class GUIGame():
-    def __init__(self, cNorth, cEast, cSouth, cWest, cMove, cLook, cNext, cAnswerA, cAnswerB, cAnswerC):
+    def __init__(self, cNorth, cEast, cSouth, cWest, cMove, cLook, cNext, cAnswerA, cAnswerB, cAnswerC, cInventory):
         self.cNorth = cNorth
         self.cEast = cEast
         self.cSouth = cSouth
@@ -15,6 +15,7 @@ class GUIGame():
         self.cAnswerA = cAnswerA
         self.cAnswerB = cAnswerB
         self.cAnswerC = cAnswerC
+        self.cInventory = cInventory
         try:
             # Erstellt das Spielfenster
             self.fenster = Toplevel()
@@ -62,7 +63,7 @@ class GUIGame():
             self.pictureLabel.pack(side='top', fill='x')
             # TextAnzeige
             self.textOutput = Label(master=self.leftFrame, height=25, width=512, bg='#A3B1B5',
-                                    textvariable=self.vTextOutput, wraplength=500)
+                                    textvariable=self.vTextOutput, wraplength=500, justify=LEFT)
             self.textOutput.pack(side='top', fill='x')
             # Texteingabe
             self.textInput = Entry(master=self.leftFrame, bg='grey', fg='white', textvariable=self.vTextInput)
@@ -85,27 +86,27 @@ class GUIGame():
             self.prestigeOutput.grid(row=1, column=1)
             # Inventory Buttons
             self.imageNoIcon = PhotoImage(file='noItem.gif')  # 40x40
-            self.buttonInventory1 = Button(master=self.rightUpperInventoryFrame, image=self.imageNoIcon)
+            self.buttonInventory1 = Button(master=self.rightUpperInventoryFrame, state='disabled', image=self.imageNoIcon, command= lambda: cInventory(0))
             self.buttonInventory1.pack(side='left')
-            self.buttonInventory2 = Button(master=self.rightUpperInventoryFrame, image=self.imageNoIcon)
+            self.buttonInventory2 = Button(master=self.rightUpperInventoryFrame, state='disabled', image=self.imageNoIcon, command= lambda: cInventory(1))
             self.buttonInventory2.pack(side='left')
-            self.buttonInventory3 = Button(master=self.rightUpperInventoryFrame, image=self.imageNoIcon)
+            self.buttonInventory3 = Button(master=self.rightUpperInventoryFrame, state='disabled', image=self.imageNoIcon, command= lambda: cInventory(2))
             self.buttonInventory3.pack(side='left')
-            self.buttonInventory4 = Button(master=self.rightUpperInventoryFrame, image=self.imageNoIcon)
+            self.buttonInventory4 = Button(master=self.rightUpperInventoryFrame, state='disabled', image=self.imageNoIcon, command= lambda: cInventory(3))
             self.buttonInventory4.pack(side='left')
-            self.buttonInventory5 = Button(master=self.rightUpperInventoryFrame, image=self.imageNoIcon)
+            self.buttonInventory5 = Button(master=self.rightUpperInventoryFrame, state='disabled', image=self.imageNoIcon, command= lambda: cInventory(4))
             self.buttonInventory5.pack(side='left')
-            self.buttonInventory6 = Button(master=self.rightUpperInventoryFrame, image=self.imageNoIcon)
+            self.buttonInventory6 = Button(master=self.rightUpperInventoryFrame, state='disabled', image=self.imageNoIcon, command= lambda: cInventory(5))
             self.buttonInventory6.pack(side='left')
-            self.buttonInventory7 = Button(master=self.rightUpperInventoryFrame, image=self.imageNoIcon)
+            self.buttonInventory7 = Button(master=self.rightUpperInventoryFrame, state='disabled', image=self.imageNoIcon, command= lambda: cInventory(6))
             self.buttonInventory7.pack(side='left')
-            self.buttonInventory8 = Button(master=self.rightUpperInventoryFrame, image=self.imageNoIcon)
+            self.buttonInventory8 = Button(master=self.rightUpperInventoryFrame, state='disabled', image=self.imageNoIcon, command= lambda: cInventory(7))
             self.buttonInventory8.pack(side='left')
-            self.buttonInventory9 = Button(master=self.rightUpperInventoryFrame, image=self.imageNoIcon)
+            self.buttonInventory9 = Button(master=self.rightUpperInventoryFrame, state='disabled', image=self.imageNoIcon, command= lambda: cInventory(8))
             self.buttonInventory9.pack(side='left')
-            self.buttonInventory10 = Button(master=self.rightUpperInventoryFrame, image=self.imageNoIcon)
+            self.buttonInventory10 = Button(master=self.rightUpperInventoryFrame, state='disabled', image=self.imageNoIcon, command= lambda: cInventory(9))
             self.buttonInventory10.pack(side='left')
-            self.buttonInventory11 = Button(master=self.rightUpperInventoryFrame, image=self.imageNoIcon)
+            self.buttonInventory11 = Button(master=self.rightUpperInventoryFrame, state='disabled', image=self.imageNoIcon, command= lambda: cInventory(10))
             self.buttonInventory11.pack(side='left')
             # Movement Buttons
             self.buttonNorth = Button(master=self.rightControlLookAroundFrame, width=15, height=2, text='↑',

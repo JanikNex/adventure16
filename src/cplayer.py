@@ -38,7 +38,7 @@ class Player(object):
         Gibt True oder False zurück, ob der Spieler gerade mit etwas interagiert
         :return: bool
         """
-        return self.interactingWith is not None
+        return self.interactingWith != None
 
     def enterPlace(self, place):
         """
@@ -57,23 +57,31 @@ class Player(object):
         """
         if self.place.canLeave() and not self.isInteracting():
             if self.facing == 'n':
-                if self.place.getPlaceInDirection(0).canEnter():
-                    self.enterPlace(self.place.getPlaceInDirection(0))
+                if self.place.getNeigbours()[0] is not None:
+                    if self.place.getPlaceInDirection(0).canEnter():
+                        self.enterPlace(self.place.getPlaceInDirection(0))
+                        return True
                 else:
                     return False
             elif self.facing == 'e':
-                if self.place.getPlaceInDirection(1).canEnter():
-                    self.enterPlace(self.place.getPlaceInDirection(1))
+                if self.place.getNeigbours()[1] is not None:
+                    if self.place.getPlaceInDirection(1).canEnter():
+                        self.enterPlace(self.place.getPlaceInDirection(1))
+                        return True
                 else:
                     return False
             elif self.facing == 's':
-                if self.place.getPlaceInDirection(2).canEnter():
-                    self.enterPlace(self.place.getPlaceInDirection(2))
+                if self.place.getNeigbours()[2] is not None:
+                    if self.place.getPlaceInDirection(2).canEnter():
+                        self.enterPlace(self.place.getPlaceInDirection(2))
+                        return True
                 else:
                     return False
             elif self.facing == 'w':
-                if self.place.getPlaceInDirection(3).canEnter():
-                    self.enterPlace(self.place.getPlaceInDirection(3))
+                if self.place.getNeigbours()[3] is not None:
+                    if self.place.getPlaceInDirection(3).canEnter():
+                        self.enterPlace(self.place.getPlaceInDirection(3))
+                        return True
                 else:
                     return False
         return False
@@ -90,6 +98,9 @@ class Player(object):
     def getPrestige(self):
         return self.prestige
 
+    def getInventory(self):
+        return self.inventory
+
     def setPrestige(self, new):
         self.prestige = new
 
@@ -99,8 +110,26 @@ class Player(object):
     def increasePrestige(self, value):
         self.prestige += value
 
+    def startInteractWith(self, object):
+        self.interactingWith = object
+
+    def endInteraction(self):
+        self.interactingWith = None
+
+    def getInteraction(self):
+        return self.interactingWith
+
+    def pickUpItem(self, item):
+        if not self.inventory.isFull() and not item.inInventory():
+            item.take()
+            self.inventory.addItem(item)
+            self.place.removeItem(item)
+
     def canMove(self):
         if self.isInteracting() and (len(self.getPossibleDirections())-self.getPossibleDirections().count(None)) == 4:
             return False
         else:
             return True
+
+    def nextInteraction(self):
+        pass

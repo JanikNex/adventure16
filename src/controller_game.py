@@ -9,11 +9,16 @@ class GameController(object):
         # Neues GUI-Objekt
         self.gui = GUIGame(self.buttonLookNorth, self.buttonLookEast, self.buttonLookSouth, self.buttonLookWest,
                            self.buttonMove, self.buttonLook, self.buttonNext, self.buttonAnswerA,
-                           self.buttonAnswerB, self.buttonAnswerC)
+                           self.buttonAnswerB, self.buttonAnswerC, self.buttonInventory)
         # Registrierung des WindowClose Event-Handlers
         self.gui.fenster.protocol("WM_DELETE_WINDOW", self.windowCloseEvent)
+        # Bilder initialisieren
+        self.ImageNoItem = PhotoImage(file='noItem.gif')
+        self.ImageInventorySlot = [None, None, None, None, None, None, None, None, None, None, None]
         # GUI an Spielstart anpassen
         self.updateGUI()
+        # Einmal umschauen um den Spieleinstieg zu erleichtern
+        self.buttonLook()
         # Aktivierung des Fensters
         self.gui.fenster.mainloop()
 
@@ -25,34 +30,76 @@ class GameController(object):
 
     def buttonLookNorth(self):
         self.game.getPlayer().setFacing('n')
-        self.game.getPlayer().getPlace().getPlaceInDirection(0).getDescription()
+        self.textOutputDesciption(self.game.getPlayer().getPlace().getPlaceInDirection(0).getDescription())
         self.updateGUI()
 
     def buttonLookEast(self):
         self.game.getPlayer().setFacing('e')
-        self.game.getPlayer().getPlace().getPlaceInDirection(1).getDescription()
+        self.textOutputDesciption(self.game.getPlayer().getPlace().getPlaceInDirection(1).getDescription())
         self.updateGUI()
 
     def buttonLookSouth(self):
         self.game.getPlayer().setFacing('s')
-        self.game.getPlayer().getPlace().getPlaceInDirection(2).getDescription()
+        self.textOutputDesciption(self.game.getPlayer().getPlace().getPlaceInDirection(2).getDescription())
         self.updateGUI()
 
     def buttonLookWest(self):
         self.game.getPlayer().setFacing('w')
-        self.game.getPlayer().getPlace().getPlaceInDirection(3).getDescription()
+        self.textOutputDesciption(self.game.getPlayer().getPlace().getPlaceInDirection(3).getDescription())
         self.updateGUI()
 
     def buttonLook(self):
-        self.textOutputDesciption((self.game.getPlayer().getPlace().getDescription(), '\n', self.game.getPlayer().canMove()))
+        self.textOutputDesciption(self.game.getPlayer().getPlace().getDescription())
+        self.textOutputInteraction(self.game.getPlayer().getPlace().getInteractableThingsAsString())
         self.updateGUI()
 
     def buttonNext(self):
-        print('OK')
-        pass
+        if not self.getTextInput() == '':
+            #try:
+                if not self.game.getPlayer().isInteracting():
+                    if int(self.getTextInput()) <= self.game.getPlayer().getPlace().getInteractionPossNum():
+                        self.textOutputReset()
+                        self.game.getPlayer().startInteractWith(self.game.getPlayer().getPlace().getInteractionObject(int(self.getTextInput())))
+                        self.textOutputInteraction(self.game.getPlayer().getInteraction().getActionsAsString())
+                        self.resetTextInput()
+                    else:
+                        self.resetTextInput()
+                        self.textOutputReset()
+                        self.textOutputWarning('Diese Interaktion ist nicht möglich!')
+                else:
+                    if int(self.getTextInput()) <= self.game.getPlayer().getInteraction().getActionCount():
+                        self.textOutputReset()
+                        self.selectInteraction(int(self.getTextInput()))
+                        if self.game.getPlayer().isInteracting():
+                            self.textOutputInteraction(self.game.getPlayer().getInteraction().getActionsAsString())
+                        else:
+                            self.buttonLook()
+                        self.resetTextInput()
+                    else:
+                        self.resetTextInput()
+                        self.textOutputReset()
+                        self.textOutputWarning('Diese Interaktion ist nicht möglich!')
+            #except:
+            #    self.resetTextInput()
+            #    self.textOutputWarning('Ungültige Eingabe!')
+        else:
+            if self.game.getPlayer().isInteracting():
+                self.resetTextInput()
+                self.game.getPlayer().nextInteraction()
+            else:
+                self.resetTextInput()
+                self.textOutputReset()
+                self.textOutputWarning('Du musst mit etwas Interargieren oder eine Auswahl eingeben um diesen Button nutzen zu können!')
+        self.updateGUI()
+
+    def selectInteraction(self, num):
+        self.textOutputInteraction(self.game.getPlayer().getInteraction().interact(self.game.getPlayer().getInteraction().getActions()[num]))
 
     def buttonMove(self):
-        self.game.getPlayer().goDirection()
+        if not self.game.getPlayer().goDirection():
+            self.textOutputWarning('Du kannst dich nicht in diese Richtung bewegen!')
+        else:
+            self.buttonLook()
         self.updateGUI()
 
     def buttonAnswerA(self):
@@ -67,11 +114,17 @@ class GameController(object):
         print('OK')
         pass
 
-    def textOutputReset(self):
-        pass
+    def buttonInventory(self, index):
+        print(index)
+        self.game.player.startInteractWith(self.game.player.getInventory().getItem(index))
+        self.textOutputInteraction(self.game.getPlayer().getInteraction().getActionsAsString())
 
-    def textOutputInteraction(self):
-        pass
+    def textOutputReset(self):
+        self.textOutputSet('')
+
+    def textOutputInteraction(self, text):
+        # Formatierung fehlt
+        self.textOutputAdd(text)
 
     def textOutputMain(self):
         pass
@@ -81,6 +134,16 @@ class GameController(object):
 
     def textOutputDesciption(self, text):
         # Formatierung fehlt
+        self.textOutputSet(text)
+
+    def textOutputWarning(self, text):
+        # Formatierung fehlt
+        self.textOutputAdd(text)
+
+    def textOutputAdd(self, text):
+        self.gui.vTextOutput.set(self.gui.vTextOutput.get()+'\n\n'+text)
+
+    def textOutputSet(self, text):
         self.gui.vTextOutput.set(text)
 
     def setPlace(self):
@@ -106,10 +169,15 @@ class GameController(object):
                 self.gui.buttonAnswerC.config(text=answers[2], state='active')
 
     def setInventory(self):
-        pass
+        for i in range(10):
+            if self.game.getPlayer().getInventory().isItemInSlot(i):
+                self.ImageInventorySlot[i] = PhotoImage(file=self.game.player.inventory.getItem(i).getTexture())
+                self.getInventoryButtonWithIndex(i).config(image=self.ImageInventorySlot[i], state='active')
+            else:
+                self.getInventoryButtonWithIndex(i).config(image=self.ImageNoItem, state='disabled')
 
     def setMovementDirections(self):
-        if self.game.getPlayer().canMove():
+        if self.game.getPlayer().canMove() or not self.game.getPlayer().isInteracting():
             self.gui.buttonMove.config(state='active')
             if self.game.getPlayer().getPossibleDirections()[0] is None:
                 self.gui.buttonNorth.config(state='disabled')
@@ -134,6 +202,31 @@ class GameController(object):
             self.gui.buttonWest.config(state='disabled')
             self.gui.buttonMove.config(state='disabled')
 
+    def getInventoryButtonWithIndex(self, index):
+        if index == 0:
+            return self.gui.buttonInventory1
+        elif index == 1:
+            return self.gui.buttonInventory2
+        elif index == 2:
+            return self.gui.buttonInventory3
+        elif index == 3:
+            return self.gui.buttonInventory4
+        elif index == 4:
+            return self.gui.buttonInventory5
+        elif index == 5:
+            return self.gui.buttonInventory6
+        elif index == 6:
+            return self.gui.buttonInventory7
+        elif index == 7:
+            return self.gui.buttonInventory8
+        elif index == 8:
+            return self.gui.buttonInventory9
+        elif index == 9:
+            return self.gui.buttonInventory10
+        elif index == 10:
+            return self.gui.buttonInventory11
+
+
     def getTextInput(self):
         return self.gui.vTextInput.get()
 
@@ -141,8 +234,17 @@ class GameController(object):
         self.gui.vTextInput.set('')
 
     def updateGUI(self):
+        self.toggleMovementButtons()
         self.setPlace()
         self.setPrestige()
         self.setAnswers()
         self.setInventory()
         self.setMovementDirections()
+
+    def toggleMovementButtons(self):
+        if self.game.getPlayer().isInteracting():
+            self.gui.buttonLook.config(state='disabled')
+            self.gui.buttonMove.config(state='disabled')
+        else:
+            self.gui.buttonLook.config(state='active')
+            self.gui.buttonMove.config(state='active')

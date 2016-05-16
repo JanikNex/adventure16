@@ -21,3 +21,6 @@ class Map(object):
     def connectPlaces(self):
         for i in self.places:
             i.setNeigbours()
+
+    def getGame(self):
+        return self.game

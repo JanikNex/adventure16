@@ -8,8 +8,24 @@ class Inventory(object):
     def isEmpty(self):
         return len(self.items) == 0
 
-    def getItem(self, index):
-        return self.items[index]
+    def isFull(self):
+        return len(self.items) == 11
 
-    def removeItem(self, index):
+    def getItem(self, index):
+        if index <= len(self.items)-1:
+            return self.items[index]
+
+    def isItemInSlot(self, index):
+        return index <= (len(self.items)-1)
+
+    def removeItemAtIndex(self, index):
         self.items.remove(self.getItem(index))
+
+    def removeItem(self, item):
+        self.items.remove(item)
+
+    def addItem(self, item):
+            self.items.append(item)
+
+    def isItemInInventory(self, item):
+        return item in self.items

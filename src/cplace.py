@@ -61,16 +61,44 @@ class Place(object):
     def addItem(self, item):
         self.items.append(item)
 
+    def getInteractableThingsAsString(self):
+        text = 'Du kannst mit folgenden Personen oder Gegenständen interagieren:\n'
+        actionCount = 0
+        if not len(self.citizen) == 0:
+            text += 'Personen:\n'
+            for i in self.citizen:
+                text += str(actionCount) + ' - ' + i.getName() + '\n'
+                actionCount += 1
+        text += 'Gegenstände:\n'
+        if not len(self.items) == 0:
+            for i in self.items:
+                text += str(actionCount) + ' - ' + i.getName() + '\n'
+                actionCount += 1
+        if len(self.citizen)+len(self.items) == 0:
+            return ''
+        return text
+
+    def getInteractionObject(self, index):
+        options = self.citizen[:]
+        options.extend(self.items)
+        return options[index]
+
+    def getInteractionPossNum(self):
+        if not self.getMap().getGame().getPlayer().isInteracting():
+            return len(self.citizen)+len(self.items)
+        else:
+            return -1
 
 class Train(Place):
     def __init__(self, map):
         Place.__init__(self, map)
-        self.exitAllowed = True
+        self.exitAllowed = False
         self.accessAllowed = True
         self.name = 'ICE 2027'
         self.description = 'Jetzt sitze ich hier schon seit mehreren Stunden in diesem Zug. So langsam wird mir langweilig!'
         self.soundPath = ''  # Fehlt
-        self.items.append(Letter())
+        self.items.append(Letter(map))
+        self.items[0].setPlace(self)
 
     def setNeigbours(self):
         self.neigbours = [None, self.map.getPlacePerName('TrainStation'), None, None]

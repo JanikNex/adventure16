@@ -23,7 +23,7 @@ class TutorialController(object):
         # Neues GUI-Objekt
         self.gui = GUIGame(self.buttonLookNorth, self.buttonLookEast, self.buttonLookSouth, self.buttonLookWest,
                            self.buttonMove, self.buttonLook, self.buttonNext, self.buttonAnswerA,
-                           self.buttonAnswerB, self.buttonAnswerC)
+                           self.buttonAnswerB, self.buttonAnswerC, self.buttonInventory)
         # Registrierung des WindowClose Event-Handlers
         self.gui.fenster.protocol("WM_DELETE_WINDOW", self.windowCloseEvent)
 
@@ -72,6 +72,9 @@ class TutorialController(object):
         self.tutorial()
 
     def buttonMove(self):
+        pass
+
+    def buttonInventory(self):
         pass
 
     def buttonAnswerA(self):
