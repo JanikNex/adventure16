@@ -30,22 +30,22 @@ class GameController(object):
 
     def buttonLookNorth(self):
         self.game.getPlayer().setFacing('n')
-        self.textOutputDesciption(self.game.getPlayer().getPlace().getPlaceInDirection(0).getDescription())
+        self.textOutputDesciption(self.game.getPlayer().getPlace().getPlaceInDirection(0).getFarsightDescription())
         self.updateGUI()
 
     def buttonLookEast(self):
         self.game.getPlayer().setFacing('e')
-        self.textOutputDesciption(self.game.getPlayer().getPlace().getPlaceInDirection(1).getDescription())
+        self.textOutputDesciption(self.game.getPlayer().getPlace().getPlaceInDirection(1).getFarsightDescription())
         self.updateGUI()
 
     def buttonLookSouth(self):
         self.game.getPlayer().setFacing('s')
-        self.textOutputDesciption(self.game.getPlayer().getPlace().getPlaceInDirection(2).getDescription())
+        self.textOutputDesciption(self.game.getPlayer().getPlace().getPlaceInDirection(2).getFarsightDescription())
         self.updateGUI()
 
     def buttonLookWest(self):
         self.game.getPlayer().setFacing('w')
-        self.textOutputDesciption(self.game.getPlayer().getPlace().getPlaceInDirection(3).getDescription())
+        self.textOutputDesciption(self.game.getPlayer().getPlace().getPlaceInDirection(3).getFarsightDescription())
         self.updateGUI()
 
     def buttonLook(self):
@@ -55,7 +55,7 @@ class GameController(object):
 
     def buttonNext(self):
         if not self.getTextInput() == '':
-            #try:
+            try:
                 if not self.game.getPlayer().isInteracting():
                     if int(self.getTextInput()) <= self.game.getPlayer().getPlace().getInteractionPossNum():
                         self.textOutputReset()
@@ -79,9 +79,9 @@ class GameController(object):
                         self.resetTextInput()
                         self.textOutputReset()
                         self.textOutputWarning('Diese Interaktion ist nicht möglich!')
-            #except:
-            #    self.resetTextInput()
-            #    self.textOutputWarning('Ungültige Eingabe!')
+            except:
+                self.resetTextInput()
+                self.textOutputWarning('Ungültige Eingabe!')
         else:
             if self.game.getPlayer().isInteracting():
                 self.resetTextInput()

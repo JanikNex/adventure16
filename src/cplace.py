@@ -6,6 +6,7 @@ class Place(object):
         self.map = map
         self.name = ''
         self.description = ''
+        self.farSightDescription = ''
         self.items = []
         self.citizen = []
         self.soundPath = ''
@@ -55,6 +56,9 @@ class Place(object):
     def getMap(self):
         return self.map
 
+    def getFarsightDescription(self):
+        return self.farSightDescription
+
     def removeItem(self, item):
         self.items.remove(item)
 
@@ -96,6 +100,7 @@ class Train(Place):
         self.accessAllowed = True
         self.name = 'ICE 2027'
         self.description = 'Jetzt sitze ich hier schon seit mehreren Stunden in diesem Zug. So langsam wird mir langweilig!'
+        self.farSightDescription = 'Da issn Zuch!'
         self.soundPath = ''  # Fehlt
         self.items.append(Letter(map))
         self.items[0].setPlace(self)
@@ -109,6 +114,7 @@ class TrainStation(Place):
         Place.__init__(self, map)
         self.name = 'Bahnhof'
         self.description = 'Dies ist der Bahnhof'
+        self.farSightDescription = 'Dat issn Bahnhof!'
         self.soundPath = ''  # Fehlt
 
     def setNeigbours(self):
