@@ -111,7 +111,8 @@ class Player(object):
         self.prestige += value
 
     def startInteractWith(self, object):
-        self.interactingWith = object
+        if not self.isInteracting():
+            self.interactingWith = object
 
     def endInteraction(self):
         self.interactingWith = None
@@ -131,5 +132,6 @@ class Player(object):
         else:
             return True
 
-    def nextInteraction(self):
-        pass
+    def nextInteraction(self, button = None):
+        if self.interactingWith.__class__.__name__ == 'DialogueHandler':
+            return self.game.getDialogueHandler().nextStep(button)

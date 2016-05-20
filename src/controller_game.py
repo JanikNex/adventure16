@@ -51,11 +51,12 @@ class GameController(object):
     def buttonLook(self):
         self.textOutputDesciption(self.game.getPlayer().getPlace().getDescription())
         self.textOutputInteraction(self.game.getPlayer().getPlace().getInteractableThingsAsString())
+        print(self.getTextInput())
         self.updateGUI()
 
     def buttonNext(self):
         if not self.getTextInput() == '':
-            try:
+            #try:
                 if not self.game.getPlayer().isInteracting():
                     if int(self.getTextInput()) <= self.game.getPlayer().getPlace().getInteractionPossNum():
                         self.textOutputReset()
@@ -67,26 +68,27 @@ class GameController(object):
                         self.textOutputReset()
                         self.textOutputWarning('Diese Interaktion ist nicht möglich!')
                 else:
-                    if int(self.getTextInput()) <= self.game.getPlayer().getInteraction().getActionCount():
-                        self.textOutputReset()
-                        self.selectInteraction(int(self.getTextInput()))
-                        if self.game.getPlayer().isInteracting():
-                            self.textOutputInteraction(self.game.getPlayer().getInteraction().getActionsAsString())
+                    if not self.game.getDialogueHandler().isInDialogue():
+                        if int(self.getTextInput()) <= self.game.getPlayer().getInteraction().getActionCount():
+                            self.textOutputReset()
+                            self.selectInteraction(int(self.getTextInput()))
+                            if self.game.getPlayer().isInteracting():
+                                self.textOutputInteraction(self.game.getPlayer().getInteraction().getActionsAsString())
+                            else:
+                                self.buttonLook()
+                            self.resetTextInput()
                         else:
-                            self.buttonLook()
-                        self.resetTextInput()
+                            self.resetTextInput()
+                            self.textOutputReset()
+                            self.textOutputWarning('Diese Interaktion ist nicht möglich!')
                     else:
                         self.resetTextInput()
-                        self.textOutputReset()
-                        self.textOutputWarning('Diese Interaktion ist nicht möglich!')
-            except:
-                self.resetTextInput()
-                self.textOutputWarning('Ungültige Eingabe!')
+                        self.game.getPlayer().nextInteraction()
+            #except:
+            #    self.resetTextInput()
+            #    self.textOutputWarning('Ungültige Eingabe!')
         else:
-            if self.game.getPlayer().isInteracting():
-                self.resetTextInput()
-                self.game.getPlayer().nextInteraction()
-            else:
+            if not self.game.getPlayer().isInteracting():
                 self.resetTextInput()
                 self.textOutputReset()
                 self.textOutputWarning('Du musst mit etwas Interargieren oder eine Auswahl eingeben um diesen Button nutzen zu können!')
@@ -115,9 +117,9 @@ class GameController(object):
         pass
 
     def buttonInventory(self, index):
-        print(index)
-        self.game.player.startInteractWith(self.game.player.getInventory().getItem(index))
-        self.textOutputInteraction(self.game.getPlayer().getInteraction().getActionsAsString())
+        if not self.game.player.isInteracting():
+            self.game.player.startInteractWith(self.game.player.getInventory().getItem(index))
+            self.textOutputInteraction(self.game.getPlayer().getInteraction().getActionsAsString())
 
     def textOutputReset(self):
         self.textOutputSet('')

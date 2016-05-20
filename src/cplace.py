@@ -1,4 +1,5 @@
 from src.citem import *
+from src.ccitizen import *
 
 
 class Place(object):
@@ -93,6 +94,7 @@ class Place(object):
         else:
             return -1
 
+
 class Train(Place):
     def __init__(self, map):
         Place.__init__(self, map)
@@ -116,6 +118,8 @@ class TrainStation(Place):
         self.description = 'Dies ist der Bahnhof'
         self.farSightDescription = 'Dat issn Bahnhof!'
         self.soundPath = ''  # Fehlt
+        self.citizen.append(Visitor(map))
+        self.citizen[0].setPlace(self)
 
     def setNeigbours(self):
         self.neigbours = [None, None, None, self.map.getPlacePerName('Train')]

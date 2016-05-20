@@ -1,6 +1,7 @@
 from src.cplayer import *
 from src.cmap import *
 from src.caudiohandler import *
+from src.cdialoguehandler import *
 
 
 class Game(object):
@@ -8,6 +9,7 @@ class Game(object):
         self.player = Player(self)
         self.map = Map(self)
         self.audioHandler = AudioHandler(None)
+        self.dialogueHandler = DialogueHandler(self)
         self.player.enterPlace(self.map.getPlacePerName('Train'))
 
     def getPlayer(self):
@@ -18,6 +20,9 @@ class Game(object):
 
     def getAudioHandler(self):
         return self.audioHandler
+
+    def getDialogueHandler(self):
+        return self.dialogueHandler
 
     def updateAudioHandler(self):
         if self.player.getPlace().getSound() == '':
