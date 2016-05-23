@@ -15,7 +15,7 @@
 - In der Heimat angekommen kann man die Stadt erforschen, mit Menschen reden und Gegenständen interagieren
 - Elternhaus ist anfangs versperrt (niemand öffnet beim Klingeln)
 - Mehrere Möglichkeiten ins Haus zu gelangen (abhängig von Dialogen mit Bewohnern)
-- Im Elernhaus angelangt erfährt man in einem emotionalen Gespräch mit Bruder / Schwester von einem Problem (?)
+- Im Elternhaus angelangt erfährt man in einem emotionalen Gespräch mit Bruder / Schwester von einem Problem (?)
 - Happy End or not - abhängig von den Entscheidungen des Spielers
 - Der Spieler kann Ruhmespunkte (Name WIP) erhalten und verlieren
 - ~~Im Horrormodus können Gruselbilder / Sounds, häufigkeit abhängig von Ruhmespunkten erscheinen~~
@@ -24,6 +24,7 @@
 - *Spielstand soll in Datei (JSON Format?) gespeichert werden*
 - *Spielstand soll aus Datei (durch Filebrowser selektierbar) geladen werden können*
 - *Texte sollen extern in einer Datei (JSON?) gespeichert werden und daraus ausgelesen werden*
+- GUI auswählbar (modern/standart)
 
 ## Sources
 - http://opengameart.org/textures/all
