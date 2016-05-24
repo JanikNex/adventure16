@@ -25,6 +25,7 @@
 - *Spielstand soll aus Datei (durch Filebrowser selektierbar) geladen werden können*
 - *Texte sollen extern in einer Datei (JSON?) gespeichert werden und daraus ausgelesen werden*
 - GUI auswählbar (modern/standart)
+- GameOver, falls Prestige < -5
 
 ## Sources
 - http://opengameart.org/textures/all
