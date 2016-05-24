@@ -59,4 +59,4 @@ class Entity(object):
                 self.getPlace().getMap().getGame().getPlayer().pickUpItem(self)
                 return self.getContent()
             elif interactionCall == self.__actionDatabase[4]:
-                return self.map.getGame().getDialogueHandler().startDialogue()
+                return self.talk()

@@ -74,8 +74,8 @@ class Place(object):
             for i in self.citizen:
                 text += str(actionCount) + ' - ' + i.getName() + '\n'
                 actionCount += 1
-        text += 'Gegenstände:\n'
         if not len(self.items) == 0:
+            text += 'Gegenstände:\n'
             for i in self.items:
                 text += str(actionCount) + ' - ' + i.getName() + '\n'
                 actionCount += 1
@@ -98,7 +98,7 @@ class Place(object):
 class Train(Place):
     def __init__(self, map):
         Place.__init__(self, map)
-        self.exitAllowed = False
+        self.exitAllowed = True # False
         self.accessAllowed = True
         self.name = 'ICE 2027'
         self.description = 'Jetzt sitze ich hier schon seit mehreren Stunden in diesem Zug. So langsam wird mir langweilig!'

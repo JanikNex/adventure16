@@ -12,7 +12,7 @@ class GUIStart():
             self.fenster = Tk()
             self.fenster.title("Lost Brother")
             self.fenster.geometry("600x600")
-            self.fenster.attributes("-topmost", 1)
+            #self.fenster.attributes("-topmost", 1)
             self.fenster.resizable(0, 0)
             self.logo = PhotoImage(file='lostBrother.gif')
             self.masterFrame = Frame(master=self.fenster)

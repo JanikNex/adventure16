@@ -1,72 +1,80 @@
 class DialogueHandler(object):
     def __init__(self, game):
-        self.inDialogue = False
-        self.citizenText = []
-        self.protagonistText = []
-        self.nextTalker = None
-        self.stepProtagonist = 0
-        self.stepCitizen = 0
-        self.needAnswer = False
-        self.reactionArray = []
         self.game = game
+        self.text = None
+        self.currentRow = None
+        self.inDialogue = False
+        self.step = 0
+        self.buttonArray = []
+        self.textOutput = ''
+        self.prestigeChange = 0
 
+    def startDialogue(self, text):
+        if not self.inDialogue:
+            self.text = text
+            self.inDialogue = True
+            self.game.getPlayer().startInteractWith(self)
+            self.updateParameter()
+            return ''
 
     def endDialogue(self):
         if self.inDialogue:
             self.inDialogue = False
-            self.citizenText = []
-            self.protagonistText = []
-            self.nextTalker = None
-            self.stepCitizen = 0
-            self.stepProtagonist = 0
-            self.reactionArray = []
-            self.game.getPlayer.endInteraction()
+            self.currentRow = None
+            self.text = None
+            self.step = 0
+            self.game.getPlayer().endInteraction()
 
-    def startDialogue(self, text=[[],[]], start = 'p'):
-        if not self.inDialogue and not self.game.getPlayer().isInteracting():
-            self.inDialogue = True
-            self.game.getPlayer.startInteractionWith(self)
-            self.citizenText = text[0]
-            self.protagonistText = text[1]
-            self.nextTalker = start
+    def getButtonArray(self, mode = 'all'):
+        if len(self.buttonArray) == 0 or (len(self.buttonArray[0]) == 0 and len(self.buttonArray[1]) == 0 and len(self.buttonArray[2]) == 0):
+            return []
+        else:
+            if mode == 'all':
+                return self.buttonArray
+            elif mode == 'text':
+                return [self.buttonArray[0][0], self.buttonArray[1][0], self.buttonArray[2][0]]
+            elif mode == 'goto':
+                return [self.buttonArray[0][1], self.buttonArray[1][1], self.buttonArray[2][1]]
+
+    def getTextOutput(self):
+        return self.textOutput
+
+    def getPrestigeChange(self):
+        return self.prestigeChange
+
+    def updateParameter(self):
+        if self.inDialogue:
+            self.currentRow = self.text[self.step]
+            self.textOutput = self.currentRow[2]
+            if self.currentRow[1] == 'P':
+                self.prestigeChange = self.currentRow[4]
+            else:
+                self.prestigeChange = 0
+            if self.currentRow[1] == 'C':
+                self.buttonArray = self.currentRow[3]
+            else:
+                self.buttonArray = []
+
+    def nextStep(self, select=None):
+        #self.updateParameter()
+        if select is None:
+            if self.currentRow[1] == 'P':
+                if self.currentRow[3] == -1:
+                    self.endDialogue()
+                else:
+                    self.step = self.currentRow[3]
+            elif self.currentRow[1] == 'C':
+                if self.currentRow[4] is not None:
+                    if self.currentRow[4] == -1:
+                        self.endDialogue()
+                    else:
+                        self.step = self.currentRow[4]
+        elif 0 <= select < 3:
+            if self.currentRow[1] == 'P':
+                pass  # Sollte nicht passieren
+            elif self.currentRow[1] == 'C':
+                self.step = self.getButtonArray('goto')[select]
+        self.updateParameter()
 
     def isInDialogue(self):
         return self.inDialogue
-
-    def nextStep(self, select = None):
-        if self.inDialogue:
-            if select is None and not self.needAnswer:
-                if self.nextTalker == 'c':
-                    self.nextTalker = 'p'
-                    text = self.citizenText[self.stepCitizen][0]
-                    buttons = [self.citizenText[self.stepCitizen][1][0], self.citizenText[self.stepCitizen][2][0], self.citizenText[self.stepCitizen][3][0]]
-                    reactionText = [self.citizenText[self.stepCitizen][1][1], self.citizenText[self.stepCitizen][2][1], self.citizenText[self.stepCitizen][3][1]]
-                    self.reactionArray = self.citizenText[self.stepCitizen][4]
-                    if not buttons == [[],[],[]]:
-                        self.needAnswer = True
-                    else:
-                        self.needAnswer = False
-                    return [text, buttons, reactionText]
-                elif self.nextTalker == 'p':
-                    self.nextTalker = 'c'
-                    self.stepCitizen = self.protagonistText[self.stepProtagonist][1]
-                    return self.protagonistText[self.stepProtagonist][0]
-            elif self.needAnswer and select is not None:
-                if self.nextTalker == 'c':
-                    self.nextTalker = 'p'
-                    text = self.citizenText[self.stepCitizen][0]
-                    buttons = [self.citizenText[self.stepCitizen][1][0], self.citizenText[self.stepCitizen][2][0],
-                               self.citizenText[self.stepCitizen][3][0]]
-                    reactionText = [self.citizenText[self.stepCitizen][1][1], self.citizenText[self.stepCitizen][2][1],
-                                    self.citizenText[self.stepCitizen][3][1]]
-                    self.reactionArray = self.citizenText[self.stepCitizen][4]
-                    if not buttons == [[], [], []]:
-                        self.needAnswer = True
-                    else:
-                        self.needAnswer = False
-                    return [text, buttons, reactionText]
-                elif self.nextTalker == 'p':
-                    self.nextTalker = 'c'
-                    self.stepProtagonist = self.reactionArray[select]
-                    self.stepCitizen = self.protagonistText[self.stepProtagonist][1]
-                    return self.protagonistText[self.stepProtagonist][0]

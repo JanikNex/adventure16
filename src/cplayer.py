@@ -133,5 +133,5 @@ class Player(object):
             return True
 
     def nextInteraction(self, button = None):
-        if self.interactingWith.__class__.__name__ == 'DialogueHandler':
+        #if self.interactingWith.__class__.__name__ == 'DialogueHandler':
             return self.game.getDialogueHandler().nextStep(button)

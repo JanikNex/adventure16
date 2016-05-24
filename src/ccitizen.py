@@ -26,6 +26,10 @@ class Citizen(Entity):
     def talk(self):
         if self.canTalk and self.talkTimes > 0:
             self.alreadyTalked = True
+            self.talkTimes -= 1
+            return self.map.getGame().getDialogueHandler().startDialogue(text=self.text)
+        else:
+            return 'Du kannst mit dieser Person nicht sprechen!'
 
 
 class Visitor(Citizen):
@@ -37,4 +41,6 @@ class Visitor(Citizen):
         self.setActions([0, 1, 4, 2])
         self.quitPhrase = 'Von Person abgewendet!'
         self.text = getText()
+        self.canTalk = True
+        self.talkTimes = 1
 
