@@ -12,6 +12,12 @@ class GameController(object):
                            self.buttonAnswerB, self.buttonAnswerC, self.buttonInventory)
         # Registrierung des WindowClose Event-Handlers
         self.gui.fenster.protocol("WM_DELETE_WINDOW", self.windowCloseEvent)
+        #Registrierung der Keyboard-Binds
+        self.gui.fenster.bind("<Return>", self.buttonNext)
+        self.gui.fenster.bind("<Up>", self.buttonLookNorth)
+        self.gui.fenster.bind("<Right>", self.buttonLookEast)
+        self.gui.fenster.bind("<Left>", self.buttonLookSouth)
+        self.gui.fenster.bind("<Down>", self.buttonLookWest)
         # Bilder initialisieren
         self.ImageNoItem = PhotoImage(file='noItem.gif')
         self.ImageInventorySlot = [None, None, None, None, None, None, None, None, None, None, None]
