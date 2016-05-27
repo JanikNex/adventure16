@@ -14,7 +14,7 @@ class GUIStart():
             self.fenster.geometry("600x600")
             #self.fenster.attributes("-topmost", 1)
             self.fenster.resizable(0, 0)
-            self.logo = PhotoImage(file='lostBrother.gif')
+            self.logo = PhotoImage(file='gif/lostBrother.gif')
             self.masterFrame = Frame(master=self.fenster)
             self.masterFrame.place(x=0, y=0, width=600, height=600)
             self.picture = Label(master=self.masterFrame, image=self.logo)

@@ -1,7 +1,7 @@
-from src.gui_start import *
-from src.controller_game import *
-from src.controller_tutorial import *
-from src.controller_credits import *
+from src.gui.gui_start import *
+from src.controller.controller_game import *
+from src.controller.controller_tutorial import *
+from src.controller.controller_credits import *
 
 
 class Starter(object):

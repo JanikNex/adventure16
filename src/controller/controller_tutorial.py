@@ -1,25 +1,15 @@
-from src.gui_game import *
+from src.gui.gui_game import *
+from src.utilclasses.cjsonhandler import *
 
 
 class TutorialController(object):
     def __init__(self):
         # Tutorialphase wird initialisiert
         self.phase = 0
-        self.text = ['Willkommen im Tutorial für Lost Brother - The Choice is yours!',
-                     'Dies ist die Benutzeroberfläche',
-                     'Die Textausgaben, aus denen der größte Teil des Spieles besteht werden in diesem Fenster angezeigt!',
-                     'Dein aktueller Aufenthaltsort wird hier angezeigt',
-                     'Hier wird dein Ruhm angezeigt. Dieser kann positiv, jedoch auch negativ sein! Dies hängt von DEINEN Entscheidungen ab!',
-                     'Dein Inventar kann Gegenstände beinhalten, welche du aufgesammelt hast. Klicke auf einen von diesen um dir Informationen über ihn anzeigen zu lassen',
-                     'Mit den Knöpfen in diesem Feld kannst du dich umschauen und bewegen. Klicke eine der Pfeiltasten an um in die gedrückte Richtung zu schauen!',
-                     'Durch betätigen der "Bewegen" Taste kannst du dann dann in die Richtung, in die duu zuletzt geschaut hast bewegen.',
-                     'Möchtest du dich nur an deinem Aktuellen Standpunkt umschauen nutze die "Umschauen" Taste',
-                     'Wenn du mit einem Gegenstand oder einer Person interagieren möchtest, gib einfach die angezeigte Nummer in dieses Textfeld ein und betätige den "Weiter" Button',
-                     'Betätige den "Weiter" Button während eines Dialoges um dein Gegenüber weiterreden zu lassen',
-                     'Während mancher Dialoge hast du die Möglichkeit eine Entscheidung zu Treffen, nutze dafür einfach einen dieser Buttons',
-                     'Wähle Weise! Die Entscheidungen wirken sich auf deinen Ruhm und auf den Verlauf der Geschichte aus!',
-                     'Für das optimale Spielerlebniss sollten Sounds aktiviert sein!',
-                     'Viel Spaß']
+        self.jsonphaser = JSONHandler()
+        self.jsonphaser.openNewFile('tutorial')
+        self.text = self.jsonphaser.getData()['normal']['text']
+        print(self.text)
         # Neues GUI-Objekt
         self.gui = GUIGame(self.buttonLookNorth, self.buttonLookEast, self.buttonLookSouth, self.buttonLookWest,
                            self.buttonMove, self.buttonLook, self.buttonNext, self.buttonAnswerA,
@@ -48,10 +38,6 @@ class TutorialController(object):
         if messagebox.askokcancel("Beenden", "Möchtest du das Tutorial wirklich beenden?!"):
             self.gui.fenster.quit()
             self.gui.fenster.destroy()
-
-    def updateOutput(self):
-        print('OK')
-        pass
 
     def buttonLookNorth(self):
         pass

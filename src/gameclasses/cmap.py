@@ -1,4 +1,4 @@
-from src.cplace import *
+from src.gameclasses.cplace import *
 
 
 class Map(object):

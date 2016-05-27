@@ -1,22 +1,19 @@
-from src.gui_credits import *
-from src.caudiohandler import *
+from src.gui.gui_credits import *
+from src.utilclasses.caudiohandler import *
+from src.utilclasses.cjsonhandler import *
 
 
 class CreditController(object):
-    def __init__(self):
+    def __init__(self, mode='fromStart'):
         # Creditphase wird initialisiert
         self.phase = 0
-        self.text = [
-            ['1', 'XXX'],
-            ['2', 'XXX'],
-            ['3', 'XXX'],
-            ['4', 'XXX'],
-            ['Vielen Dank!', 'XXX']
-        ]
+        self.jsonphaser = JSONHandler()
+        self.jsonphaser.openNewFile('credits')
+        self.text = self.jsonphaser.getData()[str(mode)]['text']
         # Neues GUI-Objekt
         self.gui = GUICredits()
         # Neuer AudioHandler
-        self.audioHandler = AudioHandler('credits.wav')
+        self.audioHandler = AudioHandler(self.jsonphaser.getData()[str(mode)]['audiofile'])
         self.audioHandler.play()
         # Registrierung der Event-Handler
         self.gui.fenster.protocol("WM_DELETE_WINDOW", self.windowCloseEvent)

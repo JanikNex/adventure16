@@ -1,5 +1,5 @@
-from src.citem import *
-from src.ccitizen import *
+from src.gameclasses.citem import *
+from src.gameclasses.ccitizen import *
 
 
 class Place(object):

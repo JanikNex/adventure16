@@ -1,7 +1,7 @@
-from src.cplayer import *
-from src.cmap import *
-from src.caudiohandler import *
-from src.cdialoguehandler import *
+from src.gameclasses.cplayer import *
+from src.gameclasses.cmap import *
+from src.utilclasses.caudiohandler import *
+from src.utilclasses.cdialoguehandler import *
 
 
 class Game(object):

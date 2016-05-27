@@ -1,5 +1,5 @@
-from src.cinventory import *
-from src.centity import *
+from src.gameclasses.cinventory import *
+from src.gameclasses.centity import *
 
 
 class Item(Entity):
@@ -40,7 +40,7 @@ class Letter(Item):
         self.description = 'Dies ist ein Brief'
         self.read = False
         self.content = 'Brief'
-        self.texturePath = 'Letter.gif'
+        self.texturePath = 'gif/Letter.gif'
         self.setActions([0, 3, 2])
         self.quitPhrase = 'Brief geschlossen'
 

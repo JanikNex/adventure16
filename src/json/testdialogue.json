@@ -1,0 +1,77 @@
+{
+  "0": {
+    "0": {
+      "operator": "P",
+      "text": "Guten Tag",
+      "goTo": "1",
+      "prestigeChange": "0"
+    },
+    "1": {
+      "operator": "C",
+      "text": "Guten Tag, was kann ich für Sie tun?",
+      "buttons": [
+        [
+          "Nichts",
+          "2"
+        ],
+        [
+          "Keine Ahnung",
+          "3"
+        ],
+        [
+          "Später",
+          "4"
+        ]
+      ],
+      "skipTo": "None"
+    },
+    "2": {
+      "operator": "P",
+      "text": "Sry bye",
+      "goTo": "7",
+      "prestigeChange": "-2"
+    },
+    "3": {
+      "operator": "P",
+      "text": "Ich weiß es leider auch nicht!",
+      "goTo": "5",
+      "prestigeChange": "0"
+    },
+    "4": {
+      "operator": "P",
+      "text": "Jetzt nicht!",
+      "goTo": "7",
+      "prestigeChange": "0"
+    },
+    "5": {
+      "operator": "C",
+      "text": "Lass es uns versuchen herauszufinden!",
+      "buttons": [
+        [
+          "Nö",
+          "2"
+        ],
+        [
+          "Och nee",
+          "2"
+        ],
+        [
+          "Jetzt nicht!",
+          "6"
+        ]
+      ],
+      "skipTo": "None"
+    },
+    "6": {
+      "operator": "P",
+      "text": "Nope",
+      "goTo": "7",
+      "prestigeChange": "0"
+    },
+    "7": {
+      "operator": "C",
+      "text": "Pff bye",
+      "skipTo": "-1"
+    }
+  }
+}

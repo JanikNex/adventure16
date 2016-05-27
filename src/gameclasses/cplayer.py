@@ -1,4 +1,4 @@
-from src.cinventory import *
+from src.gameclasses.cinventory import *
 
 
 class Player(object):
@@ -87,51 +87,119 @@ class Player(object):
         return False
 
     def getPossibleDirections(self):
+        """
+        Gibt angrenzende Orte an aktuellen Standort zurück
+        :return: Liste der angerenzenden Orte
+        :rtype: list
+        """
         return self.getPlace().getNeigbours()
 
     def getFacing(self):
+        """
+        Gibt aktuelle Blickrichtung des Spielers zurück
+        :return: Richtung
+        :rtype: char
+        """
         return self.facing
 
     def setFacing(self, direction):
+        """
+        Setzt Blickrichtung auf gegebenen char
+        :param direction: neue Blickrichtung
+        :type direction: char
+        """
         self.facing = direction
 
     def getPrestige(self):
+        """
+        Gibt Prestige des Spielers zurück
+        :return: Prestige des Spielers
+        :rtype: int
+        """
         return self.prestige
 
     def getInventory(self):
+        """
+        Gibt Inventarobjekt des Spielers zurück
+        :return: Inventar
+        :rtype: object
+        """
         return self.inventory
 
     def setPrestige(self, new):
+        """
+        Setzt Prestige des Spielers auf gegebenen Wert
+        :param new: neuer Prestige-Wert
+        :type new: int
+        """
         self.prestige = new
 
     def decreasePrestige(self, value):
+        """
+        Verringert Prestige-Wert des Spielers um gegebenen Wert
+        :param value: Wert, um den Prestige verringert werden soll
+        :type value: int
+        """
         self.prestige -= value
 
     def increasePrestige(self, value):
+        """
+        Erhöht Prestige-Wert des Spielers um gegebenen Wert
+        :param value: Wert, um den Prestige erhöht werden soll
+        :type value: int
+        """
         self.prestige += value
 
     def startInteractWith(self, object):
+        """
+        Startet Interaktion des Spielers mit gegebenem Objekt
+        :param object: Interaktionsobjekt
+        :type object: object
+        """
         if not self.isInteracting():
             self.interactingWith = object
 
     def endInteraction(self):
+        """
+        Beendet aktuelle Interaktion des Spielers
+        """
         self.interactingWith = None
 
     def getInteraction(self):
+        """
+        Gibt Objekt, mit dem der Spieler gerade interargiert zurück
+        :return: Interaktionsobjekt
+        :rtype: object
+        """
         return self.interactingWith
 
     def pickUpItem(self, item):
+        """
+        Hebt ein Item vom aktuellen Standort auf und packt es ins Inventar
+        :param item: Item, welches aufgehoben werden soll
+        :type item: Item
+        """
         if not self.inventory.isFull() and not item.inInventory():
             item.take()
             self.inventory.addItem(item)
             self.place.removeItem(item)
 
     def canMove(self):
-        if self.isInteracting() and (len(self.getPossibleDirections())-self.getPossibleDirections().count(None)) == 4:
+        """
+        Kann sich der Spieler momentan bewegen?
+        :return: Antwort
+        :rtype: bool
+        """
+        if self.isInteracting() or (len(self.getPossibleDirections()) - self.getPossibleDirections().count(None)) == 4:
             return False
         else:
             return True
 
-    def nextInteraction(self, button = None):
-        #if self.interactingWith.__class__.__name__ == 'DialogueHandler':
-            return self.game.getDialogueHandler().nextStep(button)
+    def nextInteraction(self, button=None):
+        """
+        Geht in den nächsten Interaktionsschritt mit
+         :param button: Index des Buttons, falls die Funktion durch anklicken eines Buttons aufgerufen wurde
+         :type button: int
+        """
+        # if self.interactingWith.__class__.__name__ == 'DialogueHandler':
+        self.game.getDialogueHandler().nextStep(button)
