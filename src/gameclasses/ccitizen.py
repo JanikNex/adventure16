@@ -1,5 +1,5 @@
 from src.gameclasses.centity import *
-from src.dialogueTest import *
+
 
 class Citizen(Entity):
     def __init__(self, map):
@@ -8,27 +8,40 @@ class Citizen(Entity):
         self.alreadyTalked = False
         self.talkTimes = 0
         self.inspection = ''
-        self.text = []
         self.carryingItem = None
         self.path = None
 
     def canTalk(self):
+        """
+        Gibt zurück, ob dieser Citizen noch sprechen kann
+        :rtype: bool
+        """
         return self.canTalk
 
     def alreadyTalked(self):
+        """
+        Gibt zurück, ob der Citizen bereits einmal gesprochen hat
+        :rtype: bool
+        """
         return self.alreadyTalked
 
     def getInspection(self):
+        """
+        Gibt Erinnerungen an die Vergangenheit zurück
+        :rtype: str
+        """
         return self.inspection
 
-    def getText(self):
-        return self.text
-
     def talk(self):
+        """
+        Startet, falls möglich, einen Dialog mit diesem Citizen
+        :return:
+        """
         if self.canTalk and self.talkTimes > 0:
             self.alreadyTalked = True
             self.talkTimes -= 1
-            return self.map.getGame().getDialogueHandler().startDialogue(path=self.path)
+            self.map.getGame().getDialogueHandler().startDialogue(path=self.path)
+            return ''
         else:
             return 'Du kannst mit dieser Person nicht sprechen!'
 
@@ -41,8 +54,6 @@ class Visitor(Citizen):
         self.inspection = 'Was ganz emotionales muss hier hin!'
         self.setActions([0, 1, 4, 2])
         self.quitPhrase = 'Von Person abgewendet!'
-        self.text = getText()
         self.canTalk = True
         self.talkTimes = 1000
         self.path = 'testdialogue.json'
-

@@ -122,7 +122,7 @@ class Player(object):
         """
         Gibt Inventarobjekt des Spielers zurück
         :return: Inventar
-        :rtype: object
+        :rtype: Item
         """
         return self.inventory
 
@@ -169,7 +169,7 @@ class Player(object):
         """
         Gibt Objekt, mit dem der Spieler gerade interargiert zurück
         :return: Interaktionsobjekt
-        :rtype: object
+        :rtype: Entity
         """
         return self.interactingWith
 

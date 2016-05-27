@@ -1,5 +1,6 @@
 from src.gui.gui_game import *
 from src.utilclasses.cjsonhandler import *
+from src.utilclasses.caudiohandler import *
 
 
 class TutorialController(object):
@@ -8,8 +9,9 @@ class TutorialController(object):
         self.phase = 0
         self.jsonphaser = JSONHandler()
         self.jsonphaser.openNewFile('tutorial')
+        self.audiohandler = AudioHandler(self.jsonphaser.getData()['normal']['audiofile'])
+        self.audiohandler.play()
         self.text = self.jsonphaser.getData()['normal']['text']
-        print(self.text)
         # Neues GUI-Objekt
         self.gui = GUIGame(self.buttonLookNorth, self.buttonLookEast, self.buttonLookSouth, self.buttonLookWest,
                            self.buttonMove, self.buttonLook, self.buttonNext, self.buttonAnswerA,
@@ -36,6 +38,7 @@ class TutorialController(object):
 
     def windowCloseEvent(self):
         if messagebox.askokcancel("Beenden", "Möchtest du das Tutorial wirklich beenden?!"):
+            self.audiohandler.stop()
             self.gui.fenster.quit()
             self.gui.fenster.destroy()
 

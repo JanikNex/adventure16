@@ -13,18 +13,41 @@ class Game(object):
         self.player.enterPlace(self.map.getPlacePerName('Train'))
 
     def getPlayer(self):
+        """
+        Gibt den Spieler zurück
+        :return: Spieler
+        :rtype: Player
+        """
         return self.player
 
     def getMap(self):
+        """
+        Gibt die Map zurück
+        :return: Map
+        :rtype: Map
+        """
         return self.map
 
     def getAudioHandler(self):
+        """
+        Gibt den AudioHandler zurück
+        :return: AudioHandler
+        :rtype: AudioHandler
+        """
         return self.audioHandler
 
     def getDialogueHandler(self):
+        """
+        Gibt den DialogueHandler zurück
+        :return: DialoguHandler
+        :rtype: DialogueHandler
+        """
         return self.dialogueHandler
 
     def updateAudioHandler(self):
+        """
+        Updated den AudioHandler auf den SoundPath des aktuellen Standorts des Spielers
+        """
         if self.player.getPlace().getSound() == '':
             self.audioHandler.stop()
         else:

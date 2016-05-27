@@ -7,13 +7,13 @@ class CreditController(object):
     def __init__(self, mode='fromStart'):
         # Creditphase wird initialisiert
         self.phase = 0
-        self.jsonphaser = JSONHandler()
-        self.jsonphaser.openNewFile('credits')
-        self.text = self.jsonphaser.getData()[str(mode)]['text']
+        self.jsonparser = JSONHandler()
+        self.jsonparser.openNewFile('credits')
+        self.text = self.jsonparser.getData()[str(mode)]['text']
         # Neues GUI-Objekt
         self.gui = GUICredits()
         # Neuer AudioHandler
-        self.audioHandler = AudioHandler(self.jsonphaser.getData()[str(mode)]['audiofile'])
+        self.audioHandler = AudioHandler(self.jsonparser.getData()[str(mode)]['audiofile'])
         self.audioHandler.play()
         # Registrierung der Event-Handler
         self.gui.fenster.protocol("WM_DELETE_WINDOW", self.windowCloseEvent)

@@ -12,8 +12,8 @@ class GameController(object):
                            self.buttonAnswerB, self.buttonAnswerC, self.buttonInventory)
         # Registrierung des WindowClose Event-Handlers
         self.gui.fenster.protocol("WM_DELETE_WINDOW", self.windowCloseEvent)
-        #Registrierung der Keyboard-Binds
-        self.gui.fenster.bind("<Return>", lambda e:self.buttonNext())
+        # Registrierung der Keyboard-Binds
+        self.gui.fenster.bind("<Return>", lambda e: self.buttonNext())
         # Bilder initialisieren
         self.ImageNoItem = PhotoImage(file='gif/noItem.gif')
         self.ImageInventorySlot = [None, None, None, None, None, None, None, None, None, None, None]
@@ -84,54 +84,56 @@ class GameController(object):
             self.updateGUI()
 
     def buttonNext(self):
-        #try:
-            if not self.AnswerButtonsActive:
-                if self.game.getDialogueHandler().isInDialogue():
-                    if self.getTextInput() == '':
-                        self.ButtonText = self.game.getDialogueHandler().getButtonArray('text')
-                        self.textOutputDialogue(self.game.getDialogueHandler().getTextOutput())
-                        self.game.getDialogueHandler().nextStep()
-                    else:
-                        self.resetTextInput()
-                        self.buttonNext()
+        # try:
+        if not self.AnswerButtonsActive:
+            if self.game.getDialogueHandler().isInDialogue():
+                if self.getTextInput() == '':
+                    self.ButtonText = self.game.getDialogueHandler().getButtonArray('text')
+                    self.textOutputDialogue(self.game.getDialogueHandler().getTextOutput())
+                    self.game.getDialogueHandler().nextStep()
                 else:
-                    if self.getTextInput() == '':
-                        if self.game.getPlayer().isInteracting():
-                            self.textOutputWarning('Du musst eine Option auswwählen um fortfahren zu können!')
-                        else:
-                            self.textOutputWarning('Du musst mit etwas interagieren um diesen Button nutzen zu können!')
-                            self.buttonLook()
+                    self.resetTextInput()
+                    self.buttonNext()
+            else:
+                if self.getTextInput() == '':
+                    if self.game.getPlayer().isInteracting():
+                        self.textOutputWarning('Du musst eine Option auswwählen um fortfahren zu können!')
                     else:
-                        if self.game.getPlayer().isInteracting():
-                            if int(self.getTextInput()) <= self.game.getPlayer().getInteraction().getActionCount():
-                                self.textOutputReset()
-                                self.selectInteraction(int(self.getTextInput()))
-                                if self.game.getPlayer().isInteracting() and not self.game.getDialogueHandler().isInDialogue():
-                                    self.textOutputInteraction(self.game.getPlayer().getInteraction().getActionsAsString())
-                                else:
-                                    self.buttonLook()
-                                self.resetTextInput()
-                        else:
-                            if int(self.getTextInput()) <= self.game.getPlayer().getPlace().getInteractionPossNum():  # Ist Eingabe möglich?
-                                self.textOutputReset()
-                                self.game.getPlayer().startInteractWith(
-                                    self.game.getPlayer().getPlace().getInteractionObject(int(self.getTextInput())))
+                        self.textOutputWarning('Du musst mit etwas interagieren um diesen Button nutzen zu können!')
+                        self.buttonLook()
+                else:
+                    if self.game.getPlayer().isInteracting():
+                        if int(self.getTextInput()) <= self.game.getPlayer().getInteraction().getActionCount():
+                            self.textOutputReset()
+                            self.selectInteraction(int(self.getTextInput()))
+                            if self.game.getPlayer().isInteracting() and not self.game.getDialogueHandler().isInDialogue():
                                 self.textOutputInteraction(self.game.getPlayer().getInteraction().getActionsAsString())
-                                self.resetTextInput()
                             else:
-                                self.resetTextInput()
-                                self.textOutputReset()
-                                self.textOutputWarning('Diese Interaktion ist nicht möglich!')
-                self.updateGUI()
-        #except:
-        #    self.textOutputWarning('Ungültige Eingabe!')
-        #    self.updateGUI()
+                                self.buttonLook()
+                            self.resetTextInput()
+                    else:
+                        if int(
+                                self.getTextInput()) <= self.game.getPlayer().getPlace().getInteractionPossNum():  # Ist Eingabe möglich?
+                            self.textOutputReset()
+                            self.game.getPlayer().startInteractWith(
+                                self.game.getPlayer().getPlace().getInteractionObject(int(self.getTextInput())))
+                            self.textOutputInteraction(self.game.getPlayer().getInteraction().getActionsAsString())
+                            self.resetTextInput()
+                        else:
+                            self.resetTextInput()
+                            self.textOutputReset()
+                            self.textOutputWarning('Diese Interaktion ist nicht möglich!')
+            self.updateGUI()
+            # except:
+            #    self.textOutputWarning('Ungültige Eingabe!')
+            #    self.updateGUI()
 
     def selectInteraction(self, num):
         if self.game.getDialogueHandler().isInDialogue():
             self.updateDialogueOutput()
         else:
-            self.textOutputDialogue(self.game.getPlayer().getInteraction().interact(self.game.getPlayer().getInteraction().getActions()[num]))
+            self.textOutputDialogue(self.game.getPlayer().getInteraction().interact(
+                self.game.getPlayer().getInteraction().getActions()[num]))
 
     def buttonMove(self):
         """
@@ -149,7 +151,7 @@ class GameController(object):
         Führt den Dialog mit ausgewählter Antwort fort
         """
         self.game.getPlayer().nextInteraction(button=0)
-        #self.selectInteraction(None)
+        # self.selectInteraction(None)
         self.ButtonText = []
         self.updateGUI()
 
@@ -158,7 +160,7 @@ class GameController(object):
         Führt den Dialog mit ausgewählter Antwort fort
         """
         self.game.getPlayer().nextInteraction(button=1)
-        #self.selectInteraction(None)
+        # self.selectInteraction(None)
         self.ButtonText = []
         self.updateGUI()
 
@@ -167,7 +169,7 @@ class GameController(object):
         Führt den Dialog mit ausgewählter Antwort fort
         """
         self.game.getPlayer().nextInteraction(button=2)
-        #self.selectInteraction(None)
+        # self.selectInteraction(None)
         self.ButtonText = []
         self.updateGUI()
 
@@ -246,7 +248,7 @@ class GameController(object):
         :type text: str
         """
         print(text)
-        self.gui.vTextOutput.set(self.gui.vTextOutput.get()+'\n\n'+text)
+        self.gui.vTextOutput.set(self.gui.vTextOutput.get() + '\n\n' + text)
 
     def textOutputSet(self, text):
         """

@@ -4,7 +4,7 @@ from src.utilclasses.cjsonhandler import *
 class DialogueHandler(object):
     def __init__(self, game):
         self.game = game
-        self.jsonphraser = JSONHandler()
+        self.jsonparser = JSONHandler()
         self.path = None
         self.inDialogue = False
         self.step = 0
@@ -15,12 +15,11 @@ class DialogueHandler(object):
     def startDialogue(self, path):
         if not self.inDialogue:
             self.path = path
-            self.jsonphraser.openNewFile(self.path)
+            self.jsonparser.openNewFile(self.path)
             self.usePrestige = self.game.getPlayer().getPrestige()
             self.inDialogue = True
             self.game.getPlayer().startInteractWith(self)
             self.nextStep()
-            return ''
 
     def endDialogue(self):
         if self.inDialogue:
@@ -48,9 +47,9 @@ class DialogueHandler(object):
         if self.step == -1:
             self.endDialogue()
             return
-        self.textOutput = self.jsonphraser.getData()[str(self.usePrestige)][str(self.step)]['text']
+        self.textOutput = self.jsonparser.getData()[str(self.usePrestige)][str(self.step)]['text']
         if select is None:
-            thisStep = self.jsonphraser.getData()[str(self.usePrestige)][str(self.step)]
+            thisStep = self.jsonparser.getData()[str(self.usePrestige)][str(self.step)]
             print(thisStep)
             if thisStep['operator'] == 'P':
                 self.step = int(thisStep['goTo'])
@@ -62,7 +61,7 @@ class DialogueHandler(object):
                     self.step = int(thisStep['skipTo'])
         else:
             self.step = self.getButtonArray('goto')[select]
-            thisStep = self.jsonphraser.getData()[str(self.usePrestige)][str(self.step)]
+            thisStep = self.jsonparser.getData()[str(self.usePrestige)][str(self.step)]
             print(thisStep)
             if thisStep['operator'] == 'P':
                 self.step = int(thisStep['goTo'])
