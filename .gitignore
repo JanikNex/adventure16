@@ -4,3 +4,6 @@ classdiadram_v2.class.violet.html
 classdiadram_v3.class.violet.html
 *.pyc
 *.egg-info
+tools/
+src/gif/
+src/json/
