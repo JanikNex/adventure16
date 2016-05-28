@@ -1,14 +1,6 @@
 {
   "0": {
-    "0": {
-      "operator": "P",
-      "text": "Guten Tag",
-      "goTo": "1",
-      "prestigeChange": "0"
-    },
     "1": {
-      "operator": "C",
-      "text": "Guten Tag, was kann ich für Sie tun?",
       "buttons": [
         [
           "Nichts",
@@ -19,36 +11,36 @@
           "3"
         ],
         [
-          "Später",
+          "Sp\u00e4ter",
           "4"
         ]
       ],
-      "skipTo": "None"
-    },
-    "2": {
-      "operator": "P",
-      "text": "Sry bye",
-      "goTo": "7",
-      "prestigeChange": "-2"
-    },
-    "3": {
-      "operator": "P",
-      "text": "Ich weiß es leider auch nicht!",
-      "goTo": "5",
-      "prestigeChange": "0"
+      "text": "Guten Tag, was kann ich f\u00fcr Sie tun?",
+      "skipTo": "None",
+      "operator": "C"
     },
     "4": {
-      "operator": "P",
+      "prestigeChange": "0",
       "text": "Jetzt nicht!",
       "goTo": "7",
-      "prestigeChange": "0"
+      "operator": "P"
+    },
+    "0": {
+      "prestigeChange": "0",
+      "text": "Guten Tag",
+      "goTo": "1",
+      "operator": "P"
+    },
+    "3": {
+      "prestigeChange": "0",
+      "text": "Ich wei\u00df es leider auch nicht!",
+      "goTo": "5",
+      "operator": "P"
     },
     "5": {
-      "operator": "C",
-      "text": "Lass es uns versuchen herauszufinden!",
       "buttons": [
         [
-          "Nö",
+          "N\u00f6",
           "2"
         ],
         [
@@ -60,18 +52,26 @@
           "6"
         ]
       ],
-      "skipTo": "None"
-    },
-    "6": {
-      "operator": "P",
-      "text": "Nope",
-      "goTo": "7",
-      "prestigeChange": "0"
+      "text": "Lass es uns versuchen herauszufinden!",
+      "skipTo": "None",
+      "operator": "C"
     },
     "7": {
-      "operator": "C",
+      "skipTo": "-1",
       "text": "Pff bye",
-      "skipTo": "-1"
+      "operator": "C"
+    },
+    "6": {
+      "prestigeChange": "0",
+      "text": "Nope",
+      "goTo": "7",
+      "operator": "P"
+    },
+    "2": {
+      "prestigeChange": "-2",
+      "text": "Sry bye",
+      "goTo": "7",
+      "operator": "P"
     }
   }
 }

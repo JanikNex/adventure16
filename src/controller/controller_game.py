@@ -15,7 +15,7 @@ class GameController(object):
         # Registrierung der Keyboard-Binds
         self.gui.fenster.bind("<Return>", lambda e: self.buttonNext())
         # Bilder initialisieren
-        self.ImageNoItem = PhotoImage(file='gif/noItem.gif')
+        self.ImageNoItem = PhotoImage(file='src/gif/noItem.gif')
         self.ImageInventorySlot = [None, None, None, None, None, None, None, None, None, None, None]
         # Button Array initialisieren
         self.ButtonText = []
@@ -88,8 +88,6 @@ class GameController(object):
         if not self.AnswerButtonsActive:
             if self.game.getDialogueHandler().isInDialogue():
                 if self.getTextInput() == '':
-                    self.ButtonText = self.game.getDialogueHandler().getButtonArray('text')
-                    self.textOutputDialogue(self.game.getDialogueHandler().getTextOutput())
                     self.game.getDialogueHandler().nextStep()
                 else:
                     self.resetTextInput()
@@ -108,6 +106,7 @@ class GameController(object):
                             self.selectInteraction(int(self.getTextInput()))
                             if self.game.getPlayer().isInteracting() and not self.game.getDialogueHandler().isInDialogue():
                                 self.textOutputInteraction(self.game.getPlayer().getInteraction().getActionsAsString())
+                                self.gui.textInput.focus()
                             else:
                                 self.buttonLook()
                             self.resetTextInput()
@@ -119,6 +118,7 @@ class GameController(object):
                                 self.game.getPlayer().getPlace().getInteractionObject(int(self.getTextInput())))
                             self.textOutputInteraction(self.game.getPlayer().getInteraction().getActionsAsString())
                             self.resetTextInput()
+                            self.gui.textInput.focus()
                         else:
                             self.resetTextInput()
                             self.textOutputReset()
@@ -187,8 +187,13 @@ class GameController(object):
         """
         Updatet die Antwortbuttons und gibt den aktuellen Textoutput des Dialogs aus
         """
-        self.ButtonText = self.game.getDialogueHandler().getButtonArray('text')
-        self.textOutputDialogue(self.game.getDialogueHandler().getTextOutput())
+        if self.game.getDialogueHandler().isInDialogue():
+            self.ButtonText = self.game.getDialogueHandler().getButtonArray('text')
+            textoutput = self.game.getDialogueHandler().getTextOutput()
+            if textoutput[1] == "C":
+                self.textOutputDialogue(textoutput[0])
+            elif textoutput[1] == "P":
+                self.textOutputMain(textoutput[0])
 
     def textOutputReset(self):
         """

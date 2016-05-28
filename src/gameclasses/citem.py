@@ -1,13 +1,20 @@
 from src.gameclasses.cinventory import *
 from src.gameclasses.centity import *
+from src.utilclasses.cjsonhandler import *
 
 
 class Item(Entity):
-    def __init__(self, map):
+    def __init__(self, map, itemid):
         Entity.__init__(self, map)
-        self.texturePath = None
-        self.canBeMoved = False
-        self.count = 1
+        jsonhandler = JSONHandler()
+        jsonhandler.openNewFile('itemdata')
+        self.name = jsonhandler.getData()[str(itemid)]['name']
+        self.description = jsonhandler.getData()[str(itemid)]['description']
+        self.texturePath = jsonhandler.getData()[str(itemid)]['texturepath']
+        self.setActions(jsonhandler.getData()[str(itemid)]['actions'])
+        self.canBeMoved = bool(jsonhandler.getData()[str(itemid)]['canBeMoved'])
+        self.count = int(jsonhandler.getData()[str(itemid)]['count'])
+        del jsonhandler
 
     def getTexture(self):
         return self.texturePath
@@ -34,15 +41,14 @@ class Item(Entity):
 
 
 class Letter(Item):
-    def __init__(self, map):
-        Item.__init__(self, map)
-        self.name = 'Brief'
-        self.description = 'Dies ist ein Brief'
+    def __init__(self, map, itemid):
+        Item.__init__(self, map, itemid)
+        jsonhandler = JSONHandler()
+        jsonhandler.openNewFile('itemdata')
         self.read = False
-        self.content = 'Brief'
-        self.texturePath = 'gif/Letter.gif'
-        self.setActions([0, 3, 2])
+        self.content = jsonhandler.getData()[str(itemid)]['content']
         self.quitPhrase = 'Brief geschlossen'
+        del jsonhandler
 
     def getContent(self):
         if self.place.__class__.__name__ == 'Train':

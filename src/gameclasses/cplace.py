@@ -104,7 +104,7 @@ class Train(Place):
         self.description = 'Jetzt sitze ich hier schon seit mehreren Stunden in diesem Zug. So langsam wird mir langweilig!'
         self.farSightDescription = 'Da issn Zuch!'
         self.soundPath = ''  # Fehlt
-        self.items.append(Letter(map))
+        self.items.append(Letter(map, 0))
         self.items[0].setPlace(self)
 
     def setNeigbours(self):
@@ -118,8 +118,10 @@ class TrainStation(Place):
         self.description = 'Dies ist der Bahnhof'
         self.farSightDescription = 'Dat issn Bahnhof!'
         self.soundPath = ''  # Fehlt
-        self.citizen.append(Visitor(map))
+        self.citizen.append(Citizen(map, 0))
         self.citizen[0].setPlace(self)
+        self.items.append(Letter(map, 1))
+        self.items[0].setPlace(self)
 
     def setNeigbours(self):
         self.neigbours = [None, None, None, self.map.getPlacePerName('Train')]

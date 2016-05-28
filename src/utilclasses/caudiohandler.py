@@ -11,7 +11,7 @@ class AudioHandler(object):
         self.playing = False
         self.file = filepath
         if self.file is not None:
-            self.file = "wav/"+str(self.file)+".wav"
+            self.file = "src/wav/"+str(self.file)+".wav"
 
     def play(self):
         """

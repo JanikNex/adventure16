@@ -1,15 +1,22 @@
 from src.gameclasses.centity import *
+from src.utilclasses.cjsonhandler import *
 
 
 class Citizen(Entity):
-    def __init__(self, map):
+    def __init__(self, map, citizenid):
         Entity.__init__(self, map)
-        self.canTalk = False
+        jsonhandler = JSONHandler()
+        jsonhandler.openNewFile('citizendata')
+        self.name = jsonhandler.getData()[str(citizenid)]['name']
+        self.description = jsonhandler.getData()[str(citizenid)]['description']
+        self.canTalk = jsonhandler.getData()[str(citizenid)]['canTalk']
+        self.inspection = jsonhandler.getData()[str(citizenid)]['inspection']
+        self.setActions(jsonhandler.getData()[str(citizenid)]['actions'])
+        self.quitPhrase = jsonhandler.getData()[str(citizenid)]['quitPhrase']
+        self.talkTimes = int(jsonhandler.getData()[str(citizenid)]['talkTimes'])
+        self.path = jsonhandler.getData()[str(citizenid)]['path']
         self.alreadyTalked = False
-        self.talkTimes = 0
-        self.inspection = ''
         self.carryingItem = None
-        self.path = None
 
     def canTalk(self):
         """
@@ -44,16 +51,3 @@ class Citizen(Entity):
             return ''
         else:
             return 'Du kannst mit dieser Person nicht sprechen!'
-
-
-class Visitor(Citizen):
-    def __init__(self, map):
-        Citizen.__init__(self, map)
-        self.name = 'Random Person'
-        self.description = 'Dat issn komischer Typ'
-        self.inspection = 'Was ganz emotionales muss hier hin!'
-        self.setActions([0, 1, 4, 2])
-        self.quitPhrase = 'Von Person abgewendet!'
-        self.canTalk = True
-        self.talkTimes = 1000
-        self.path = 'testdialogue.json'

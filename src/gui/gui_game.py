@@ -57,7 +57,7 @@ class GUIGame():
             self.vPlaceOutput = StringVar(master=self.rightUpperInfoFrame)
             self.vPrestigeOutput = StringVar(master=self.rightUpperInfoFrame)
             # Logo laden
-            self.image = PhotoImage(file='gif/placeholder.gif')
+            self.image = PhotoImage(file='src/gif/placeholder.gif')
             # Logo einfügen
             self.pictureLabel = Label(master=self.leftFrame, height=150, width=512, image=self.image)
             self.pictureLabel.pack(side='top', fill='x')
@@ -85,7 +85,7 @@ class GUIGame():
                                         textvariable=self.vPrestigeOutput, fg='black')
             self.prestigeOutput.grid(row=1, column=1)
             # Inventory Buttons
-            self.imageNoIcon = PhotoImage(file='gif/noItem.gif')  # 40x40
+            self.imageNoIcon = PhotoImage(file='src/gif/noItem.gif')  # 40x40
             self.buttonInventory1 = Button(master=self.rightUpperInventoryFrame, state='disabled', image=self.imageNoIcon, command= lambda: cInventory(0))
             self.buttonInventory1.pack(side='left')
             self.buttonInventory2 = Button(master=self.rightUpperInventoryFrame, state='disabled', image=self.imageNoIcon, command= lambda: cInventory(1))

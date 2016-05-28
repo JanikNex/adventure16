@@ -18,7 +18,7 @@ class JSONHandler(object):
         self.data = None
         self.filepath = path
         try:
-            with open('json/'+str(path)+'.json') as data:
+            with open('src/json/'+str(path)+'.json') as data:
                 self.data = js.load(data)
         except:
             print('FileSystem Error: Could not open JSON File!')
