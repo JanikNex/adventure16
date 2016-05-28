@@ -106,6 +106,8 @@ class Train(Place):
         self.soundPath = ''  # Fehlt
         self.items.append(Letter(map, 0))
         self.items[0].setPlace(self)
+        self.items.append(Item(map, 1))
+        self.items[1].setPlace(self)
 
     def setNeigbours(self):
         self.neigbours = [None, self.map.getPlacePerName('TrainStation'), None, None]
@@ -120,8 +122,6 @@ class TrainStation(Place):
         self.soundPath = ''  # Fehlt
         self.citizen.append(Citizen(map, 0))
         self.citizen[0].setPlace(self)
-        self.items.append(Letter(map, 1))
-        self.items[0].setPlace(self)
 
     def setNeigbours(self):
         self.neigbours = [None, None, None, self.map.getPlacePerName('Train')]

@@ -5,7 +5,7 @@ class Entity(object):
         self.map = map
         self.description = ''
         self.actions = []
-        self.__actionDatabase = ['Anschauen', 'Erinnerungen hervorrufen', 'Verlassen', 'Lesen', 'Ansprechen']
+        self.__actionDatabase = ['Anschauen', 'Erinnerungen hervorrufen', 'Verlassen', 'Lesen', 'Ansprechen', 'Aufheben', 'Fallen lassen']
         self.quitPhrase = 'Exit'
 
     def getName(self):
@@ -20,7 +20,7 @@ class Entity(object):
         """
         Gibt den Ort der Entity zurück
         :return: Ort
-        :rtype: object
+        :rtype: Place
         """
         return self.place
 
@@ -28,7 +28,7 @@ class Entity(object):
         """
         Setzt den Ort der Entity auf gegebenes Placeobject
         :param place: Placeobjekt
-        :rtype: object
+        :type place: object
         """
         self.place = place
 
@@ -36,7 +36,7 @@ class Entity(object):
         """
         Gibt Map des Spiels zurück
         :return: Map
-        :rtype: object
+        :rtype: Map
         """
         return self.map
 
@@ -52,7 +52,7 @@ class Entity(object):
         """
         Gibt mögliche Actions zurück
         :return: Actions
-        :rtype: str
+        :rtype: list
         """
         return self.actions
 
@@ -62,8 +62,29 @@ class Entity(object):
         :param actions: Actions mit Index-Ints aus der actiondatabase
         :type actions: list
         """
+        self.actions = []
         for e in actions:
             self.actions.append(self.__actionDatabase[e])
+
+    def replaceAction(self, old, new):
+        """
+        Ersetzt einen Actioncode durch einen neuen
+        :param old: Alter Actioncode
+        :param new: Neuer Actioncode
+        """
+        array = self.getActionCodes()
+        for i in range(len(array)):
+            if array[i] == old:
+                array[i] = new
+        self.setActions(array)
+
+    def getActionCodes(self):
+        array = []
+        for i in self.actions:
+            for e, n in enumerate(self.__actionDatabase):
+                if i == n:
+                    array.append(e)
+        return array
 
     def getActionCount(self):
         """
@@ -113,3 +134,13 @@ class Entity(object):
                 return self.getContent()
             elif interactionCall == self.__actionDatabase[4]:
                 return self.talk()
+            elif interactionCall == self.__actionDatabase[5]:
+                self.getMap().getGame().getPlayer().pickUpItem(self)
+                self.replaceAction(5, 6)
+                self.map.getGame().getPlayer().endInteraction()
+                return 'Aufgehoben!'
+            elif interactionCall == self.__actionDatabase[6]:
+                self.getMap().getGame().getPlayer().dropItem(self)
+                self.replaceAction(6, 5)
+                self.map.getGame().getPlayer().endInteraction()
+                return 'Fallen gelassen!'

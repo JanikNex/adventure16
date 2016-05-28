@@ -9,3 +9,8 @@ src/gif/
 src/json/
 src/dontUpload/
 src/wav/
+src/__pycache__/
+src/controller/__pycache__/
+src/gameclasses/__pycache__/
+src/gui/__pycache__/
+src/utilclasses/__pycache__/

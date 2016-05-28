@@ -25,13 +25,16 @@ class Player(object):
         """
         self.place = place
 
-    def dropItem(self, index):
+    def dropItem(self, item):
         """
         Drops ein Item aus dem Inventar am momentanen Aufenthaltsort des Spielers
-        :param index: bool
+        :param item: Item
+        :type item: Item
         """
-        self.inventory.getItem(index).drop()
-        self.inventory.removeItem(index)
+        if item.inInventory() and item.getCanBeMoved():
+            item.drop(self.place)
+            self.inventory.removeItem(item)
+            self.place.addItem(item)
 
     def isInteracting(self):
         """
@@ -179,7 +182,7 @@ class Player(object):
         :param item: Item, welches aufgehoben werden soll
         :type item: Item
         """
-        if not self.inventory.isFull() and not item.inInventory():
+        if not self.inventory.isFull() and not item.inInventory() and item.getCanBeMoved():
             item.take()
             self.inventory.addItem(item)
             self.place.removeItem(item)
