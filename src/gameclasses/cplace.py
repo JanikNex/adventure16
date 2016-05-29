@@ -1,19 +1,29 @@
 from src.gameclasses.citem import *
 from src.gameclasses.ccitizen import *
+from src.utilclasses.cjsonhandler import *
 
 
 class Place(object):
-    def __init__(self, map):
+    def __init__(self, map, id):
+        jsonhandler = JSONHandler()
+        jsonhandler.openNewFile('placedata')
         self.map = map
-        self.name = ''
-        self.description = ''
-        self.farSightDescription = ''
+        self.id = int(id)
+        self.name = jsonhandler.getData()[str(id)]['name']
+        self.description = jsonhandler.getData()[str(id)]['description']
+        self.farSightDescription = jsonhandler.getData()[str(id)]['farSightDescription']
         self.items = []
         self.citizen = []
-        self.soundPath = ''
-        self.accessAllowed = True
-        self.exitAllowed = True
-        self.neigbours = [None, None, None, None]
+        for i in jsonhandler.getData()[str(id)]['items']:
+            self.createItem(eval(i))
+        for i in jsonhandler.getData()[str(id)]['citizen']:
+            self.createCitizen(eval(i))
+        self.soundPath = jsonhandler.getData()[str(id)]['soundpath']
+        self.accessAllowed = jsonhandler.getData()[str(id)]['accessAllowed']
+        self.exitAllowed = jsonhandler.getData()[str(id)]['exitAllowed']
+        self.neigbours = jsonhandler.getData()[str(id)]['neigbours']
+        del jsonhandler
+
 
     def canEnter(self):
         return self.accessAllowed
@@ -30,14 +40,20 @@ class Place(object):
     def getItems(self):
         return self.items
 
+    def getID(self):
+        return self.id
+
     def getCitizens(self):
         return self.citizen
 
     def getNeigbours(self):
-        return self.neigbours
+        result = []
+        for i in self.neigbours:
+            result.append(self.map.getPlacePerID(i))
+        return result
 
     def getPlaceInDirection(self, index):
-        return self.neigbours[index]
+        return self.getNeigbours()[index]
 
     def getSound(self):
         return self.soundPath
@@ -94,34 +110,12 @@ class Place(object):
         else:
             return -1
 
+    def createItem(self, item):
+        self.items.append(item)
+        item.setPlace(self)
+        self.map.addItem(item)
 
-class Train(Place):
-    def __init__(self, map):
-        Place.__init__(self, map)
-        self.exitAllowed = True # False
-        self.accessAllowed = True
-        self.name = 'ICE 2027'
-        self.description = 'Jetzt sitze ich hier schon seit mehreren Stunden in diesem Zug. So langsam wird mir langweilig!'
-        self.farSightDescription = 'Da issn Zuch!'
-        self.soundPath = ''  # Fehlt
-        self.items.append(Letter(map, 0))
-        self.items[0].setPlace(self)
-        self.items.append(Item(map, 1))
-        self.items[1].setPlace(self)
-
-    def setNeigbours(self):
-        self.neigbours = [None, self.map.getPlacePerName('TrainStation'), None, None]
-
-
-class TrainStation(Place):
-    def __init__(self, map):
-        Place.__init__(self, map)
-        self.name = 'Bahnhof'
-        self.description = 'Dies ist der Bahnhof'
-        self.farSightDescription = 'Dat issn Bahnhof!'
-        self.soundPath = ''  # Fehlt
-        self.citizen.append(Citizen(map, 0))
-        self.citizen[0].setPlace(self)
-
-    def setNeigbours(self):
-        self.neigbours = [None, None, None, self.map.getPlacePerName('Train')]
+    def createCitizen(self, citizen):
+        self.citizen.append(citizen)
+        citizen.setPlace(self)
+        self.map.addCitizen(citizen)

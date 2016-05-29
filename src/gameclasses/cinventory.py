@@ -70,3 +70,10 @@ class Inventory(object):
         :return:
         """
         return item in self.items
+
+    def getPlayer(self):
+        """
+        Gibt den dazugehörigen Spieler zurück
+        :return: Player
+        """
+        return self.player

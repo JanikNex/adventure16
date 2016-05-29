@@ -5,9 +5,15 @@ class Map(object):
     def __init__(self, game):
         self.game = game
         self.places = []
-        self.places.append(Train(self))
-        self.places.append(TrainStation(self))
-        self.connectPlaces()
+        self.items = []
+        self.citizen = []
+        jsonhandler = JSONHandler()
+        jsonhandler.openNewFile('placedata')
+        for i in jsonhandler.getData():
+            self.places.append(Place(self, i))
+        #self.places.append(Place(self, 0))
+        #self.places.append(Place(self, 1))
+        #self.connectPlaces()
 
     def getPlacees(self):
         """
@@ -25,9 +31,15 @@ class Map(object):
         :rtype: object
         """
         for i in self.places:
-            if i.__class__.__name__ == name:
+            if i.getName() == name:
                 return i
         return False
+
+    def getPlacePerID(self, id):
+        for i in self.places:
+            if i.getID() == id:
+                return i
+        return None
 
     def connectPlaces(self):
         """
@@ -43,3 +55,21 @@ class Map(object):
         :rtype: object
         """
         return self.game
+
+    def addItem(self, item):
+        self.items.append(item)
+
+    def addCitizen(self, citizen):
+        self.citizen.append(citizen)
+
+    def getItemPerName(self, name):
+        for i in self.items:
+            if i.getName() == name:
+                return i
+        return False
+
+    def getCitizenPerName(self, name):
+        for i in self.citizen:
+            if i.getName() == name:
+                return i
+        return False

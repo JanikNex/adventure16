@@ -51,9 +51,9 @@ class Letter(Item):
         del jsonhandler
 
     def getContent(self):
-        if self.place.__class__.__name__ == 'Train':
-            self.place.getMap().getPlacePerName('Train').allowExit()
-            self.place.getMap().getPlacePerName('Train').denyEnter()
+        if self.place.getPlayer().getPlace().getID() == 0:
+            self.place.getPlayer().getPlace().getMap().getPlacePerID(0).allowExit()
+            self.place.getPlayer().getPlace().getMap().getPlacePerID(0).denyEnter()
         self.read = True
         return self.content
 

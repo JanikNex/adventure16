@@ -24,15 +24,27 @@ class CreditController(object):
         self.gui.fenster.mainloop()
 
     def windowCloseEvent(self, event=None):
+        """
+        Stoppt die Audiowiedergabe und schließt das Fenster
+        :param event: Event falls Funktion als Eventhandler aufgerufen wird
+        """
         self.audioHandler.stop()
         self.gui.fenster.quit()
         self.gui.fenster.destroy()
 
     def setText(self, text):
+        """
+        Setzt die Textvariablen auf den Inhalt der übergebenen Liste
+        :param text: Liste [Titel, Beschreibung]
+        :type text: list
+        """
         self.gui.title.set(text[0])
         self.gui.description.set(text[1])
 
     def nextPhase(self):
+        """
+        Startet die nächste Phase der Credits
+        """
         if self.phase <= (len(self.text)-1):
             self.setText(self.text[self.phase])
             self.phase += 1
