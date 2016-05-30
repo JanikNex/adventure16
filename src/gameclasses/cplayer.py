@@ -55,39 +55,39 @@ class Player(object):
     def goDirection(self):
         """
         Lässt den Spieler in die Richtung laufen, in welche er zuletzt geschaut hat
-        :rtype: bool
-        :return: Erfolgreich?
+        :rtype: str
+        :return: Errormessage oder leerer String
         """
         if self.place.canLeave() and not self.isInteracting():
             if self.facing == 'n':
-                if self.place.getNeigbours()[0] is not None:
+                if self.place.getNeighbors()[0] is not None:
                     if self.place.getPlaceInDirection(0).canEnter():
                         self.enterPlace(self.place.getPlaceInDirection(0))
-                        return True
+                        return ''
                 else:
-                    return False
+                    return self.place.getEnterDeniedMessage()
             elif self.facing == 'e':
-                if self.place.getNeigbours()[1] is not None:
+                if self.place.getNeighbors()[1] is not None:
                     if self.place.getPlaceInDirection(1).canEnter():
                         self.enterPlace(self.place.getPlaceInDirection(1))
-                        return True
+                        return ''
                 else:
-                    return False
+                    return self.place.getEnterDeniedMessage()
             elif self.facing == 's':
-                if self.place.getNeigbours()[2] is not None:
+                if self.place.getNeighbors()[2] is not None:
                     if self.place.getPlaceInDirection(2).canEnter():
                         self.enterPlace(self.place.getPlaceInDirection(2))
-                        return True
+                        return ''
                 else:
-                    return False
+                    return self.place.getEnterDeniedMessage()
             elif self.facing == 'w':
-                if self.place.getNeigbours()[3] is not None:
+                if self.place.getNeighbors()[3] is not None:
                     if self.place.getPlaceInDirection(3).canEnter():
                         self.enterPlace(self.place.getPlaceInDirection(3))
-                        return True
+                        return ''
                 else:
-                    return False
-        return False
+                    return self.place.getEnterDeniedMessage()
+        return self.place.getExitDeniedMessage()
 
     def getPossibleDirections(self):
         """
@@ -95,7 +95,7 @@ class Player(object):
         :return: Liste der angerenzenden Orte
         :rtype: list
         """
-        return self.getPlace().getNeigbours()
+        return self.getPlace().getNeighbors()
 
     def getFacing(self):
         """

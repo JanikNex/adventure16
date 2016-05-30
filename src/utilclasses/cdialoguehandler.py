@@ -21,7 +21,6 @@ class DialogueHandler(object):
         if not self.inDialogue:
             self.path = path
             self.jsonparser.openNewFile(self.path)
-            print(self.jsonparser.getData())
             self.usePrestige = self.game.getPlayer().getPrestige()
             self.inDialogue = True
             self.game.getPlayer().startInteractWith(self)

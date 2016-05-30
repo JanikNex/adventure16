@@ -7,13 +7,13 @@ class Map(object):
         self.places = []
         self.items = []
         self.citizen = []
+        print('[DEBUG] Map generation started...')
         jsonhandler = JSONHandler()
         jsonhandler.openNewFile('placedata')
         for i in jsonhandler.getData():
             self.places.append(Place(self, i))
-        #self.places.append(Place(self, 0))
-        #self.places.append(Place(self, 1))
-        #self.connectPlaces()
+        del jsonhandler
+        print('[DEBUG] Map generation finished...')
 
     def getPlacees(self):
         """
@@ -46,7 +46,7 @@ class Map(object):
         Setzt die Verbindungen der einzelnen Orte untereinander
         """
         for i in self.places:
-            i.setNeigbours()
+            i.setNeighbors()
 
     def getGame(self):
         """

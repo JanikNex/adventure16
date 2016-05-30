@@ -68,7 +68,7 @@
       "operator": "P"
     },
     "2": {
-      "prestigeChange": "-2",
+      "prestigeChange": "-1",
       "text": "Sry bye",
       "goTo": "7",
       "operator": "P"

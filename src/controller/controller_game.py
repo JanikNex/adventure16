@@ -140,11 +140,12 @@ class GameController(object):
         Bewegt den Spieler, wenn möglich, in die aktuelle Blickrichtung und lässt den Spieler sich einmal umschauen
         """
         if not self.game.getPlayer().isInteracting():
-            if not self.game.getPlayer().goDirection():
-                self.textOutputWarning('Du kannst dich nicht in diese Richtung bewegen!')
-            else:
-                self.buttonLook()
-            self.updateGUI()
+            result = self.game.getPlayer().goDirection()
+            if not result == '':
+                self.textOutputWarning(result)
+        else:
+            self.buttonLook()
+        self.updateGUI()
 
     def buttonAnswerA(self):
         """

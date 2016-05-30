@@ -15,9 +15,11 @@ class Starter(object):
         self.start.buttonStartGame.config(text='Ingame...', state='disabled')
         self.start.buttonTutorial.config(state='disabled')
         self.start.buttonCredits.config(state='disabled')
+        self.start.fenster.iconify()
         # Spielobjekt erstellen
         game = GameController()
         # Nach beenden des Spieles wird der Button wieder aktiviert
+        self.start.fenster.deiconify()
         self.start.buttonStartGame.config(text='Spiel starten', state='active')
         self.start.buttonTutorial.config(state='active')
         self.start.buttonCredits.config(state='active')
@@ -30,9 +32,11 @@ class Starter(object):
         self.start.buttonStartGame.config(state='disabled')
         self.start.buttonTutorial.config(text='Ingame...', state='disabled')
         self.start.buttonCredits.config(state='disabled')
+        self.start.fenster.iconify()
         # Spielobjekt erstellen
         tutorial = TutorialController()
         # Nach beenden des Tutorials wird der Button wieder aktiviert
+        self.start.fenster.deiconify()
         self.start.buttonStartGame.config(state='active')
         self.start.buttonTutorial.config(text='Tutorial', state='active')
         self.start.buttonCredits.config(state='active')
@@ -43,12 +47,14 @@ class Starter(object):
         self.start.buttonStartGame.config(state='disabled')
         self.start.buttonCredits.config(text='Ingame...', state='disabled')
         self.start.buttonTutorial.config(state='disabled')
+        self.start.fenster.iconify()
         # Spielobjekt erstellen
         credits = CreditController()
         # Nach beenden der Credits wird der Button wieder aktiviert
+        self.start.fenster.deiconify()
         self.start.buttonStartGame.config(state='active')
         self.start.buttonCredits.config(text='Credits', state='active')
         self.start.buttonTutorial.config(state='active')
 
-
-load = Starter()  # Erstellt ein neues Spielstart-Fenster
+if __name__ == '__main__':
+    load = Starter()  # Erstellt ein neues Spielstart-Fenster

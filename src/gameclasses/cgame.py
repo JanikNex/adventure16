@@ -10,7 +10,7 @@ class Game(object):
         self.map = Map(self)
         self.audioHandler = AudioHandler(None)
         self.dialogueHandler = DialogueHandler(self)
-        self.player.enterPlace(self.map.getPlacePerName('ICE 2027'))
+        self.player.enterPlace(self.map.getPlacePerID(0))
 
     def getPlayer(self):
         """

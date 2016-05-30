@@ -17,6 +17,8 @@ class Citizen(Entity):
         self.path = jsonhandler.getData()[str(citizenid)]['path']
         self.alreadyTalked = False
         self.carryingItem = None
+        print('[DEBUG] Generated', self.name)
+        del jsonhandler
 
     def canTalk(self):
         """

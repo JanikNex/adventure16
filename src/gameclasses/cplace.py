@@ -21,39 +21,83 @@ class Place(object):
         self.soundPath = jsonhandler.getData()[str(id)]['soundpath']
         self.accessAllowed = jsonhandler.getData()[str(id)]['accessAllowed']
         self.exitAllowed = jsonhandler.getData()[str(id)]['exitAllowed']
-        self.neigbours = jsonhandler.getData()[str(id)]['neigbours']
+        self.enterDeniedMessage = jsonhandler.getData()[str(id)]['enterDeniedMessage']
+        self.exitDeniedMessage = jsonhandler.getData()[str(id)]['exitDeniedMessage']
+        self.neighbors = jsonhandler.getData()[str(id)]['neighbors']
+        print('[DEBUG] Generated', self.name)
         del jsonhandler
 
-
     def canEnter(self):
+        """
+        Gibt zurück, ob dieser Platz betreten werden kann
+        :rtype: bool
+        """
         return self.accessAllowed
 
     def canLeave(self):
+        """
+        Gibt zurück, ob dieser Platz verlassen werden kann
+        :rtype: bool
+        """
         return self.exitAllowed
 
     def getName(self):
+        """
+        Gibt den Namen des Platzes zurück
+        :rtype: str
+        """
         return self.name
 
     def getDescription(self):
+        """
+        Gibt die Beschreibung des Platzes zurück
+        :rtype: str
+        """
         return self.description
 
     def getItems(self):
+        """
+        Gibt die Itemobjekte, welche auf diesem Platz liegen zurück
+        :rtype: list
+        """
         return self.items
 
     def getID(self):
+        """
+        Gibt die ID des Platzes zurück
+        :rtype: int
+        """
         return self.id
 
     def getCitizens(self):
+        """
+        Gibt die Citizenobjekte, welche sich auf diesem Platz befinden zurück
+        :rtype: list
+        """
         return self.citizen
 
-    def getNeigbours(self):
+    def getEnterDeniedMessage(self):
+        """
+        Gibt die Nachicht zurück, welche angezeigt werden soll, falls ein Ort nicht betreten werden kann
+        :rtype: str
+        """
+        return self.enterDeniedMessage
+
+    def getExitDeniedMessage(self):
+        """
+        Gibt die Nachicht zurück, welche angezeigt werden soll, falls ein Ort nicht verlassen werden kann
+        :rtype: str
+        """
+        return self.exitDeniedMessage
+
+    def getNeighbors(self):
         result = []
-        for i in self.neigbours:
+        for i in self.neighbors:
             result.append(self.map.getPlacePerID(i))
         return result
 
     def getPlaceInDirection(self, index):
-        return self.getNeigbours()[index]
+        return self.getNeighbors()[index]
 
     def getSound(self):
         return self.soundPath
@@ -95,7 +139,7 @@ class Place(object):
             for i in self.items:
                 text += str(actionCount) + ' - ' + i.getName() + '\n'
                 actionCount += 1
-        if len(self.citizen)+len(self.items) == 0:
+        if len(self.citizen) + len(self.items) == 0:
             return ''
         return text
 
@@ -106,7 +150,7 @@ class Place(object):
 
     def getInteractionPossNum(self):
         if not self.getMap().getGame().getPlayer().isInteracting():
-            return len(self.citizen)+len(self.items)
+            return len(self.citizen) + len(self.items)
         else:
             return -1
 

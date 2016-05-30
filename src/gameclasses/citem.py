@@ -14,6 +14,7 @@ class Item(Entity):
         self.setActions(jsonhandler.getData()[str(itemid)]['actions'])
         self.canBeMoved = bool(jsonhandler.getData()[str(itemid)]['canBeMoved'])
         self.count = int(jsonhandler.getData()[str(itemid)]['count'])
+        print('[DEBUG] Generated', self.name)
         del jsonhandler
 
     def getTexture(self):
