@@ -15,6 +15,7 @@ class Citizen(Entity):
         self.quitPhrase = jsonhandler.getData()[str(citizenid)]['quitPhrase']
         self.talkTimes = int(jsonhandler.getData()[str(citizenid)]['talkTimes'])
         self.path = jsonhandler.getData()[str(citizenid)]['path']
+        self.visible = jsonhandler.getData()[str(citizenid)]['visible']
         self.alreadyTalked = False
         self.carryingItem = None
         print('[DEBUG] Generated', self.name)
@@ -40,6 +41,13 @@ class Citizen(Entity):
         :rtype: str
         """
         return self.inspection
+
+    def isVisible(self):
+        """
+        Gibt zurück, ob dieser Citizen gerade sichtbar ist.
+        :rtype: bool
+        """
+        return self.visible
 
     def talk(self):
         """

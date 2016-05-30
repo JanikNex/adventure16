@@ -42,6 +42,7 @@ class TutorialController(object):
             self.gui.fenster.quit()
             self.gui.fenster.destroy()
 
+# Callback Funktionen, welche beim Tutorial nicht benötigt werden
     def buttonLookNorth(self):
         pass
 
@@ -85,6 +86,10 @@ class TutorialController(object):
         self.gui.vTextOutput.set(text)
 
     def setAnswers(self, answers):
+        """
+        Setzt die Antwortbuttons auf gegebenen Text
+        :param answers:
+        """
         if len(answers) == 0:
             self.gui.buttonAnswerA.config(state='disabled', text='Antwort A')
             self.gui.buttonAnswerB.config(state='disabled', text='Antwort B')
@@ -100,6 +105,9 @@ class TutorialController(object):
                 self.gui.buttonAnswerC.config(text=answers[2], state='active')
 
     def tutorial(self):
+        """
+        Springt zur nächsten Phase des Tutorials
+        """
         if self.phase < (len(self.text)-1):
             self.setText(self.text[self.phase])
             self.phase += 1

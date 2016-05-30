@@ -76,6 +76,13 @@ class Place(object):
         """
         return self.citizen
 
+    def getVisibleCitizens(self):
+        citizens = []
+        for i in self.citizen:
+            if i.isVisible():
+                citizens.append(i)
+        return citizens
+
     def getEnterDeniedMessage(self):
         """
         Gibt die Nachicht zurück, welche angezeigt werden soll, falls ein Ort nicht betreten werden kann
@@ -129,9 +136,9 @@ class Place(object):
     def getInteractableThingsAsString(self):
         text = 'Du kannst mit folgenden Personen oder Gegenständen interagieren:\n'
         actionCount = 0
-        if not len(self.citizen) == 0:
+        if not len(self.getVisibleCitizens()) == 0:
             text += 'Personen:\n'
-            for i in self.citizen:
+            for i in self.getVisibleCitizens():
                 text += str(actionCount) + ' - ' + i.getName() + '\n'
                 actionCount += 1
         if not len(self.items) == 0:
@@ -139,18 +146,18 @@ class Place(object):
             for i in self.items:
                 text += str(actionCount) + ' - ' + i.getName() + '\n'
                 actionCount += 1
-        if len(self.citizen) + len(self.items) == 0:
+        if len(self.getVisibleCitizens()) + len(self.items) == 0:
             return ''
         return text
 
     def getInteractionObject(self, index):
-        options = self.citizen[:]
+        options = self.getVisibleCitizens()[:]
         options.extend(self.items)
         return options[index]
 
     def getInteractionPossNum(self):
         if not self.getMap().getGame().getPlayer().isInteracting():
-            return len(self.citizen) + len(self.items)
+            return len(self.getVisibleCitizens()) + len(self.items)
         else:
             return -1
 

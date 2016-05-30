@@ -143,8 +143,8 @@ class GameController(object):
             result = self.game.getPlayer().goDirection()
             if not result == '':
                 self.textOutputWarning(result)
-        else:
-            self.buttonLook()
+            else:
+                self.buttonLook()
         self.updateGUI()
 
     def buttonAnswerA(self):

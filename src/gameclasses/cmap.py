@@ -57,18 +57,39 @@ class Map(object):
         return self.game
 
     def addItem(self, item):
+        """
+        Fügt ein Itemobjekt zur Itemliste hinzu
+        :param item: Item
+        """
         self.items.append(item)
 
     def addCitizen(self, citizen):
+        """
+        Fügt ein citizenobjekt zur Citizenliste hinzu
+        :param citizen: Citizen
+        """
         self.citizen.append(citizen)
 
     def getItemPerName(self, name):
+        """
+        Gibt ein Item mit gegebenem Namen zurück
+        :param name: Name eines Items
+        :type name: str
+        :return: Item
+        :rtype: Item
+        """
         for i in self.items:
             if i.getName() == name:
                 return i
         return False
 
     def getCitizenPerName(self, name):
+        """
+        Gibt einen Citizen mit gegebenem Namen zurück
+        :param name: Name eines Citizens
+        :return: Citizen
+        :rtype: Citizen
+        """
         for i in self.citizen:
             if i.getName() == name:
                 return i
