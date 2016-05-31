@@ -5,7 +5,8 @@ class Entity(object):
         self.map = map
         self.description = ''
         self.actions = []
-        self.__actionDatabase = ['Anschauen', 'Erinnerungen hervorrufen', 'Verlassen', 'Lesen', 'Ansprechen', 'Aufheben', 'Fallen lassen']
+        self.__actionDatabase = ['Anschauen', 'Erinnerungen hervorrufen', 'Verlassen', 'Lesen', 'Ansprechen',
+                                 'Aufheben', 'Fallen lassen', 'Ansprechen ', 'Anschauen ']
         self.quitPhrase = 'Exit'
 
     def getName(self):
@@ -122,25 +123,40 @@ class Entity(object):
         :rtype function
         """
         if interactionCall in self.actions:
+            # Anschauen
             if interactionCall == self.__actionDatabase[0]:
                 return self.description
+            # Erinnerungen hervorrufen
             elif interactionCall == self.__actionDatabase[1]:
                 return self.inspection
+            # Verlassen
             elif interactionCall == self.__actionDatabase[2]:
                 self.map.getGame().getPlayer().endInteraction()
                 return self.quitPhrase
+            # Lesen
             elif interactionCall == self.__actionDatabase[3]:
                 self.getPlace().getMap().getGame().getPlayer().pickUpItem(self)
                 return self.getContent()
+            # Ansprechen
             elif interactionCall == self.__actionDatabase[4]:
                 return self.talk()
+            # Aufheben
             elif interactionCall == self.__actionDatabase[5]:
                 self.getMap().getGame().getPlayer().pickUpItem(self)
                 self.replaceAction(5, 6)
                 self.map.getGame().getPlayer().endInteraction()
                 return 'Aufgehoben!'
+            # Fallen lassen
             elif interactionCall == self.__actionDatabase[6]:
                 self.getMap().getGame().getPlayer().dropItem(self)
                 self.replaceAction(6, 5)
                 self.map.getGame().getPlayer().endInteraction()
                 return 'Fallen gelassen!'
+            # Ansprechen und Citizen verstecken
+            elif interactionCall == self.__actionDatabase[7]:
+                self.hide()
+                return self.talk()
+            # Anschauen und Citizen verstecken
+            elif interactionCall == self.__actionDatabase[8]:
+                self.hide()
+                return self.description

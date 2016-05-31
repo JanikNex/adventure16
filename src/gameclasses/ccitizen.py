@@ -1,4 +1,5 @@
 from src.gameclasses.centity import *
+from src.gameclasses.citem import *
 from src.utilclasses.cjsonhandler import *
 
 
@@ -13,11 +14,16 @@ class Citizen(Entity):
         self.inspection = jsonhandler.getData()[str(citizenid)]['inspection']
         self.setActions(jsonhandler.getData()[str(citizenid)]['actions'])
         self.quitPhrase = jsonhandler.getData()[str(citizenid)]['quitPhrase']
-        self.talkTimes = int(jsonhandler.getData()[str(citizenid)]['talkTimes'])
+        self.talkTimes = jsonhandler.getData()[str(citizenid)]['talkTimes']
         self.path = jsonhandler.getData()[str(citizenid)]['path']
         self.visible = jsonhandler.getData()[str(citizenid)]['visible']
-        self.alreadyTalked = False
         self.carryingItem = None
+        if jsonhandler.getData()[str(citizenid)]['carryingItem'] is not None:
+            self.carryingItem = eval(jsonhandler.getData()[str(citizenid)]['carryingItem'])
+        if self.carryingItem is not None:
+            self.carryingItem.setPlace(self)
+            self.map.addItem(self.carryingItem)
+        self.alreadyTalked = False
         print('[DEBUG] Generated', self.name)
         del jsonhandler
 
@@ -49,6 +55,9 @@ class Citizen(Entity):
         """
         return self.visible
 
+    def hide(self):
+        self.visible = False
+
     def talk(self):
         """
         Startet, falls möglich, einen Dialog mit diesem Citizen
@@ -57,6 +66,10 @@ class Citizen(Entity):
         if self.canTalk and self.talkTimes > 0:
             self.alreadyTalked = True
             self.talkTimes -= 1
+            if self.carryingItem is not None:
+                self.carryingItem.drop(self.carryingItem.getMap().getGame().getPlayer().getPlace())
+                self.carryingItem.getMap().getGame().getPlayer().getPlace().addItem(self.carryingItem)
+                self.carryingItem = None
             self.map.getGame().getDialogueHandler().startDialogue(path=self.path)
             return ''
         else:

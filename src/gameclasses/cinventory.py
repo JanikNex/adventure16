@@ -77,3 +77,6 @@ class Inventory(object):
         :return: Player
         """
         return self.player
+
+    def getMap(self):
+        return self.player.getGame().getMap()

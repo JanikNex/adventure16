@@ -17,6 +17,9 @@ class Player(object):
         """
         return self.place
 
+    def getGame(self):
+        return self.game
+
     def setPlace(self, place):
         """
         Setzt den aktuellen Standort des Spielers
