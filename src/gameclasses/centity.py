@@ -6,7 +6,7 @@ class Entity(object):
         self.description = ''
         self.actions = []
         self.__actionDatabase = ['Anschauen', 'Erinnerungen hervorrufen', 'Verlassen', 'Lesen', 'Ansprechen',
-                                 'Aufheben', 'Fallen lassen', 'Ansprechen ', 'Anschauen ']
+                                 'Aufheben', 'Fallen lassen', 'Ansprechen ', 'Anschauen ', 'Betrachten']
         self.quitPhrase = 'Exit'
 
     def getName(self):
@@ -113,6 +113,19 @@ class Entity(object):
             return ''
         return text
 
+    def isVisible(self):
+        """
+        Gibt zurück, ob diese Entity gerade sichtbar ist.
+        :rtype: bool
+        """
+        return self.visible
+
+    def hide(self):
+        self.visible = False
+
+    def show(self):
+        self.visible = True
+
     def interact(self, interactionCall):
         """
         Führt eine gegebene Interaktion durch. Dafür wird der interactionCall mit den Interaktionen der action
@@ -160,3 +173,5 @@ class Entity(object):
             elif interactionCall == self.__actionDatabase[8]:
                 self.hide()
                 return self.description
+            elif interactionCall == self.__actionDatabase[9]:
+                return self.getContent()

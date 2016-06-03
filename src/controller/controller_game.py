@@ -217,7 +217,7 @@ class GameController(object):
         :param text: Text als String
         :type text: str
         """
-        print(text)
+        # Formatierung fehlt
         self.textOutputSet(text)
 
     def textOutputDialogue(self, text):
@@ -226,7 +226,7 @@ class GameController(object):
         :param text: Text als String
         :type text: str
         """
-        print(text)
+        # Formatierung fehlt
         self.textOutputAdd(text)
 
     def textOutputDesciption(self, text):
@@ -253,7 +253,7 @@ class GameController(object):
         :param text: Text als String
         :type text: str
         """
-        print(text)
+        # Formatierung fehlt
         self.gui.vTextOutput.set(self.gui.vTextOutput.get() + '\n\n' + text)
 
     def textOutputSet(self, text):

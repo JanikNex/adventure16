@@ -14,6 +14,7 @@ class Item(Entity):
         self.setActions(jsonhandler.getData()[str(itemid)]['actions'])
         self.canBeMoved = bool(jsonhandler.getData()[str(itemid)]['canBeMoved'])
         self.count = int(jsonhandler.getData()[str(itemid)]['count'])
+        self.visible = jsonhandler.getData()[str(itemid)]['visible']
         print('[DEBUG] Generated', self.name)
         del jsonhandler
 
@@ -46,7 +47,6 @@ class Letter(Item):
         Item.__init__(self, map, itemid)
         jsonhandler = JSONHandler()
         jsonhandler.openNewFile('itemdata')
-        self.read = False
         self.content = jsonhandler.getData()[str(itemid)]['content']
         self.quitPhrase = 'Brief geschlossen'
         del jsonhandler
@@ -55,6 +55,14 @@ class Letter(Item):
         if self.place.getPlayer().getPlace().getID() == 0:
             self.place.getPlayer().getPlace().getMap().getPlacePerID(0).allowExit()
             self.place.getPlayer().getPlace().getMap().getPlacePerID(0).denyEnter()
-        self.read = True
         return self.content
 
+
+class GhostNote(Letter):
+    def __init__(self, map, itemid):
+        Letter.__init__(self, map, itemid)
+        self.quitPhrase = 'Notiz löste sich in Luft auf!'
+
+    def getContent(self):
+        self.hide()
+        return self.content

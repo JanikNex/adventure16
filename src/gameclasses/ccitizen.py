@@ -48,16 +48,6 @@ class Citizen(Entity):
         """
         return self.inspection
 
-    def isVisible(self):
-        """
-        Gibt zurück, ob dieser Citizen gerade sichtbar ist.
-        :rtype: bool
-        """
-        return self.visible
-
-    def hide(self):
-        self.visible = False
-
     def talk(self):
         """
         Startet, falls möglich, einen Dialog mit diesem Citizen
