@@ -1,4 +1,5 @@
 from src.gameclasses.cinventory import *
+from src.gameclasses.citem import Key
 
 
 class Player(object):
@@ -209,3 +210,18 @@ class Player(object):
         """
         # if self.interactingWith.__class__.__name__ == 'DialogueHandler':
         self.game.getDialogueHandler().nextStep(button)
+
+    def hasKeyForPlace(self, place):
+        for i in self.inventory.getItems():
+            if isinstance(i, Key):
+                if i.getCanOpen() == place.getID():
+                    return True
+        return False
+
+    def useKey(self, place):
+        for i in self.inventory.getItems():
+            if isinstance(i, Key):
+                if i.getCanOpen() == place.getID():
+                    if i.inInventory():
+                        self.inventory.removeItem(i)
+                        del i

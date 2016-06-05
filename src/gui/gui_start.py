@@ -11,7 +11,7 @@ class GUIStart():
         self.cCreditStart = cCreditStart
         try:
             self.fenster = Tk()
-            self.fenster.title("Lost Brother")
+            self.fenster.title("Lost Brother - The choice is yours")
             self.fenster.geometry("600x600")
             #self.fenster.attributes("-topmost", 1)
             self.fenster.resizable(0, 0)

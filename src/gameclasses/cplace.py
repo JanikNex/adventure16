@@ -29,10 +29,18 @@ class Place(object):
 
     def canEnter(self):
         """
-        Gibt zurück, ob dieser Platz betreten werden kann
+        Gibt zurück, ob dieser Platz betreten werden kann. Kann er nicht betreten werden aber der Spieler besitzt einen
+        Schlüssel, wird der Platz freigeschaltet.
         :rtype: bool
         """
-        return self.accessAllowed
+        if self.accessAllowed:
+            return True
+        elif not self.accessAllowed and self.map.getGame().getPlayer().hasKeyForPlace(self):
+            self.map.getGame().getPlayer().useKey(self)
+            self.accessAllowed = True
+            return True
+        elif not self.accessAllowed and not self.map.getGame().getPlayer().hasKeyForPlace(self):
+            return False
 
     def canLeave(self):
         """

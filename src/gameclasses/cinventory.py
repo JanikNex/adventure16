@@ -80,3 +80,7 @@ class Inventory(object):
 
     def getMap(self):
         return self.player.getGame().getMap()
+
+
+    def getItems(self):
+        return self.items

@@ -66,3 +66,14 @@ class GhostNote(Letter):
     def getContent(self):
         self.hide()
         return self.content
+
+
+class Key(Item):
+    def __init__(self, map, itemid):
+        Item.__init__(self, map, itemid)
+        jsonhandler = JSONHandler()
+        jsonhandler.openNewFile('itemdata')
+        self.canOpen = jsonhandler.getData()[str(itemid)]['canOpen']
+
+    def getCanOpen(self):
+        return self.canOpen

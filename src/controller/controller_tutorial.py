@@ -69,16 +69,19 @@ class TutorialController(object):
 
     def buttonAnswerA(self):
         messagebox.showinfo('Tutorial', 'Ob diese Entscheidung weise war.....wer weiß!')
+        self.audiohandler.stop()
         self.gui.fenster.quit()
         self.gui.fenster.destroy()
 
     def buttonAnswerB(self):
         messagebox.showinfo('Tutorial', 'Ob diese Entscheidung weise war.....wer weiß!')
+        self.audiohandler.stop()
         self.gui.fenster.quit()
         self.gui.fenster.destroy()
 
     def buttonAnswerC(self):
         messagebox.showinfo('Tutorial', 'Ob diese Entscheidung weise war.....wer weiß!')
+        self.audiohandler.stop()
         self.gui.fenster.quit()
         self.gui.fenster.destroy()
 

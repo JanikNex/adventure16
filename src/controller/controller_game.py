@@ -34,6 +34,7 @@ class GameController(object):
         """
         if messagebox.askokcancel("Beenden",
                                   "Möchtest du das Spiel wirklich beenden? \nDein Spielstand wird dabei unwiederruflich gelöscht!"):
+            self.game.getAudioHandler().stop()
             self.gui.fenster.quit()
             self.gui.fenster.destroy()
 

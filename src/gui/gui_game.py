@@ -19,7 +19,7 @@ class GUIGame():
         try:
             # Erstellt das Spielfenster
             self.fenster = Toplevel()
-            self.fenster.title("Lost Brother")
+            self.fenster.title("Lost Brother - The choice is yours")
             self.fenster.geometry("1024x600")
             self.fenster.resizable(0, 0)
             #self.fenster.attributes("-topmost", 1)

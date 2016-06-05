@@ -7,7 +7,7 @@ class GUICredits():
     def __init__(self):
         try:
             self.fenster = Toplevel()
-            self.fenster.title("Lost Brother")
+            self.fenster.title("Lost Brother - The choice is yours")
             self.fenster.geometry("600x600")
             self.fenster.resizable(0, 0)
             self.fenster.attributes("-topmost", 1)
