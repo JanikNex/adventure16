@@ -7,7 +7,15 @@ from src.controller.controller_credits import *
 class Starter(object):
     def __init__(self):
         self.start = GUIStart(self.startGame, self.tutorialStart, self.creditStart)
+        # Registrierung des WindowClose Event-Handlers
+        self.start.fenster.protocol("WM_DELETE_WINDOW", self.windowCloseEvent)
         self.start.fenster.mainloop()
+
+    def windowCloseEvent(self):
+        if messagebox.askokcancel("Beenden?", "Durch Beenden dieses Fensters werden alle Fenster dieses Spiels geschlossen!"):
+            self.start.fenster.quit()
+            self.start.fenster.destroy()
+            sys.exit(0)
 
     def startGame(self):
         # Startet neues Spiel

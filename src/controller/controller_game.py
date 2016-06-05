@@ -32,7 +32,7 @@ class GameController(object):
         Wird aufgerufen, sobald versucht wird das Fenster zu schließen. Es erscheint eine Messagebox und mit klick auf
         ok wird das Fenster geschlossen
         """
-        if messagebox.askokcancel("Beenden",
+        if messagebox.askokcancel("Beenden?",
                                   "Möchtest du das Spiel wirklich beenden? \nDein Spielstand wird dabei unwiederruflich gelöscht!"):
             self.game.getAudioHandler().stop()
             self.gui.fenster.quit()

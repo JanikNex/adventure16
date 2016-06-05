@@ -37,7 +37,7 @@ class TutorialController(object):
         self.gui.fenster.mainloop()
 
     def windowCloseEvent(self):
-        if messagebox.askokcancel("Beenden", "Möchtest du das Tutorial wirklich beenden?!"):
+        if messagebox.askokcancel("Beenden?", "Möchtest du das Tutorial wirklich beenden?!"):
             self.audiohandler.stop()
             self.gui.fenster.quit()
             self.gui.fenster.destroy()

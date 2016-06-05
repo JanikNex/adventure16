@@ -13,6 +13,7 @@ class GUIStart():
             self.fenster = Tk()
             self.fenster.title("Lost Brother - The choice is yours")
             self.fenster.geometry("600x600")
+            self.fenster.wm_iconbitmap("src/icon.ico")
             #self.fenster.attributes("-topmost", 1)
             self.fenster.resizable(0, 0)
             self.logo = PhotoImage(file='src/gif/lostBrother.gif')

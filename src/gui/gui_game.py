@@ -21,6 +21,7 @@ class GUIGame():
             self.fenster = Toplevel()
             self.fenster.title("Lost Brother - The choice is yours")
             self.fenster.geometry("1024x600")
+            self.fenster.wm_iconbitmap("src/icon.ico")
             self.fenster.resizable(0, 0)
             #self.fenster.attributes("-topmost", 1)
             # Erstellt alle Elemente der GUI
