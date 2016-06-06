@@ -10,12 +10,12 @@ class Citizen(Entity):
         jsonhandler.openNewFile('citizendata')
         self.name = jsonhandler.getData()[str(citizenid)]['name']
         self.description = jsonhandler.getData()[str(citizenid)]['description']
-        self.canTalk = jsonhandler.getData()[str(citizenid)]['canTalk']
         self.inspection = jsonhandler.getData()[str(citizenid)]['inspection']
+        self.path = jsonhandler.getData()[str(citizenid)]['path']
+        self.canTalk = jsonhandler.getData()[str(citizenid)]['canTalk']
+        self.talkTimes = jsonhandler.getData()[str(citizenid)]['talkTimes']
         self.setActions(jsonhandler.getData()[str(citizenid)]['actions'])
         self.quitPhrase = jsonhandler.getData()[str(citizenid)]['quitPhrase']
-        self.talkTimes = jsonhandler.getData()[str(citizenid)]['talkTimes']
-        self.path = jsonhandler.getData()[str(citizenid)]['path']
         self.visible = jsonhandler.getData()[str(citizenid)]['visible']
         self.carryingItem = None
         if jsonhandler.getData()[str(citizenid)]['carryingItem'] is not None:

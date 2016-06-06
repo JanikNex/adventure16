@@ -76,13 +76,13 @@ class GUIGame():
             self.placeLabel = Label(master=self.rightUpperInfoFrame, font=('fixedsys', 13), width=5, justify=RIGHT,
                                     text='Ort:', fg='black')
             self.placeLabel.grid(row=0, column=0)
-            self.placeOutput = Label(master=self.rightUpperInfoFrame, font=('fixedsys', 10), width=20, justify=LEFT,
+            self.placeOutput = Label(master=self.rightUpperInfoFrame, font=('fixedsys', 10), width=25, justify=LEFT,
                                      textvariable=self.vPlaceOutput, fg='black')
             self.placeOutput.grid(row=0, column=1)
             self.prestigeLabel = Label(master=self.rightUpperInfoFrame, font=('fixedsys', 13), width=5, justify=LEFT,
                                        text='Ruhm:', fg='black')
             self.prestigeLabel.grid(row=1, column=0)
-            self.prestigeOutput = Label(master=self.rightUpperInfoFrame, font=('fixedsys', 10), width=20, justify=RIGHT,
+            self.prestigeOutput = Label(master=self.rightUpperInfoFrame, font=('fixedsys', 10), width=5, justify=RIGHT,
                                         textvariable=self.vPrestigeOutput, fg='black')
             self.prestigeOutput.grid(row=1, column=1)
             # Inventory Buttons
