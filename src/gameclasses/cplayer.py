@@ -139,7 +139,8 @@ class Player(object):
         :param new: neuer Prestige-Wert
         :type new: int
         """
-        self.prestige = new
+        if -5 <= new <= 5:
+            self.prestige = new
 
     def decreasePrestige(self, value):
         """
@@ -147,7 +148,8 @@ class Player(object):
         :param value: Wert, um den Prestige verringert werden soll
         :type value: int
         """
-        self.prestige -= value
+        if -5 <= self.prestige-value <= 5:
+            self.prestige -= value
 
     def increasePrestige(self, value):
         """
@@ -155,7 +157,8 @@ class Player(object):
         :param value: Wert, um den Prestige erhöht werden soll
         :type value: int
         """
-        self.prestige += value
+        if -5 <= self.prestige + value <= 5:
+            self.prestige += value
 
     def startInteractWith(self, object):
         """
