@@ -12,12 +12,19 @@ class Starter(object):
         self.start.fenster.mainloop()
 
     def windowCloseEvent(self):
+        """
+        Beendet das Mainfenster, wodurch nach einer okcancel Abfrage alle Fenster des Spiels geschlossen werden.
+        """
         if messagebox.askokcancel("Beenden?", "Durch Beenden dieses Fensters werden alle Fenster dieses Spiels geschlossen!"):
             self.start.fenster.quit()
             self.start.fenster.destroy()
             sys.exit(0)
 
     def startGame(self):
+        """
+        Deaktiviert die Buttons des Starters, minimiert diesen, erstellt ein GameController Objekt und macht alles nach
+        beendigung des GameControllers rückgängig.
+        """
         # Startet neues Spiel
         # Deaktivieren des Buttons, damit nur ein Spiel zur gleichen Zeit laufen kann
         self.start.buttonStartGame.config(text='Ingame...', state='disabled')
@@ -35,6 +42,10 @@ class Starter(object):
         # self.creditStart()
 
     def tutorialStart(self):
+        """
+        Deaktiviert die Buttons des Starters, minimiert diesen, erstellt ein TutorialController Objekt und macht alles nach
+        beendigung des TutorialControllers rückgängig.
+        """
         # Startet neues Tutorial
         # Deaktivieren des Buttons, damit nur ein Tutorial zur gleichen Zeit laufen kann
         self.start.buttonStartGame.config(state='disabled')
@@ -50,6 +61,10 @@ class Starter(object):
         self.start.buttonCredits.config(state='active')
 
     def creditStart(self):
+        """
+        Deaktiviert die Buttons des Starters, minimiert diesen, erstellt ein CreditController Objekt und macht alles nach
+        beendigung des CreditControllers rückgängig.
+        """
         # Startet Credits
         # Deaktivieren des Buttons, damit nur ein Credit-Fenster zur gleichen Zeit laufen kann
         self.start.buttonStartGame.config(state='disabled')

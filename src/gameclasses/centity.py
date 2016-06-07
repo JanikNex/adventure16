@@ -121,9 +121,15 @@ class Entity(object):
         return self.visible
 
     def hide(self):
+        """
+        Versteckt diese Entity, indem das visible Attribut auf False gesetzt wird.
+        """
         self.visible = False
 
     def show(self):
+        """
+        Lässt diese Entity erscheinen, indem das visible Attribut auf True gesetzt wird.
+        """
         self.visible = True
 
     def interact(self, interactionCall):

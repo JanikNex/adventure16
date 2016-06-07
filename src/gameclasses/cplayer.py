@@ -212,6 +212,12 @@ class Player(object):
         self.game.getDialogueHandler().nextStep(button)
 
     def hasKeyForPlace(self, place):
+        """
+        Gibt zurück, ob der Spieler einen Schlüssel für gegebenen Ort hat
+        :param place: zuprüfender Ort
+        :type place: Place
+        :rtype: bool
+        """
         for i in self.inventory.getItems():
             if isinstance(i, Key):
                 if i.getCanOpen() == place.getID():
@@ -219,6 +225,12 @@ class Player(object):
         return False
 
     def useKey(self, place):
+        """
+        Benutzt einen Schlüssel für einen gegebenen Ort, falls jener vorhanden ist.
+        Zudem wird das Schlüsselobjekt anschließend zerstört
+        :param place: zu öffnender Ort
+        :type place: Place
+        """
         for i in self.inventory.getItems():
             if isinstance(i, Key):
                 if i.getCanOpen() == place.getID():

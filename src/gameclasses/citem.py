@@ -19,26 +19,55 @@ class Item(Entity):
         del jsonhandler
 
     def getTexture(self):
+        """
+        Gibt den Texturpfad zurück
+        :return: texturepath
+        :rtype: str
+        """
         return self.texturePath
 
     def inInventory(self):
+        """
+        Gibt zurück, ob sich dieses Item im Spielerinventar befinded
+        :rtype: bool
+        """
         return self.map.getGame().getPlayer().getInventory().isItemInInventory(self)
 
     def drop(self, place):
+        """
+        Setzt den Ort dieses Items, falls es sich im Inventar befinded auf einen gegebenen Ort
+        :param place: Place
+        """
         if self.inInventory() and self.canBeMoved:
             self.setPlace(place)
 
     def take(self):
+        """
+        Setzt den Ort dieses Items, falls es sich nicht im Inventar befinded auf das Inventar des Spielers
+        """
         if not self.inInventory() and self.canBeMoved:
             self.setPlace(self.getPlace().getMap().getGame().getPlayer().getInventory())
 
     def getCanBeMoved(self):
+        """
+        Gibt zurück, ob dieses Item bewegt werden kann.
+        :rtype: bool
+        """
         return self.canBeMoved
 
     def getCount(self):
+        """
+        Gibt die Anzahl des Objekts zurück.
+        :rtype: int
+        """
         return self.count
 
     def setCount(self, count):
+        """
+        Setzt die Anzahl des Objekts auf einen gegebenen Wert
+        :param count: Neue Anzahl
+        :type count: int
+        """
         self.count = count
 
 
@@ -52,6 +81,10 @@ class Letter(Item):
         del jsonhandler
 
     def getContent(self):
+        """
+        Gibt den Inhalt des Briefs zurück, erlaubt das Verlassen des Zuges und verbietet das betreten.
+        :rtype: str
+        """
         if self.place.getPlayer().getPlace().getID() == 0:
             self.place.getPlayer().getPlace().getMap().getPlacePerID(0).allowExit()
             self.place.getPlayer().getPlace().getMap().getPlacePerID(0).denyEnter()
@@ -64,6 +97,10 @@ class GhostNote(Letter):
         self.quitPhrase = 'Notiz löste sich in Luft auf!'
 
     def getContent(self):
+        """
+        Gibt den Inhalt der Notiz zurück und lässt diese verschwinden.
+        :rtype: str
+        """
         self.hide()
         return self.content
 
@@ -76,4 +113,8 @@ class Key(Item):
         self.canOpen = jsonhandler.getData()[str(itemid)]['canOpen']
 
     def getCanOpen(self):
+        """
+        Gibt zurück, welcher Ort mit diesem Schlüssel geöffnet werden kann.
+        :rtype: int
+        """
         return self.canOpen

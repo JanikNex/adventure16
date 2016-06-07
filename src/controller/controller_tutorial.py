@@ -37,55 +37,95 @@ class TutorialController(object):
         self.gui.fenster.mainloop()
 
     def windowCloseEvent(self):
+        """
+        Schließt das Tutorialfenster, falls bei einer okcancel Abfrage auf ok geklickt wird.
+        """
         if messagebox.askokcancel("Beenden?", "Möchtest du das Tutorial wirklich beenden?!"):
             self.audiohandler.stop()
             self.gui.fenster.quit()
             self.gui.fenster.destroy()
 
+    def endTutorial(self):
+        """
+        Beendet das Tutorial, nachdem eine Infobox angezeigt wurde.
+        """
+        messagebox.showinfo('Tutorial', 'Ob dies die richtige Entscheidung war...')
+        self.audiohandler.stop()
+        self.gui.fenster.quit()
+        self.gui.fenster.destroy()
+
 # Callback Funktionen, welche beim Tutorial nicht benötigt werden
     def buttonLookNorth(self):
+        """
+        Leere Callbackfunktion
+        """
         pass
 
     def buttonLookEast(self):
+        """
+        Leere Callbackfunktion
+        """
         pass
 
     def buttonLookSouth(self):
+        """
+        Leere Callbackfunktion
+        """
         pass
 
     def buttonLookWest(self):
+        """
+        Leere Callbackfunktion
+        """
         pass
 
     def buttonLook(self):
+        """
+        Leere Callbackfunktion
+        """
         pass
 
     def buttonNext(self):
+        """
+        Ruft die nächste Phase des Tutorials auf.
+        """
         self.tutorial()
 
     def buttonMove(self):
+        """
+        Leere Callbackfunktion
+        """
         pass
 
     def buttonInventory(self):
+        """
+        Leere Callbackfunktion
+        """
         pass
 
     def buttonAnswerA(self):
-        messagebox.showinfo('Tutorial', 'Ob diese Entscheidung weise war.....wer weiß!')
-        self.audiohandler.stop()
-        self.gui.fenster.quit()
-        self.gui.fenster.destroy()
+        """
+        Beendet das Tutorial
+        """
+        self.endTutorial()
 
     def buttonAnswerB(self):
-        messagebox.showinfo('Tutorial', 'Ob diese Entscheidung weise war.....wer weiß!')
-        self.audiohandler.stop()
-        self.gui.fenster.quit()
-        self.gui.fenster.destroy()
+        """
+        Beendet das Tutorial
+        """
+        self.endTutorial()
 
     def buttonAnswerC(self):
-        messagebox.showinfo('Tutorial', 'Ob diese Entscheidung weise war.....wer weiß!')
-        self.audiohandler.stop()
-        self.gui.fenster.quit()
-        self.gui.fenster.destroy()
+        """
+        Beendet das Tutorial
+        """
+        self.endTutorial()
 
     def setText(self, text):
+        """
+        Setzt den Text des Textfensters auf den gegebenen Text
+        :param text: Anzuzeigender Text
+        """
         self.gui.vTextOutput.set(text)
 
     def setAnswers(self, answers):

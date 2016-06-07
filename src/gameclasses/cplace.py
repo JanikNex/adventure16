@@ -85,6 +85,11 @@ class Place(object):
         return self.citizen
 
     def getVisibleCitizens(self):
+        """
+        Gibt eine Liste nur der sichtbaren Citizens zurück.
+        :return: Liste sichtbarer Citizens
+        :rtype: list
+        """
         citizens = []
         for i in self.citizen:
             if i.isVisible():
@@ -92,6 +97,11 @@ class Place(object):
         return citizens
 
     def getVisibleItems(self):
+        """
+        Gibt eine Liste nur der sichtbaren Items zurück.
+        :return: Liste sichtbarer Items
+        :rtype: list
+        """
         items = []
         for i in self.items:
             if i.isVisible():
@@ -113,42 +123,97 @@ class Place(object):
         return self.exitDeniedMessage
 
     def getNeighbors(self):
+        """
+        Gibt die Nachbarobjekte zurück
+        :return: list of Place
+        :rtype: list
+        """
         result = []
         for i in self.neighbors:
             result.append(self.map.getPlacePerID(i))
         return result
 
     def getPlaceInDirection(self, index):
+        """
+        Gibt das Nachbarobjekt in einer bestimmten Richtung zurück.
+        :param index: Richtungsindex
+        :type index: int
+        :return: Place
+        :rtype: Place
+        """
         return self.getNeighbors()[index]
 
     def getSound(self):
+        """
+        Gibt den Soundpath des Objekts zurück
+        :return: Soundpath des Objekts
+        :rtype: str
+        """
         return self.soundPath
 
     def allowEnter(self):
+        """
+        Erlaubt das betreten dieses Ortes
+        """
         self.accessAllowed = True
 
     def denyEnter(self):
+        """
+        Verbietet das betreten dieses Ortes
+        """
         self.accessAllowed = False
 
     def allowExit(self):
+        """
+        Erlaubt das verlassen dieses Ortes
+        """
         self.exitAllowed = True
 
     def denyExit(self):
+        """
+        Verbietet das verlassen dieses Ortes
+        """
         self.exitAllowed = False
 
     def getMap(self):
+        """
+        Gibt die Map zurück
+        :return: Map
+        :rtype: Map
+        """
         return self.map
 
     def getFarsightDescription(self):
+        """
+        Gibt die Entfernungsbeschreibung dieses Ortes zurück
+        :return: Entfernungsbeschreibung
+        :rtype: str
+        """
         return self.farSightDescription
 
     def removeItem(self, item):
+        """
+        Entfernt ein gegebenes Item von diesem Ort
+        :param item: zu entfernendes Item
+        :type item: Item
+        """
         self.items.remove(item)
 
     def addItem(self, item):
+        """
+        Fügt ein gegebenes Item zu diesem Ort hinzu
+        :param item: hinzuzufügendes Item
+        :type item: Item
+        """
         self.items.append(item)
 
     def getInteractableThingsAsString(self):
+        """
+        Gibt die Interaktionsmöglichkeiten, also alle Personen und Gegenstände dieses Ortes zusammen mit ihrer
+        ActionID zurück
+        :return: Ineraktionsmöglichkeiten
+        :rtype: str
+        """
         text = 'Du kannst mit folgenden Personen oder Gegenständen interagieren:\n'
         actionCount = 0
         if not len(self.getVisibleCitizens()) == 0:
@@ -166,22 +231,43 @@ class Place(object):
         return text
 
     def getInteractionObject(self, index):
+        """
+        Gibt ein Interaktionsobjekt mit einer gegebenen ActionID zurück
+        :param index: ActionID
+        :type index: int
+        :return: Entity
+        :rtype: Entity
+        """
         options = self.getVisibleCitizens()[:]
         options.extend(self.getVisibleItems())
         return options[index]
 
     def getInteractionPossNum(self):
+        """
+        Gibt die maximale Anzahl an Interaktionsmöglichkeiten zurück
+        :return:
+        """
         if not self.getMap().getGame().getPlayer().isInteracting():
             return len(self.getVisibleCitizens()) + len(self.getVisibleItems())
         else:
             return -1
 
     def createItem(self, item):
+        """
+        Erstellt ein gegebenes Item komplett im gesamten Spiel
+        :param item: Item
+        :type item: Item
+        """
         self.items.append(item)
         item.setPlace(self)
         self.map.addItem(item)
 
     def createCitizen(self, citizen):
+        """
+        Erstellt einen gegebenen Citizen komplett im gesamten Spiel
+        :param citizen: Citizen
+        :type citizen: Citizen
+        """
         self.citizen.append(citizen)
         citizen.setPlace(self)
         self.map.addCitizen(citizen)

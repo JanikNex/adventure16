@@ -44,7 +44,7 @@ class GameController(object):
         """
         if not self.game.getPlayer().isInteracting():
             self.game.getPlayer().setFacing('n')
-            self.textOutputDesciption(self.game.getPlayer().getPlace().getPlaceInDirection(0).getFarsightDescription())
+            self.textOutputDescription(self.game.getPlayer().getPlace().getPlaceInDirection(0).getFarsightDescription())
             self.updateGUI()
 
     def buttonLookEast(self):
@@ -53,7 +53,7 @@ class GameController(object):
         """
         if not self.game.getPlayer().isInteracting():
             self.game.getPlayer().setFacing('e')
-            self.textOutputDesciption(self.game.getPlayer().getPlace().getPlaceInDirection(1).getFarsightDescription())
+            self.textOutputDescription(self.game.getPlayer().getPlace().getPlaceInDirection(1).getFarsightDescription())
             self.updateGUI()
 
     def buttonLookSouth(self):
@@ -62,7 +62,7 @@ class GameController(object):
         """
         if not self.game.getPlayer().isInteracting():
             self.game.getPlayer().setFacing('s')
-            self.textOutputDesciption(self.game.getPlayer().getPlace().getPlaceInDirection(2).getFarsightDescription())
+            self.textOutputDescription(self.game.getPlayer().getPlace().getPlaceInDirection(2).getFarsightDescription())
             self.updateGUI()
 
     def buttonLookWest(self):
@@ -71,7 +71,7 @@ class GameController(object):
         """
         if not self.game.getPlayer().isInteracting():
             self.game.getPlayer().setFacing('w')
-            self.textOutputDesciption(self.game.getPlayer().getPlace().getPlaceInDirection(3).getFarsightDescription())
+            self.textOutputDescription(self.game.getPlayer().getPlace().getPlaceInDirection(3).getFarsightDescription())
             self.updateGUI()
 
     def buttonLook(self):
@@ -79,13 +79,17 @@ class GameController(object):
         Gibt die Beschreibung des aktullenen Standorts des Spielers aus
         """
         if not self.game.getPlayer().isInteracting():
-            self.textOutputDesciption(self.game.getPlayer().getPlace().getDescription())
+            self.textOutputDescription(self.game.getPlayer().getPlace().getDescription())
             self.textOutputInteraction(self.game.getPlayer().getPlace().getInteractableThingsAsString())
             print(self.getTextInput())
             self.updateGUI()
 
     def buttonNext(self):
         # try:
+        """
+        Führt die Funktion aus, welche zur aktuellen Spiellage durch diesen Button ausgeführt werden soll.
+        Dabei werden auch eventuelle Benutzereingaben in das Textfeld integriert.
+        """
         if not self.AnswerButtonsActive:
             if self.game.getDialogueHandler().isInDialogue():
                 if self.getTextInput() == '':
@@ -130,6 +134,11 @@ class GameController(object):
             #    self.updateGUI()
 
     def selectInteraction(self, num):
+        """
+        Führt die Interaktion mit der gegebenen Nummer aus
+        :param num: Nummer der Interaktion
+        :type num: int
+        """
         if self.game.getDialogueHandler().isInDialogue():
             self.updateDialogueOutput()
         else:
@@ -150,28 +159,25 @@ class GameController(object):
 
     def buttonAnswerA(self):
         """
-        Führt den Dialog mit ausgewählter Antwort fort
+        Führt den Dialog mit ausgewählter Antwort A fort
         """
         self.game.getPlayer().nextInteraction(button=0)
-        # self.selectInteraction(None)
         self.ButtonText = []
         self.updateGUI()
 
     def buttonAnswerB(self):
         """
-        Führt den Dialog mit ausgewählter Antwort fort
+        Führt den Dialog mit ausgewählter Antwort B fort
         """
         self.game.getPlayer().nextInteraction(button=1)
-        # self.selectInteraction(None)
         self.ButtonText = []
         self.updateGUI()
 
     def buttonAnswerC(self):
         """
-        Führt den Dialog mit ausgewählter Antwort fort
+        Führt den Dialog mit ausgewählter Antwort C fort
         """
         self.game.getPlayer().nextInteraction(button=2)
-        # self.selectInteraction(None)
         self.ButtonText = []
         self.updateGUI()
 
@@ -230,7 +236,7 @@ class GameController(object):
         # Formatierung fehlt
         self.textOutputAdd(text)
 
-    def textOutputDesciption(self, text):
+    def textOutputDescription(self, text):
         """
         Gibt Textoutput der aktuellen Ortsbeschreibung aus
         :param text: Text als String
