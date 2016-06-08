@@ -82,7 +82,6 @@ class GameController(object):
         if not self.game.getPlayer().isInteracting():
             self.textOutputDescription(self.game.getPlayer().getPlace().getDescription())
             self.textOutputInteraction(self.game.getPlayer().getPlace().getInteractableThingsAsString())
-            print(self.getTextInput())
             self.updateGUI()
 
     def buttonNext(self):
@@ -211,7 +210,9 @@ class GameController(object):
         """
         Resettet den Textoutput
         """
-        self.textOutputSet('')
+        self.gui.textOutput['state'] = 'normal'
+        self.gui.textOutput.delete(1.0, 'end')
+        self.gui.textOutput['state'] = 'disabled'
 
     def textOutputInteraction(self, text):
         """
@@ -219,8 +220,7 @@ class GameController(object):
         :param text: Interaktionsmöglichkeiten als String
         :type text: str
         """
-        # Formatierung fehlt
-        self.textOutputAdd(text)
+        self.textOutputAdd(text, 'interaction')
 
     def textOutputMain(self, text):
         """
@@ -228,8 +228,7 @@ class GameController(object):
         :param text: Text als String
         :type text: str
         """
-        # Formatierung fehlt
-        self.textOutputSet(text)
+        self.textOutputSet(text, 'main')
 
     def textOutputDialogue(self, text):
         """
@@ -237,8 +236,7 @@ class GameController(object):
         :param text: Text als String
         :type text: str
         """
-        # Formatierung fehlt
-        self.textOutputAdd(text)
+        self.textOutputAdd(text, 'dialogue')
 
     def textOutputDescription(self, text):
         """
@@ -246,8 +244,7 @@ class GameController(object):
         :param text: Text als String
         :type text: str
         """
-        # Formatierung fehlt
-        self.textOutputSet(text)
+        self.textOutputSet(text, 'description')
 
     def textOutputWarning(self, text):
         """
@@ -255,25 +252,36 @@ class GameController(object):
         :param text: Text als String
         :type text: str
         """
-        # Formatierung fehlt
-        self.textOutputAdd(text)
+        self.textOutputAdd(text, 'warning')
 
-    def textOutputAdd(self, text):
+    def textOutputAdd(self, text, tag=None):
         """
         Fügt den Text mit einer Zeile Abstand an den aktuellen Textoutput an
+        :param tag: Formatierungstag
         :param text: Text als String
         :type text: str
         """
-        # Formatierung fehlt
-        self.gui.vTextOutput.set(self.gui.vTextOutput.get() + '\n\n' + text)
+        self.gui.textOutput['state'] = 'normal'
+        if tag is None:
+            self.gui.textOutput.insert('end', '\n\n' + text)
+        else:
+            self.gui.textOutput.insert('end', '\n\n'+text, tag)
+        self.gui.textOutput['state'] = 'disabled'
 
-    def textOutputSet(self, text):
+    def textOutputSet(self, text, tag=None):
         """
         Setzt den Textoutput auf Text
+        :param tag: Formatierungstag
         :param text: Text als String
         :type text: str
         """
-        self.gui.vTextOutput.set(text)
+        self.textOutputReset()
+        self.gui.textOutput['state'] = 'normal'
+        if tag is None:
+            self.gui.textOutput.insert('end', text)
+        else:
+            self.gui.textOutput.insert('end', '\n\n' + text, tag)
+        self.gui.textOutput['state'] = 'disabled'
 
     def setPlace(self):
         """
