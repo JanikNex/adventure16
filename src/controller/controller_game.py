@@ -19,6 +19,7 @@ class GameController(object):
         self.ImageInventorySlot = [None, None, None, None, None, None, None, None, None, None, None]
         # Button Array initialisieren
         self.ButtonText = []
+        self.oldButtonText = []
         self.AnswerButtonsActive = False
         # GUI an Spielstart anpassen
         self.updateGUI()
@@ -196,7 +197,10 @@ class GameController(object):
         Updatet die Antwortbuttons und gibt den aktuellen Textoutput des Dialogs aus
         """
         if self.game.getDialogueHandler().isInDialogue():
-            self.ButtonText = self.game.getDialogueHandler().getButtonArray('text')
+            new = self.game.getDialogueHandler().getButtonArray('text')
+            if not self.oldButtonText == new:
+                self.ButtonText = new
+                self.oldButtonText = new
             textoutput = self.game.getDialogueHandler().getTextOutput()
             if textoutput[1] == "C":
                 self.textOutputDialogue(textoutput[0])
@@ -395,10 +399,10 @@ class GameController(object):
         self.toggleMovementButtons()
         self.setPlace()
         self.setPrestige()
+        self.updateDialogueOutput()
         self.setAnswers()
         self.setInventory()
         self.setMovementDirections()
-        self.updateDialogueOutput()
 
     def toggleMovementButtons(self):
         """
