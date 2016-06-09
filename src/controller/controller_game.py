@@ -216,7 +216,7 @@ class GameController(object):
 
     def textOutputInteraction(self, text):
         """
-        Fügt die Interaktionsmöglichekeiten an den aktuellen Textoutput an
+        Fügt übergebenen Text mit der Interaction-Formatierung in das Textfeld ein.
         :param text: Interaktionsmöglichkeiten als String
         :type text: str
         """
@@ -224,7 +224,7 @@ class GameController(object):
 
     def textOutputMain(self, text):
         """
-        Gibt Textoutput des Protagonisten aus
+        Fügt übergebenen Text mit der Protagonist-Formatierung in das Textfeld ein.
         :param text: Text als String
         :type text: str
         """
@@ -232,7 +232,7 @@ class GameController(object):
 
     def textOutputDialogue(self, text):
         """
-        Gibt Textoutput des Dialogpartners aus
+        Fügt übergebenen Text mit der Dialog-Formatierung in das Textfeld ein.
         :param text: Text als String
         :type text: str
         """
@@ -240,7 +240,7 @@ class GameController(object):
 
     def textOutputDescription(self, text):
         """
-        Gibt Textoutput der aktuellen Ortsbeschreibung aus
+        Fügt übergebenen Text mit der Description-Formatierung in das Textfeld ein.
         :param text: Text als String
         :type text: str
         """
@@ -248,7 +248,7 @@ class GameController(object):
 
     def textOutputWarning(self, text):
         """
-        Gibt Warnung aus
+        Fügt übergebenen Text mit der Warnungs-Formatierung in das Textfeld ein.
         :param text: Text als String
         :type text: str
         """
