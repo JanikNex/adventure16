@@ -21,7 +21,7 @@ class JSONHandler(object):
             with open('src/json/' + str(path) + '.json') as data:
                 self.data = js.load(data)
         except:
-            print('FileSystem Error: Could not open JSON File!')
+            print('[DEBUG] FileSystem Error: Could not open JSON File!')
 
     def getData(self):
         """
