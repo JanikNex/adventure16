@@ -68,19 +68,20 @@ class GUIGame():
         self.vPrestigeOutput = StringVar(master=self.rightUpperInfoFrame)
         # TextAnzeige
         self.textOutput = scrtxt.ScrolledText(master=self.leftFrameTextOutput, wrap=WORD, bg='#A3B1B5',
-                                              state='disabled')
+                                              state='disabled', cursor='arrow')
         self.textOutput.pack(fill=BOTH, expand=True)
         # Formatierungstags für die Textausgabe
-        self.textOutput.tag_configure('warning', foreground='red')
-        self.textOutput.tag_configure('description', foreground='yellow')
-        self.textOutput.tag_configure('main', foreground='pink')
-        self.textOutput.tag_configure('interaction', foreground='green')
-        self.textOutput.tag_configure('tutorial', foreground='black', justify=CENTER)
+        self.textOutput.tag_configure('warning', foreground='red', justify=CENTER, spacing1=2, font=("fixedsys", 12))
+        self.textOutput.tag_configure('description', foreground='black', justify=CENTER, spacing3=2, font=("fixedsys", 12))
+        self.textOutput.tag_configure('main', foreground='black', justify=LEFT, font=("fixedsys", 12))
+        self.textOutput.tag_configure('dialogue', foreground='black', justify=RIGHT, font=("fixedsys", 12))
+        self.textOutput.tag_configure('interaction', foreground='black', justify=LEFT, spacing1=2, font=("fixedsys", 12))
+        self.textOutput.tag_configure('tutorial', foreground='black', justify=CENTER, spacing1=6, font=("fixedsys", 12))
         # Texteingabe
-        self.textInput = Entry(master=self.leftFrame, bg='grey', fg='white', textvariable=self.vTextInput)
+        self.textInput = Entry(master=self.leftFrame, bg='grey', fg='white', textvariable=self.vTextInput, cursor='pencil')
         self.textInput.pack(side='top', fill='x')
         # Weiter-Buttton
-        self.buttonNext = Button(master=self.leftFrame, height=3, text='Weiter', command=self.cNext)
+        self.buttonNext = Button(master=self.leftFrame, height=3, text='Weiter', command=self.cNext, cursor='hand2')
         self.buttonNext.pack(side='top', fill='x')
         # Infolabels
         self.placeLabel = Label(master=self.rightUpperInfoFrame, font=('fixedsys', 13), width=5, justify=RIGHT,

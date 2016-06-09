@@ -11,7 +11,7 @@ class GUICredits():
             self.fenster.geometry("600x600")
             self.fenster.wm_iconbitmap("src/icon.ico")
             self.fenster.resizable(0, 0)
-            self.fenster.attributes("-topmost", 1)
+            #self.fenster.attributes("-topmost", 1)
             self.background = PhotoImage(file='src/gif/clouds.gif')
             self.masterFrame = Frame(master=self.fenster)
             self.masterFrame.place(x=0, y=0, width=600, height=600)

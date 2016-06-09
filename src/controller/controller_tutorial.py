@@ -20,16 +20,16 @@ class TutorialController(object):
         self.gui.fenster.protocol("WM_DELETE_WINDOW", self.windowCloseEvent)
 
         # Buttons deaktivieren
-        self.gui.buttonNorth.config(state='disabled')
-        self.gui.buttonEast.config(state='disabled')
-        self.gui.buttonSouth.config(state='disabled')
-        self.gui.buttonWest.config(state='disabled')
-        self.gui.buttonMove.config(state='disabled')
-        self.gui.buttonLook.config(state='disabled')
-        self.gui.buttonAnswerA.config(state='disabled')
-        self.gui.buttonAnswerB.config(state='disabled')
-        self.gui.buttonAnswerC.config(state='disabled')
-        self.gui.textInput.config(state='disabled')
+        self.gui.buttonNorth.config(state='disabled', cursor='no')
+        self.gui.buttonEast.config(state='disabled', cursor='no')
+        self.gui.buttonSouth.config(state='disabled', cursor='no')
+        self.gui.buttonWest.config(state='disabled', cursor='no')
+        self.gui.buttonMove.config(state='disabled', cursor='no')
+        self.gui.buttonLook.config(state='disabled', cursor='no')
+        self.gui.buttonAnswerA.config(state='disabled', cursor='no')
+        self.gui.buttonAnswerB.config(state='disabled', cursor='no')
+        self.gui.buttonAnswerC.config(state='disabled', cursor='no')
+        self.gui.textInput.config(state='disabled', cursor='no')
         self.gui.vPrestigeOutput.set(0)
         self.gui.vPlaceOutput.set('Tutorial')
         self.tutorial()
@@ -145,18 +145,18 @@ class TutorialController(object):
         :param answers:
         """
         if len(answers) == 0:
-            self.gui.buttonAnswerA.config(state='disabled', text='Antwort A')
-            self.gui.buttonAnswerB.config(state='disabled', text='Antwort B')
-            self.gui.buttonAnswerC.config(state='disabled', text='Antwort C')
+            self.gui.buttonAnswerA.config(state='disabled', text='Antwort A', cursor='no')
+            self.gui.buttonAnswerB.config(state='disabled', text='Antwort B', cursor='no')
+            self.gui.buttonAnswerC.config(state='disabled', text='Antwort C', cursor='no')
         else:
             if len(answers) >= 1:
-                self.gui.buttonAnswerA.config(text=answers[0], state='active')
-                self.gui.buttonAnswerB.config(state='disabled')
-                self.gui.buttonAnswerC.config(state='disabled')
+                self.gui.buttonAnswerA.config(text=answers[0], state='active', cursor='hand2')
+                self.gui.buttonAnswerB.config(state='disabled', cursor='no')
+                self.gui.buttonAnswerC.config(state='disabled', cursor='no')
             if len(answers) >= 2:
-                self.gui.buttonAnswerB.config(text=answers[1], state='active')
+                self.gui.buttonAnswerB.config(text=answers[1], state='active', cursor='hand2')
             if len(answers) == 3:
-                self.gui.buttonAnswerC.config(text=answers[2], state='active')
+                self.gui.buttonAnswerC.config(text=answers[2], state='active', cursor='hand2')
 
     def tutorial(self):
         """
@@ -166,7 +166,7 @@ class TutorialController(object):
             self.setText(self.text[self.phase])
             self.phase += 1
         else:
-            self.gui.buttonNext.config(state='disabled')
+            self.gui.buttonNext.config(state='disabled', cursor='no')
             self.setText("Bereit zum Spielen?")
             self.setAnswers(['JA!', 'JAA!', 'JAAA!'])
 

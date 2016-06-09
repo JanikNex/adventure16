@@ -315,21 +315,21 @@ class GameController(object):
         """
         answers = self.ButtonText
         if len(answers) == 0:
-            self.gui.buttonAnswerA.config(state='disabled', text='Antwort A')
-            self.gui.buttonAnswerB.config(state='disabled', text='Antwort B')
-            self.gui.buttonAnswerC.config(state='disabled', text='Antwort C')
+            self.gui.buttonAnswerA.config(state='disabled', text='Antwort A', cursor='no')
+            self.gui.buttonAnswerB.config(state='disabled', text='Antwort B', cursor='no')
+            self.gui.buttonAnswerC.config(state='disabled', text='Antwort C', cursor='no')
             self.AnswerButtonsActive = False
             self.ButtonText = []
         else:
             self.AnswerButtonsActive = True
             if len(answers) >= 1:
-                self.gui.buttonAnswerA.config(text=answers[0], state='active')
-                self.gui.buttonAnswerB.config(state='disabled')
-                self.gui.buttonAnswerC.config(state='disabled')
+                self.gui.buttonAnswerA.config(text=answers[0], state='active', cursor='hand2')
+                self.gui.buttonAnswerB.config(state='disabled', cursor='no')
+                self.gui.buttonAnswerC.config(state='disabled', cursor='no')
             if len(answers) >= 2:
-                self.gui.buttonAnswerB.config(text=answers[1], state='active')
+                self.gui.buttonAnswerB.config(text=answers[1], state='active', cursor='hand2')
             if len(answers) == 3:
-                self.gui.buttonAnswerC.config(text=answers[2], state='active')
+                self.gui.buttonAnswerC.config(text=answers[2], state='active', cursor='hand2')
 
     def setInventory(self):
         """
@@ -338,38 +338,38 @@ class GameController(object):
         for i in range(10):
             if self.game.getPlayer().getInventory().isItemInSlot(i):
                 self.ImageInventorySlot[i] = PhotoImage(file=self.game.player.inventory.getItem(i).getTexture())
-                self.getInventoryButtonWithIndex(i).config(image=self.ImageInventorySlot[i], state='active')
+                self.getInventoryButtonWithIndex(i).config(image=self.ImageInventorySlot[i], state='active', cursor='hand2')
             else:
-                self.getInventoryButtonWithIndex(i).config(image=self.ImageNoItem, state='disabled')
+                self.getInventoryButtonWithIndex(i).config(image=self.ImageNoItem, state='disabled', cursor='no')
 
     def setMovementDirections(self):
         """
         Setzt den Bewegungsbuttons auf die aktuell gegebenen Möglichkeiten des Spielers
         """
         if self.game.getPlayer().canMove() or not self.game.getPlayer().isInteracting():
-            self.gui.buttonMove.config(state='active')
+            self.gui.buttonMove.config(state='active', cursor='hand2')
             if self.game.getPlayer().getPossibleDirections()[0] is None:
-                self.gui.buttonNorth.config(state='disabled')
+                self.gui.buttonNorth.config(state='disabled', cursor='no')
             else:
-                self.gui.buttonNorth.config(state='active')
+                self.gui.buttonNorth.config(state='active', cursor='hand2')
             if self.game.getPlayer().getPossibleDirections()[1] is None:
-                self.gui.buttonEast.config(state='disabled')
+                self.gui.buttonEast.config(state='disabled', cursor='no')
             else:
-                self.gui.buttonEast.config(state='active')
+                self.gui.buttonEast.config(state='active', cursor='hand2')
             if self.game.getPlayer().getPossibleDirections()[2] is None:
-                self.gui.buttonSouth.config(state='disabled')
+                self.gui.buttonSouth.config(state='disabled', cursor='no')
             else:
-                self.gui.buttonSouth.config(state='active')
+                self.gui.buttonSouth.config(state='active', cursor='hand2')
             if self.game.getPlayer().getPossibleDirections()[3] is None:
-                self.gui.buttonWest.config(state='disabled')
+                self.gui.buttonWest.config(state='disabled', cursor='no')
             else:
-                self.gui.buttonWest.config(state='active')
+                self.gui.buttonWest.config(state='active', cursor='hand2')
         else:
-            self.gui.buttonNorth.config(state='disabled')
-            self.gui.buttonEast.config(state='disabled')
-            self.gui.buttonSouth.config(state='disabled')
-            self.gui.buttonWest.config(state='disabled')
-            self.gui.buttonMove.config(state='disabled')
+            self.gui.buttonNorth.config(state='disabled', cursor='no')
+            self.gui.buttonEast.config(state='disabled', cursor='no')
+            self.gui.buttonSouth.config(state='disabled', cursor='no')
+            self.gui.buttonWest.config(state='disabled', cursor='no')
+            self.gui.buttonMove.config(state='disabled', cursor='no')
 
     def getInventoryButtonWithIndex(self, index):
         """
@@ -431,8 +431,8 @@ class GameController(object):
         Deaktiviert Move- und Look-Button, während der Spieler interargiert
         """
         if self.game.getPlayer().isInteracting():
-            self.gui.buttonLook.config(state='disabled')
-            self.gui.buttonMove.config(state='disabled')
+            self.gui.buttonLook.config(state='disabled', cursor='no')
+            self.gui.buttonMove.config(state='disabled', cursor='no')
         else:
-            self.gui.buttonLook.config(state='active')
-            self.gui.buttonMove.config(state='active')
+            self.gui.buttonLook.config(state='active', cursor='hand2')
+            self.gui.buttonMove.config(state='active', cursor='hand2')
