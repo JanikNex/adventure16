@@ -85,53 +85,53 @@ class GameController(object):
             self.updateGUI()
 
     def buttonNext(self):
-        # try:
         """
         Führt die Funktion aus, welche zur aktuellen Spiellage durch diesen Button ausgeführt werden soll.
         Dabei werden auch eventuelle Benutzereingaben in das Textfeld integriert.
         """
-        if not self.AnswerButtonsActive:
-            if self.game.getDialogueHandler().isInDialogue():
-                if self.getTextInput() == '':
-                    self.game.getDialogueHandler().nextStep()
-                else:
-                    self.resetTextInput()
-                    self.buttonNext()
-            else:
-                if self.getTextInput() == '':
-                    if self.game.getPlayer().isInteracting():
-                        self.textOutputWarning('Du musst eine Option auswwählen um fortfahren zu können!')
+        try:
+            if not self.AnswerButtonsActive:
+                if self.game.getDialogueHandler().isInDialogue():
+                    if self.getTextInput() == '':
+                        self.game.getDialogueHandler().nextStep()
                     else:
-                        self.textOutputWarning('Du musst mit etwas interagieren um diesen Button nutzen zu können!')
-                        self.buttonLook()
+                        self.resetTextInput()
+                        self.buttonNext()
                 else:
-                    if self.game.getPlayer().isInteracting():
-                        if int(self.getTextInput()) <= self.game.getPlayer().getInteraction().getActionCount():
-                            self.textOutputReset()
-                            self.selectInteraction(int(self.getTextInput()))
-                            if self.game.getPlayer().isInteracting() and not self.game.getDialogueHandler().isInDialogue():
+                    if self.getTextInput() == '':
+                        if self.game.getPlayer().isInteracting():
+                            self.textOutputWarning('Du musst eine Option auswwählen um fortfahren zu können!')
+                        else:
+                            self.textOutputWarning('Du musst mit etwas interagieren um diesen Button nutzen zu können!')
+                            self.buttonLook()
+                    else:
+                        if self.game.getPlayer().isInteracting():
+                            if int(self.getTextInput()) <= self.game.getPlayer().getInteraction().getActionCount():
+                                self.textOutputReset()
+                                self.selectInteraction(int(self.getTextInput()))
+                                if self.game.getPlayer().isInteracting() and not self.game.getDialogueHandler().isInDialogue():
+                                    self.textOutputInteraction(self.game.getPlayer().getInteraction().getActionsAsString())
+                                    self.gui.textInput.focus()
+                                else:
+                                    self.buttonLook()
+                                self.resetTextInput()
+                        else:
+                            if int(
+                                    self.getTextInput()) <= self.game.getPlayer().getPlace().getInteractionPossNum():  # Ist Eingabe möglich?
+                                self.textOutputReset()
+                                self.game.getPlayer().startInteractWith(
+                                    self.game.getPlayer().getPlace().getInteractionObject(int(self.getTextInput())))
                                 self.textOutputInteraction(self.game.getPlayer().getInteraction().getActionsAsString())
+                                self.resetTextInput()
                                 self.gui.textInput.focus()
                             else:
-                                self.buttonLook()
-                            self.resetTextInput()
-                    else:
-                        if int(
-                                self.getTextInput()) <= self.game.getPlayer().getPlace().getInteractionPossNum():  # Ist Eingabe möglich?
-                            self.textOutputReset()
-                            self.game.getPlayer().startInteractWith(
-                                self.game.getPlayer().getPlace().getInteractionObject(int(self.getTextInput())))
-                            self.textOutputInteraction(self.game.getPlayer().getInteraction().getActionsAsString())
-                            self.resetTextInput()
-                            self.gui.textInput.focus()
-                        else:
-                            self.resetTextInput()
-                            self.textOutputReset()
-                            self.textOutputWarning('Diese Interaktion ist nicht möglich!')
+                                self.resetTextInput()
+                                self.textOutputWarning('Diese Interaktion ist nicht möglich!')
+                self.updateGUI()
+        except:
+            self.resetTextInput()
+            self.textOutputWarning('Ungültige Eingabe!')
             self.updateGUI()
-            # except:
-            #    self.textOutputWarning('Ungültige Eingabe!')
-            #    self.updateGUI()
 
     def selectInteraction(self, num):
         """
@@ -214,6 +214,19 @@ class GameController(object):
         self.gui.textOutput.delete(1.0, 'end')
         self.gui.textOutput['state'] = 'disabled'
 
+    def textOutputResetPerTag(self, tag):
+        """
+        Entfernt Text mit gegebenem Formatierungstag aus der TextOutput Box
+        :param tag: Formatierungstag
+        :type tag: str
+        """
+        try:
+            self.gui.textOutput['state'] = 'normal'
+            self.gui.textOutput.delete(self.gui.textOutput.index(tag+'.first'), self.gui.textOutput.index(tag+'.last'))
+            self.gui.textOutput['state'] = 'disabled'
+        except TclError:
+            pass
+
     def textOutputInteraction(self, text):
         """
         Fügt übergebenen Text mit der Interaction-Formatierung in das Textfeld ein.
@@ -252,6 +265,7 @@ class GameController(object):
         :param text: Text als String
         :type text: str
         """
+        self.textOutputResetPerTag('warning')
         self.textOutputAdd(text, 'warning')
 
     def textOutputAdd(self, text, tag=None):

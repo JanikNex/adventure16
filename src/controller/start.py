@@ -15,7 +15,8 @@ class Starter(object):
         """
         Beendet das Mainfenster, wodurch nach einer okcancel Abfrage alle Fenster des Spiels geschlossen werden.
         """
-        if messagebox.askokcancel("Beenden?", "Durch Beenden dieses Fensters werden alle Fenster dieses Spiels geschlossen!"):
+        if messagebox.askokcancel("Beenden?",
+                                  "Durch Beenden dieses Fensters werden alle Fenster dieses Spiels geschlossen!"):
             self.start.fenster.quit()
             self.start.fenster.destroy()
             sys.exit(0)
@@ -78,6 +79,7 @@ class Starter(object):
         self.start.buttonStartGame.config(state='active')
         self.start.buttonCredits.config(text='Credits', state='active')
         self.start.buttonTutorial.config(state='active')
+
 
 if __name__ == '__main__':
     load = Starter()  # Erstellt ein neues Spielstart-Fenster

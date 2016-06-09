@@ -17,7 +17,7 @@ class GUIGame():
         self.cAnswerB = cAnswerB
         self.cAnswerC = cAnswerC
         self.cInventory = cInventory
-        #try:
+        # try:
         # Erstellt das Spielfenster
         self.fenster = Toplevel()
         self.fenster.title("Lost Brother - The choice is yours")
@@ -68,13 +68,14 @@ class GUIGame():
         self.vPrestigeOutput = StringVar(master=self.rightUpperInfoFrame)
         # TextAnzeige
         self.textOutput = scrtxt.ScrolledText(master=self.leftFrameTextOutput, wrap=WORD, bg='#A3B1B5',
-                                                       state='disabled')
+                                              state='disabled')
         self.textOutput.pack(fill=BOTH, expand=True)
         # Formatierungstags für die Textausgabe
         self.textOutput.tag_configure('warning', foreground='red')
         self.textOutput.tag_configure('description', foreground='yellow')
         self.textOutput.tag_configure('main', foreground='pink')
         self.textOutput.tag_configure('interaction', foreground='green')
+        self.textOutput.tag_configure('tutorial', foreground='black', justify=CENTER)
         # Texteingabe
         self.textInput = Entry(master=self.leftFrame, bg='grey', fg='white', textvariable=self.vTextInput)
         self.textInput.pack(side='top', fill='x')
@@ -160,7 +161,7 @@ class GUIGame():
         self.buttonAnswerA.pack(pady=20)
         self.buttonAnswerB.pack(pady=20)
         self.buttonAnswerC.pack(pady=20)
-        #except:
+        # except:
         #    # Kommt es beim erstellen des Fensters zu einem Fehler wird das Programm mit einem Fehler geschlossen
         #    messagebox.showerror('Fehler', 'Ein Fehler ist aufgetreten und das Programm muss beendet werden!')
         #    self.fenster.quit()

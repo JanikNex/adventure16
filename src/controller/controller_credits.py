@@ -45,7 +45,7 @@ class CreditController(object):
         """
         Startet die nächste Phase der Credits
         """
-        if self.phase <= (len(self.text)-1):
+        if self.phase <= (len(self.text) - 1):
             self.setText(self.text[self.phase])
             self.phase += 1
             self.gui.fenster.after(4000, self.nextPhase)

@@ -1,4 +1,3 @@
-
 class Inventory(object):
     def __init__(self, player):
         self.player = player
@@ -25,7 +24,7 @@ class Inventory(object):
         Gibt das Itemobjekt, welchs sich an gegebenem Index gebindet zurück
         :rtype: object
         """
-        if index <= len(self.items ) -1:
+        if index <= len(self.items) - 1:
             return self.items[index]
 
     def isItemInSlot(self, index):
@@ -35,7 +34,7 @@ class Inventory(object):
         :type index: int
         :rtype: bool
         """
-        return index <= (len(self.items ) -1)
+        return index <= (len(self.items) - 1)
 
     def removeItemAtIndex(self, index):
         """

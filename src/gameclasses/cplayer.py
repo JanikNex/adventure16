@@ -148,7 +148,7 @@ class Player(object):
         :param value: Wert, um den Prestige verringert werden soll
         :type value: int
         """
-        if -5 <= self.prestige-value <= 5:
+        if -5 <= self.prestige - value <= 5:
             self.prestige -= value
 
     def increasePrestige(self, value):

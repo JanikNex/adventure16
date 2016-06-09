@@ -21,9 +21,11 @@ class GUICredits():
             self.description.set("The choice is yours")
             self.picture = Label(master=self.masterFrame, image=self.background, width=600, height=600)
             self.picture.place(x=0, y=0)
-            self.titleLabel = Label(master=self.masterFrame,textvariable=self.title, font="fixedsys 36 bold")
-            self.descriptionLabel = Label(master=self.masterFrame, textvariable=self.description, font="fixedsys 26 bold")
-            self.exitTextLabel = Label(master=self.masterFrame, text='Drücke "Enter" zum überspringen!', font="fixedsys 10 bold italic")
+            self.titleLabel = Label(master=self.masterFrame, textvariable=self.title, font="fixedsys 36 bold")
+            self.descriptionLabel = Label(master=self.masterFrame, textvariable=self.description,
+                                          font="fixedsys 26 bold")
+            self.exitTextLabel = Label(master=self.masterFrame, text='Drücke "Enter" zum überspringen!',
+                                       font="fixedsys 10 bold italic")
             self.titleLabel.place(y=250, x=300, anchor=CENTER)
             self.descriptionLabel.place(y=350, x=300, anchor=CENTER)
             self.exitTextLabel.place(y=550, x=300, anchor=CENTER)

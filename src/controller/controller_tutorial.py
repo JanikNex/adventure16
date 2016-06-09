@@ -54,7 +54,7 @@ class TutorialController(object):
         self.gui.fenster.quit()
         self.gui.fenster.destroy()
 
-# Callback Funktionen, welche beim Tutorial nicht benötigt werden
+    # Callback Funktionen, welche beim Tutorial nicht benötigt werden
     def buttonLookNorth(self):
         """
         Leere Callbackfunktion
@@ -121,12 +121,23 @@ class TutorialController(object):
         """
         self.endTutorial()
 
+    def textOutputReset(self):
+        """
+        Resettet den Textoutput
+        """
+        self.gui.textOutput['state'] = 'normal'
+        self.gui.textOutput.delete(1.0, 'end')
+        self.gui.textOutput['state'] = 'disabled'
+
     def setText(self, text):
         """
         Setzt den Text des Textfensters auf den gegebenen Text
         :param text: Anzuzeigender Text
         """
-        self.gui.vTextOutput.set(text)
+        self.textOutputReset()
+        self.gui.textOutput['state'] = 'normal'
+        self.gui.textOutput.insert('end', '\n\n\n\n\n\n\n'+text, 'tutorial')
+        self.gui.textOutput['state'] = 'disabled'
 
     def setAnswers(self, answers):
         """
@@ -151,13 +162,14 @@ class TutorialController(object):
         """
         Springt zur nächsten Phase des Tutorials
         """
-        if self.phase < (len(self.text)-1):
+        if self.phase < (len(self.text) - 1):
             self.setText(self.text[self.phase])
             self.phase += 1
         else:
             self.gui.buttonNext.config(state='disabled')
             self.setText("Bereit zum Spielen?")
             self.setAnswers(['JA!', 'JAA!', 'JAAA!'])
+
 
 if __name__ == '__main__':
     t = TutorialController()

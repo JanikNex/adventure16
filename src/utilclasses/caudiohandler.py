@@ -11,7 +11,7 @@ class AudioHandler(object):
         self.playing = False
         self.file = filepath
         if self.file is not None:
-            self.file = "src/wav/"+str(self.file)+".wav"
+            self.file = "src/wav/" + str(self.file) + ".wav"
 
     def play(self):
         """
@@ -19,7 +19,8 @@ class AudioHandler(object):
         """
         if not self.playing:
             self.playing = True
-            winsound.PlaySound(self.file, winsound.SND_FILENAME | winsound.SND_ASYNC | winsound.SND_LOOP | winsound.SND_NODEFAULT| winsound.SND_NOSTOP)
+            winsound.PlaySound(self.file,
+                               winsound.SND_FILENAME | winsound.SND_ASYNC | winsound.SND_LOOP | winsound.SND_NODEFAULT | winsound.SND_NOSTOP)
             print('[DEBUG] AudioHandler is now playing', self.file)
 
     def stop(self):

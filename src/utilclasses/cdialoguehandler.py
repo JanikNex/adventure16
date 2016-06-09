@@ -43,7 +43,8 @@ class DialogueHandler(object):
         :rtype: list
         """
         if len(self.buttonArray) == 0 or (
-                    len(self.buttonArray[0]) == 0 and len(self.buttonArray[1]) == 0 and len(self.buttonArray[2]) == 0):
+                            len(self.buttonArray[0]) == 0 and len(self.buttonArray[1]) == 0 and len(
+                    self.buttonArray[2]) == 0):
             return []
         else:
             if mode == 'all':
