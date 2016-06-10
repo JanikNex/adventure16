@@ -100,7 +100,7 @@ class GameController(object):
                 else:
                     if self.getTextInput() == '':
                         if self.game.getPlayer().isInteracting():
-                            self.textOutputWarning('Du musst eine Option auswwählen um fortfahren zu können!')
+                            self.textOutputWarning('Du musst eine Option auswählen um fortfahren zu können!')
                         else:
                             self.textOutputWarning('Du musst mit etwas interagieren um diesen Button nutzen zu können!')
                             self.buttonLook()
@@ -142,7 +142,7 @@ class GameController(object):
         if self.game.getDialogueHandler().isInDialogue():
             self.updateDialogueOutput()
         else:
-            self.textOutputDialogue(self.game.getPlayer().getInteraction().interact(
+            self.textOutputMain(self.game.getPlayer().getInteraction().interact(
                 self.game.getPlayer().getInteraction().getActions()[num]))
 
     def buttonMove(self):

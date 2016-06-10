@@ -118,3 +118,16 @@ class Key(Item):
         :rtype: int
         """
         return self.canOpen
+
+
+class Readable(Letter):
+    def __init__(self, map, itemid):
+        Letter.__init__(self, map, itemid)
+        self.quitPhrase = 'Verlassen.'
+
+    def getContent(self):
+        """
+        Gibt den Inhalt zurück.
+        :rtype: str
+        """
+        return self.content

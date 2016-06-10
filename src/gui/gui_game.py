@@ -72,10 +72,10 @@ class GUIGame():
         self.textOutput.pack(fill=BOTH, expand=True)
         # Formatierungstags für die Textausgabe
         self.textOutput.tag_configure('warning', foreground='red', justify=CENTER, spacing1=2, font=("fixedsys", 12))
-        self.textOutput.tag_configure('description', foreground='black', justify=CENTER, spacing3=2, font=("fixedsys", 12))
+        self.textOutput.tag_configure('description', foreground='black', justify=CENTER, font=("fixedsys", 12))
         self.textOutput.tag_configure('main', foreground='black', justify=LEFT, font=("fixedsys", 12))
         self.textOutput.tag_configure('dialogue', foreground='black', justify=RIGHT, font=("fixedsys", 12))
-        self.textOutput.tag_configure('interaction', foreground='black', justify=LEFT, spacing1=2, font=("fixedsys", 12))
+        self.textOutput.tag_configure('interaction', foreground='white', justify=LEFT, spacing1=2, font=("fixedsys", 12))
         self.textOutput.tag_configure('tutorial', foreground='black', justify=CENTER, spacing1=6, font=("fixedsys", 12))
         # Texteingabe
         self.textInput = Entry(master=self.leftFrame, bg='grey', fg='white', textvariable=self.vTextInput, cursor='pencil')
