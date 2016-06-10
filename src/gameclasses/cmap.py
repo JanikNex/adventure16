@@ -3,6 +3,12 @@ from src.gameclasses.cplace import *
 
 class Map(object):
     def __init__(self, game):
+        """
+        Erstellt ein neues Map Objekt, durchläuft die placedata Datei und erstellt alle vorhandenen Räume
+        Zudem verwaltet dieses Objekt alle Items und Citizens und kann somit Objekte anhand ihrer Namen zurückgeben
+        :param game: Game
+        :type game: Game
+        """
         self.game = game
         self.places = []
         self.items = []
@@ -40,13 +46,6 @@ class Map(object):
             if i.getID() == id:
                 return i
         return None
-
-    def connectPlaces(self):
-        """
-        Setzt die Verbindungen der einzelnen Orte untereinander
-        """
-        for i in self.places:
-            i.setNeighbors()
 
     def getGame(self):
         """

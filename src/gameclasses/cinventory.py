@@ -1,5 +1,10 @@
 class Inventory(object):
     def __init__(self, player):
+        """
+        Erstellt ein neues Spielerinventar für einen bestimmten Spieler
+        :param player: Player
+        :type player: Player
+        """
         self.player = player
         self.items = []  # List(of Item)
 

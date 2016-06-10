@@ -5,6 +5,10 @@ from src.utilclasses.caudiohandler import *
 
 class TutorialController(object):
     def __init__(self):
+        """
+        Erstellt ein neues TutorialController Objektm, welches anschließend das Tutorial und dessen zusammenspiel
+        mit dem GUI verwaltet.
+        """
         # Tutorialphase wird initialisiert
         self.phase = 0
         self.jsonphaser = JSONHandler()

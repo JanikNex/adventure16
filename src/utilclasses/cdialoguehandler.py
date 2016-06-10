@@ -3,6 +3,11 @@ from src.utilclasses.cjsonhandler import *
 
 class DialogueHandler(object):
     def __init__(self, game):
+        """
+        Erstellt neuen DialogueHandler
+        :param game: Game
+        :type game: Game
+        """
         self.game = game
         self.jsonparser = JSONHandler()
         self.path = None

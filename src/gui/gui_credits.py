@@ -3,8 +3,11 @@ from tkinter import messagebox
 from sys import exit
 
 
-class GUICredits():
+class GUICredits(object):
     def __init__(self):
+        """
+        Erstellt eine neue CreditGui
+        """
         try:
             self.fenster = Toplevel()
             self.fenster.title("Lost Brother - The choice is yours")

@@ -5,6 +5,13 @@ from src.utilclasses.cjsonhandler import *
 
 class Place(object):
     def __init__(self, map, id):
+        """
+        Erstellt ein neues PlaceObjekt und ließt alle erforderlichen Informationen anhand der id aus der JSON Datei aus.
+        :param map: Map
+        :param id: PlaceID
+        :type map: Map
+        :type id: int
+        """
         jsonhandler = JSONHandler()
         jsonhandler.openNewFile('placedata')
         self.map = map

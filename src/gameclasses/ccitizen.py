@@ -5,6 +5,13 @@ from src.utilclasses.cjsonhandler import *
 
 class Citizen(Entity):
     def __init__(self, map, citizenid):
+        """
+        Erstellt einen neuen Bewohner mit einer bestimmten CitizenID auf einer bestimmten Map.
+        :param map: Map
+        :param citizenid: ID des CitizenObjekts in der JSON Datei
+        :type map: Map
+        :type citizenid: int
+        """
         Entity.__init__(self, map)
         jsonhandler = JSONHandler()
         jsonhandler.openNewFile('citizendata')

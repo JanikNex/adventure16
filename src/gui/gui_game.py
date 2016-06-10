@@ -4,8 +4,22 @@ import tkinter.scrolledtext as scrtxt
 from sys import exit
 
 
-class GUIGame():
+class GUIGame(object):
     def __init__(self, cNorth, cEast, cSouth, cWest, cMove, cLook, cNext, cAnswerA, cAnswerB, cAnswerC, cInventory):
+        """
+        Erstellt eine neue GameGui und setzt Callbackfunktionen
+        :param cNorth: Callbackfunktion
+        :param cEast:  Callbackfunktion
+        :param cSouth: Callbackfunktion
+        :param cWest: Callbackfunktion
+        :param cMove: Callbackfunktion
+        :param cLook: Callbackfunktion
+        :param cNext: Callbackfunktion
+        :param cAnswerA: Callbackfunktion
+        :param cAnswerB: Callbackfunktion
+        :param cAnswerC: Callbackfunktion
+        :param cInventory: Callbackfunktion
+        """
         self.cNorth = cNorth
         self.cEast = cEast
         self.cSouth = cSouth

@@ -6,6 +6,10 @@ from src.utilclasses.cjsonhandler import *
 class CreditController(object):
     def __init__(self, mode='fromStart'):
         # Creditphase wird initialisiert
+        """
+        Erstellt ein neues CreditController-Objekt
+        :param mode: Modus der Credits (unbenutzt)
+        """
         self.phase = 0
         self.jsonparser = JSONHandler()
         self.jsonparser.openNewFile('credits')

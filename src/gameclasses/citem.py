@@ -5,6 +5,14 @@ from src.utilclasses.cjsonhandler import *
 
 class Item(Entity):
     def __init__(self, map, itemid):
+        """
+        Erstellt ein neues Itemobjekt, welches auf einer Entity basiert. Zum erstellen werden die benötigten
+        Informationen, pasend ur übergebenen ItemID, aus der JSON Datei ausgelesen.
+        :param map: Map
+        :param itemid: ItemID des Items in der JSON Datei
+        :type map: Map
+        :type itemid: int
+        """
         Entity.__init__(self, map)
         jsonhandler = JSONHandler()
         jsonhandler.openNewFile('itemdata')
@@ -73,6 +81,15 @@ class Item(Entity):
 
 class Letter(Item):
     def __init__(self, map, itemid):
+        """
+        Erstellt ein LetterObjekt, welches ein Item mit Content-Zusatz ist.
+        Durch eine Methode kann der content rurückgegeben werden und außerdem die Türen geschlossen werden, falls der
+        Spieler sich zu dem Zeitpunkt im Zug befindet.
+        :param map: Map
+        :param itemid: ItemID des Items in der JSON Datei
+        :type map: Map
+        :type itemid: int
+        """
         Item.__init__(self, map, itemid)
         jsonhandler = JSONHandler()
         jsonhandler.openNewFile('itemdata')
@@ -93,6 +110,14 @@ class Letter(Item):
 
 class GhostNote(Letter):
     def __init__(self, map, itemid):
+        """
+        Erstellt ein GhostNote Objekt, welches ein Brief ist, welcher allerdings beim lesen verschwindet
+        (bzw unsichtbar wird)
+        :param map: Map
+        :param itemid: ItemID des Items in der JSON Datei
+        :type map: Map
+        :type itemid: int
+        """
         Letter.__init__(self, map, itemid)
         self.quitPhrase = 'Notiz löste sich in Luft auf!'
 
@@ -107,6 +132,13 @@ class GhostNote(Letter):
 
 class Key(Item):
     def __init__(self, map, itemid):
+        """
+        Erstelllt ein Key Objekt, welches ein Item ist, welches in der JSON gespeicherte Räume aufschließen kann.
+        :param map: Map
+        :param itemid: ItemID des Items in der JSON Datei
+        :type map: Map
+        :type itemid: int
+        """
         Item.__init__(self, map, itemid)
         jsonhandler = JSONHandler()
         jsonhandler.openNewFile('itemdata')
@@ -122,6 +154,11 @@ class Key(Item):
 
 class Readable(Letter):
     def __init__(self, map, itemid):
+        """
+        Erstellt ein Readable Objekt, welches ein LEtterobjekt jedoch ohne den Zugtürschließzusatz ist
+        :param map: Map
+        :param itemid: ItemID des Items in der JSON Datei
+        """
         Letter.__init__(self, map, itemid)
         self.quitPhrase = 'Verlassen.'
 

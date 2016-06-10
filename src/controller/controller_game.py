@@ -4,6 +4,9 @@ from src.gameclasses.cgame import *
 
 class GameController(object):
     def __init__(self):
+        """
+        Erstellt ein neues GameController Objekt, welches anschließend den kompletten Spielverlauf verwaltet.
+        """
         # Neues Game-Objekt
         self.game = Game()
         # Neues GUI-Objekt

@@ -4,8 +4,14 @@ from tkinter import ttk
 from sys import exit
 
 
-class GUIStart():
+class GUIStart(object):
     def __init__(self, cGameStart, cTutorialStart, cCreditStart):
+        """
+        Erstellt eine neue StartMenueGui
+        :param cGameStart: Callbackfunktion
+        :param cTutorialStart: Callbackfunktion
+        :param cCreditStart: Callbackfunktion
+        """
         self.cGameStart = cGameStart
         self.cTutorialStart = cTutorialStart
         self.cCreditStart = cCreditStart

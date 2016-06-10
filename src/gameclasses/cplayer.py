@@ -4,6 +4,11 @@ from src.gameclasses.citem import Key
 
 class Player(object):
     def __init__(self, game):
+        """
+        Erstellt ein neues Player Objekt, welches anschließend ein eigenes Inventar erstellt.
+        :param game: Game
+        :type game: Game
+        """
         self.game = game
         self.place = None
         self.prestige = 0
@@ -150,6 +155,11 @@ class Player(object):
         """
         if -5 <= self.prestige - value <= 5:
             self.prestige -= value
+        else:
+            if -5 > self.prestige - value:
+                self.prestige = -5
+            elif 5 < self.prestige - value:
+                self.prestige = 5
 
     def increasePrestige(self, value):
         """
@@ -159,6 +169,11 @@ class Player(object):
         """
         if -5 <= self.prestige + value <= 5:
             self.prestige += value
+        else:
+            if -5 > self.prestige + value:
+                self.prestige = -5
+            elif 5 < self.prestige + value:
+                self.prestige = 5
 
     def startInteractWith(self, object):
         """

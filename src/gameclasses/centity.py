@@ -1,5 +1,11 @@
 class Entity(object):
     def __init__(self, map):
+        """
+        Erstellt eine neue Entity auf einer bestimmten Map.
+        Diese Klasse ist nur Basisklasse für die unterschiedlichen Entitytypen
+        :param map: Map
+        :type map: Map
+        """
         self.name = ''
         self.place = None
         self.map = map

@@ -6,6 +6,10 @@ from src.utilclasses.cdialoguehandler import *
 
 class Game(object):
     def __init__(self):
+        """
+        Erstellt ein neues GameObjekt, welches wiederum alle bestantteile des Games verwaltet und erstellt.
+        Zudem wird der Spieler an die Startposition gesetzt.
+        """
         self.player = Player(self)
         self.map = Map(self)
         self.audioHandler = AudioHandler(None)
