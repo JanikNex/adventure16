@@ -92,49 +92,49 @@ class GameController(object):
         Führt die Funktion aus, welche zur aktuellen Spiellage durch diesen Button ausgeführt werden soll.
         Dabei werden auch eventuelle Benutzereingaben in das Textfeld integriert.
         """
-        try:
-            if not self.AnswerButtonsActive:
-                if self.game.getDialogueHandler().isInDialogue():
-                    if self.getTextInput() == '':
-                        self.game.getDialogueHandler().nextStep()
-                    else:
-                        self.resetTextInput()
-                        self.buttonNext()
+        #try:
+        if not self.AnswerButtonsActive:
+            if self.game.getDialogueHandler().isInDialogue():
+                if self.getTextInput() == '':
+                    self.game.getDialogueHandler().nextStep()
                 else:
-                    if self.getTextInput() == '':
-                        if self.game.getPlayer().isInteracting():
-                            self.textOutputWarning('Du musst eine Option auswählen um fortfahren zu können!')
-                        else:
-                            self.textOutputWarning('Du musst mit etwas interagieren um diesen Button nutzen zu können!')
-                            self.buttonLook()
+                    self.resetTextInput()
+                    self.buttonNext()
+            else:
+                if self.getTextInput() == '':
+                    if self.game.getPlayer().isInteracting():
+                        self.textOutputWarning('Du musst eine Option auswählen um fortfahren zu können!')
                     else:
-                        if self.game.getPlayer().isInteracting():
-                            if int(self.getTextInput()) <= self.game.getPlayer().getInteraction().getActionCount():
-                                self.textOutputReset()
-                                self.selectInteraction(int(self.getTextInput()))
-                                if self.game.getPlayer().isInteracting() and not self.game.getDialogueHandler().isInDialogue():
-                                    self.textOutputInteraction(self.game.getPlayer().getInteraction().getActionsAsString())
-                                    self.gui.textInput.focus()
-                                else:
-                                    self.buttonLook()
-                                self.resetTextInput()
-                        else:
-                            if int(
-                                    self.getTextInput()) <= self.game.getPlayer().getPlace().getInteractionPossNum():  # Ist Eingabe möglich?
-                                self.textOutputReset()
-                                self.game.getPlayer().startInteractWith(
-                                    self.game.getPlayer().getPlace().getInteractionObject(int(self.getTextInput())))
+                        self.textOutputWarning('Du musst mit etwas interagieren um diesen Button nutzen zu können!')
+                        self.buttonLook()
+                else:
+                    if self.game.getPlayer().isInteracting():
+                        if int(self.getTextInput()) <= self.game.getPlayer().getInteraction().getActionCount():
+                            self.textOutputReset()
+                            self.selectInteraction(int(self.getTextInput()))
+                            if self.game.getPlayer().isInteracting() and not self.game.getDialogueHandler().isInDialogue():
                                 self.textOutputInteraction(self.game.getPlayer().getInteraction().getActionsAsString())
-                                self.resetTextInput()
                                 self.gui.textInput.focus()
                             else:
-                                self.resetTextInput()
-                                self.textOutputWarning('Diese Interaktion ist nicht möglich!')
-                self.updateGUI()
-        except:
-            self.resetTextInput()
-            self.textOutputWarning('Ungültige Eingabe!')
+                                self.buttonLook()
+                            self.resetTextInput()
+                    else:
+                        if int(
+                                self.getTextInput()) <= self.game.getPlayer().getPlace().getInteractionPossNum():  # Ist Eingabe möglich?
+                            self.textOutputReset()
+                            self.game.getPlayer().startInteractWith(
+                                self.game.getPlayer().getPlace().getInteractionObject(int(self.getTextInput())))
+                            self.textOutputInteraction(self.game.getPlayer().getInteraction().getActionsAsString())
+                            self.resetTextInput()
+                            self.gui.textInput.focus()
+                        else:
+                            self.resetTextInput()
+                            self.textOutputWarning('Diese Interaktion ist nicht möglich!')
             self.updateGUI()
+        #except:
+        #    self.resetTextInput()
+        #    self.textOutputWarning('Ungültige Eingabe!')
+        #    self.updateGUI()
 
     def selectInteraction(self, num):
         """
@@ -244,7 +244,7 @@ class GameController(object):
         :param text: Text als String
         :type text: str
         """
-        self.textOutputSet(text, 'main')
+        self.textOutputAdd(text, 'main')
 
     def textOutputDialogue(self, text):
         """
@@ -318,21 +318,21 @@ class GameController(object):
         """
         answers = self.ButtonText
         if len(answers) == 0:
-            self.gui.buttonAnswerA.config(state='disabled', text='Antwort A', cursor='no')
-            self.gui.buttonAnswerB.config(state='disabled', text='Antwort B', cursor='no')
-            self.gui.buttonAnswerC.config(state='disabled', text='Antwort C', cursor='no')
+            self.gui.buttonAnswerA.config(state='disabled', text='Antwort A', cursor='no', fg='#00a6ff', bg='#000038')
+            self.gui.buttonAnswerB.config(state='disabled', text='Antwort B', cursor='no', fg='#00a6ff', bg='#000038')
+            self.gui.buttonAnswerC.config(state='disabled', text='Antwort C', cursor='no', fg='#00a6ff', bg='#000038')
             self.AnswerButtonsActive = False
             self.ButtonText = []
         else:
             self.AnswerButtonsActive = True
             if len(answers) >= 1:
-                self.gui.buttonAnswerA.config(text=answers[0], state='active', cursor='hand2')
-                self.gui.buttonAnswerB.config(state='disabled', cursor='no')
-                self.gui.buttonAnswerC.config(state='disabled', cursor='no')
+                self.gui.buttonAnswerA.config(text=answers[0], state='active', cursor='hand2', fg='#00a6ff', bg='#000038')
+                self.gui.buttonAnswerB.config(state='disabled', cursor='no', fg='#00a6ff', bg='#000038')
+                self.gui.buttonAnswerC.config(state='disabled', cursor='no', fg='#00a6ff', bg='#000038')
             if len(answers) >= 2:
-                self.gui.buttonAnswerB.config(text=answers[1], state='active', cursor='hand2')
+                self.gui.buttonAnswerB.config(text=answers[1], state='active', cursor='hand2', fg='#00a6ff', bg='#000038')
             if len(answers) == 3:
-                self.gui.buttonAnswerC.config(text=answers[2], state='active', cursor='hand2')
+                self.gui.buttonAnswerC.config(text=answers[2], state='active', cursor='hand2', fg='#00a6ff', bg='#000038')
 
     def setInventory(self):
         """
@@ -350,29 +350,29 @@ class GameController(object):
         Setzt den Bewegungsbuttons auf die aktuell gegebenen Möglichkeiten des Spielers
         """
         if self.game.getPlayer().canMove() or not self.game.getPlayer().isInteracting():
-            self.gui.buttonMove.config(state='active', cursor='hand2')
+            self.gui.buttonMove.config(state='active', cursor='hand2', fg='#00a6ff', bg='#000038')
             if self.game.getPlayer().getPossibleDirections()[0] is None:
-                self.gui.buttonNorth.config(state='disabled', cursor='no')
+                self.gui.buttonNorth.config(state='disabled', cursor='no', fg='#00a6ff', bg='#000038')
             else:
-                self.gui.buttonNorth.config(state='active', cursor='hand2')
+                self.gui.buttonNorth.config(state='active', cursor='hand2', fg='#00a6ff', bg='#000038')
             if self.game.getPlayer().getPossibleDirections()[1] is None:
-                self.gui.buttonEast.config(state='disabled', cursor='no')
+                self.gui.buttonEast.config(state='disabled', cursor='no', fg='#00a6ff', bg='#000038')
             else:
-                self.gui.buttonEast.config(state='active', cursor='hand2')
+                self.gui.buttonEast.config(state='active', cursor='hand2', fg='#00a6ff', bg='#000038')
             if self.game.getPlayer().getPossibleDirections()[2] is None:
-                self.gui.buttonSouth.config(state='disabled', cursor='no')
+                self.gui.buttonSouth.config(state='disabled', cursor='no', fg='#00a6ff', bg='#000038')
             else:
-                self.gui.buttonSouth.config(state='active', cursor='hand2')
+                self.gui.buttonSouth.config(state='active', cursor='hand2', fg='#00a6ff', bg='#000038')
             if self.game.getPlayer().getPossibleDirections()[3] is None:
-                self.gui.buttonWest.config(state='disabled', cursor='no')
+                self.gui.buttonWest.config(state='disabled', cursor='no', fg='#00a6ff', bg='#000038')
             else:
-                self.gui.buttonWest.config(state='active', cursor='hand2')
+                self.gui.buttonWest.config(state='active', cursor='hand2', fg='#00a6ff', bg='#000038')
         else:
-            self.gui.buttonNorth.config(state='disabled', cursor='no')
-            self.gui.buttonEast.config(state='disabled', cursor='no')
-            self.gui.buttonSouth.config(state='disabled', cursor='no')
-            self.gui.buttonWest.config(state='disabled', cursor='no')
-            self.gui.buttonMove.config(state='disabled', cursor='no')
+            self.gui.buttonNorth.config(state='disabled', cursor='no', fg='#00a6ff', bg='#000038')
+            self.gui.buttonEast.config(state='disabled', cursor='no', fg='#00a6ff', bg='#000038')
+            self.gui.buttonSouth.config(state='disabled', cursor='no', fg='#00a6ff', bg='#000038')
+            self.gui.buttonWest.config(state='disabled', cursor='no', fg='#00a6ff', bg='#000038')
+            self.gui.buttonMove.config(state='disabled', cursor='no', fg='#00a6ff', bg='#000038')
 
     def getInventoryButtonWithIndex(self, index):
         """
@@ -434,8 +434,8 @@ class GameController(object):
         Deaktiviert Move- und Look-Button, während der Spieler interargiert
         """
         if self.game.getPlayer().isInteracting():
-            self.gui.buttonLook.config(state='disabled', cursor='no')
-            self.gui.buttonMove.config(state='disabled', cursor='no')
+            self.gui.buttonLook.config(state='disabled', cursor='no', fg='#00a6ff', bg='#000038')
+            self.gui.buttonMove.config(state='disabled', cursor='no', fg='#00a6ff', bg='#000038')
         else:
-            self.gui.buttonLook.config(state='active', cursor='hand2')
-            self.gui.buttonMove.config(state='active', cursor='hand2')
+            self.gui.buttonLook.config(state='active', cursor='hand2', fg='#00a6ff', bg='#000038')
+            self.gui.buttonMove.config(state='active', cursor='hand2', fg='#00a6ff', bg='#000038')

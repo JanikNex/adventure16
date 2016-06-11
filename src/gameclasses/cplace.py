@@ -278,3 +278,12 @@ class Place(object):
         self.citizen.append(citizen)
         citizen.setPlace(self)
         self.map.addCitizen(citizen)
+
+    def getPlayer(self):
+        """
+        Gibt Spieler zurück.
+        Methode nur zum sicherstellen der Funktionalität des Briefes außerhalb des Inventars vorhanden!
+        :return: Player
+        :rtype: Player
+        """
+        return self.map.getGame().getPlayer()

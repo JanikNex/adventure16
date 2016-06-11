@@ -31,17 +31,17 @@ class Starter(object):
         """
         # Startet neues Spiel
         # Deaktivieren des Buttons, damit nur ein Spiel zur gleichen Zeit laufen kann
-        self.start.buttonStartGame.config(text='Ingame...', state='disabled')
-        self.start.buttonTutorial.config(state='disabled')
-        self.start.buttonCredits.config(state='disabled')
+        self.start.buttonStartGame.config(text='Ingame...', state='disabled', cursor='no')
+        self.start.buttonTutorial.config(state='disabled', cursor='no')
+        self.start.buttonCredits.config(state='disabled', cursor='no')
         self.start.fenster.iconify()
         # Spielobjekt erstellen
         game = GameController()
         # Nach beenden des Spieles wird der Button wieder aktiviert
         self.start.fenster.deiconify()
-        self.start.buttonStartGame.config(text='Spiel starten', state='active')
-        self.start.buttonTutorial.config(state='active')
-        self.start.buttonCredits.config(state='active')
+        self.start.buttonStartGame.config(text='Spiel starten', state='active', cursor='hand2')
+        self.start.buttonTutorial.config(state='active', cursor='hand2')
+        self.start.buttonCredits.config(state='active', cursor='hand2')
         # Zum Abschluss werden die Credits automatisch abgespielt
         # self.creditStart()
 
@@ -52,17 +52,17 @@ class Starter(object):
         """
         # Startet neues Tutorial
         # Deaktivieren des Buttons, damit nur ein Tutorial zur gleichen Zeit laufen kann
-        self.start.buttonStartGame.config(state='disabled')
-        self.start.buttonTutorial.config(text='Ingame...', state='disabled')
-        self.start.buttonCredits.config(state='disabled')
+        self.start.buttonStartGame.config(state='disabled', cursor='no')
+        self.start.buttonTutorial.config(text='Ingame...', state='disabled', cursor='no')
+        self.start.buttonCredits.config(state='disabled', cursor='no')
         self.start.fenster.iconify()
         # Spielobjekt erstellen
         tutorial = TutorialController()
         # Nach beenden des Tutorials wird der Button wieder aktiviert
         self.start.fenster.deiconify()
-        self.start.buttonStartGame.config(state='active')
-        self.start.buttonTutorial.config(text='Tutorial', state='active')
-        self.start.buttonCredits.config(state='active')
+        self.start.buttonStartGame.config(state='active', cursor='hand2')
+        self.start.buttonTutorial.config(text='Tutorial', state='active', cursor='hand2')
+        self.start.buttonCredits.config(state='active', cursor='hand2')
 
     def creditStart(self):
         """
@@ -71,17 +71,17 @@ class Starter(object):
         """
         # Startet Credits
         # Deaktivieren des Buttons, damit nur ein Credit-Fenster zur gleichen Zeit laufen kann
-        self.start.buttonStartGame.config(state='disabled')
-        self.start.buttonCredits.config(text='Ingame...', state='disabled')
-        self.start.buttonTutorial.config(state='disabled')
+        self.start.buttonStartGame.config(state='disabled', cursor='no')
+        self.start.buttonCredits.config(text='Ingame...', state='disabled', cursor='no')
+        self.start.buttonTutorial.config(state='disabled', cursor='no')
         self.start.fenster.iconify()
         # Spielobjekt erstellen
         credits = CreditController()
         # Nach beenden der Credits wird der Button wieder aktiviert
         self.start.fenster.deiconify()
-        self.start.buttonStartGame.config(state='active')
-        self.start.buttonCredits.config(text='Credits', state='active')
-        self.start.buttonTutorial.config(state='active')
+        self.start.buttonStartGame.config(state='active', cursor='hand2')
+        self.start.buttonCredits.config(text='Credits', state='active', cursor='hand2')
+        self.start.buttonTutorial.config(state='active', cursor='hand2')
 
 
 if __name__ == '__main__':
