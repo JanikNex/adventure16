@@ -43,7 +43,7 @@ class Starter(object):
         self.start.buttonTutorial.config(state='active', cursor='hand2')
         self.start.buttonCredits.config(state='active', cursor='hand2')
         # Zum Abschluss werden die Credits automatisch abgespielt
-        # self.creditStart()
+        self.creditStart()
 
     def tutorialStart(self):
         """

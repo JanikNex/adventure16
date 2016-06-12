@@ -78,7 +78,6 @@ class DialogueHandler(object):
         if select is None:
             thisStep = self.jsonparser.getData()[str(self.usePrestige)][str(self.step)]
             self.textOutput = [thisStep['text'], thisStep['operator']]
-            print(thisStep)
             if thisStep['operator'] == 'P':
                 self.step = int(thisStep['goTo'])
                 self.game.getPlayer().increasePrestige(int(thisStep['prestigeChange']))
@@ -91,7 +90,6 @@ class DialogueHandler(object):
             self.step = self.getButtonArray('goto')[select]
             thisStep = self.jsonparser.getData()[str(self.usePrestige)][str(self.step)]
             self.textOutput = [thisStep['text'], thisStep['operator']]
-            print(thisStep)
             if thisStep['operator'] == 'P':
                 self.step = int(thisStep['goTo'])
                 self.game.getPlayer().increasePrestige(

@@ -12,7 +12,7 @@ class Entity(object):
         self.description = ''
         self.actions = []
         self.__actionDatabase = ['Anschauen', 'Erinnerungen hervorrufen', 'Verlassen', 'Lesen', 'Ansprechen',
-                                 'Aufheben', 'Fallen lassen', 'Ansprechen ', 'Anschauen ', 'Betrachten']
+                                 'Aufheben', 'Fallen lassen', 'Ansprechen ', 'Anschauen ', 'Betrachten', 'Ansprechen  ']
         self.quitPhrase = 'Exit'
 
     def getName(self):
@@ -194,3 +194,8 @@ class Entity(object):
                 return self.description
             elif interactionCall == self.__actionDatabase[9]:
                 return self.getContent()
+            # Reden, verstecken und verlassen erlauben
+            elif interactionCall == self.__actionDatabase[10]:
+                self.place.allowExit()
+                self.hide()
+                return self.talk()
