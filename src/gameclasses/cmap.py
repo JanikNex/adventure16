@@ -21,7 +21,7 @@ class Map(object):
         del jsonhandler
         print('[DEBUG] Map generation finished...')
 
-    def getPlacees(self):
+    def getPlaces(self):
         """
         Gibt eine Liste aller vorhandenen Orte zurück
         :return: Liste aller Orte
@@ -42,6 +42,13 @@ class Map(object):
         return False
 
     def getPlacePerID(self, id):
+        """
+        Gibt das Placeobjekt mit gegebener PlaceID zurück
+        :param id: PlaceID aus der Placedata JSON Datei
+        :type id: int
+        :return: Gesuchter Platz oder None, falls kein Place mit dieser ID vorhanden ist
+        :rtype: Place
+        """
         for i in self.places:
             if i.getID() == id:
                 return i
@@ -59,6 +66,7 @@ class Map(object):
         """
         Fügt ein Itemobjekt zur Itemliste hinzu
         :param item: Item
+        :type item: Item
         """
         self.items.append(item)
 
@@ -66,6 +74,7 @@ class Map(object):
         """
         Fügt ein citizenobjekt zur Citizenliste hinzu
         :param citizen: Citizen
+        :type citizen: Citizen
         """
         self.citizen.append(citizen)
 
@@ -86,6 +95,7 @@ class Map(object):
         """
         Gibt einen Citizen mit gegebenem Namen zurück
         :param name: Name eines Citizens
+        :type name: str
         :return: Citizen
         :rtype: Citizen
         """

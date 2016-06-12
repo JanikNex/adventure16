@@ -20,10 +20,16 @@ class Player(object):
         """
         Gibt den aktuellen Standort des Spielers zurück
         :return: Place
+        :rtype: Place
         """
         return self.place
 
     def getGame(self):
+        """
+        Gibt das Spiel zurück
+        :return: Game
+        :rtype: Game
+        """
         return self.game
 
     def setPlace(self, place):

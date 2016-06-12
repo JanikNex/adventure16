@@ -27,7 +27,10 @@ class Inventory(object):
     def getItem(self, index):
         """
         Gibt das Itemobjekt, welchs sich an gegebenem Index gebindet zurück
-        :rtype: object
+        :param index: Idex des gesuchten Items im Inventar
+        :type index: int
+        :return: Item an gegebenem Index
+        :rtype: Item
         """
         if index <= len(self.items) - 1:
             return self.items[index]
@@ -53,7 +56,7 @@ class Inventory(object):
         """
         Entfernt ein bestimmtes Itemobjekt aus dem Inventar
         :param item: Itemobjekt
-        :type item: object
+        :type item: Item
         """
         self.items.remove(item)
 
@@ -61,7 +64,7 @@ class Inventory(object):
         """
         Fügt ein gegebenes Itemobjekt zum Inventar hinzu
         :param item: Itemobjekt
-        :type item: object
+        :type item: Item
         """
         self.items.append(item)
 
@@ -69,8 +72,8 @@ class Inventory(object):
         """
         Gibt zurück, ob sich ein gegebenes Item im Inventar befindet
         :param item: Itemobekt
-        :type item: object
-        :return:
+        :type item: Item
+        :rtype: bool
         """
         return item in self.items
 

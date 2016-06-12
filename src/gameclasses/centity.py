@@ -78,6 +78,8 @@ class Entity(object):
         Ersetzt einen Actioncode durch einen neuen
         :param old: Alter Actioncode
         :param new: Neuer Actioncode
+        :type old: int
+        :type new: int
         """
         array = self.getActionCodes()
         for i in range(len(array)):
@@ -86,6 +88,11 @@ class Entity(object):
         self.setActions(array)
 
     def getActionCodes(self):
+        """
+        Gibt die Actions als Actioncodes zurück
+        :return: Liste der Actioncodes
+        :rtype: list
+        """
         array = []
         for i in self.actions:
             for e, n in enumerate(self.__actionDatabase):

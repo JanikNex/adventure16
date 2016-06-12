@@ -252,7 +252,7 @@ class Place(object):
     def getInteractionPossNum(self):
         """
         Gibt die maximale Anzahl an Interaktionsmöglichkeiten zurück
-        :return:
+        :rtype: int
         """
         if not self.getMap().getGame().getPlayer().isInteracting():
             return len(self.getVisibleCitizens()) + len(self.getVisibleItems())
