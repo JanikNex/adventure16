@@ -38,7 +38,7 @@ class GUIGame(object):
             self.fenster.geometry("1024x600")
             self.fenster.wm_iconbitmap("src/icon.ico")
             self.fenster.resizable(0, 0)
-            # self.fenster.attributes("-topmost", 1)
+            self.fenster.attributes("-topmost", 1)
             # Erstellt alle Elemente der GUI
             # MasterFrame
             self.masterFrame = Frame(master=self.fenster)
