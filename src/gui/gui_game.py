@@ -101,7 +101,8 @@ class GUIGame(object):
                                                   state='disabled', cursor='arrow')
             self.textOutput.pack(fill=BOTH, expand=True)
             # Formatierungstags für die Textausgabe
-            self.textOutput.tag_configure('warning', foreground='red', justify=CENTER, spacing1=2, font=("fixedsys", 12))
+            self.textOutput.tag_configure('warning', foreground='red', justify=CENTER, spacing1=2,
+                                          font=("fixedsys", 12))
             self.textOutput.tag_configure('description', foreground='#00a6ff', justify=CENTER, font=("fixedsys", 12))
             self.textOutput.tag_configure('main', foreground='#00a6ff', justify=LEFT, font=("fixedsys", 12))
             self.textOutput.tag_configure('dialogue', foreground='#00a6ff', justify=RIGHT, font=("fixedsys", 12))

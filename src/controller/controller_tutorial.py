@@ -140,7 +140,7 @@ class TutorialController(object):
         """
         self.textOutputReset()
         self.gui.textOutput['state'] = 'normal'
-        self.gui.textOutput.insert('end', '\n\n\n\n\n\n\n'+text, 'tutorial')
+        self.gui.textOutput.insert('end', '\n\n\n\n\n\n\n' + text, 'tutorial')
         self.gui.textOutput['state'] = 'disabled'
 
     def setAnswers(self, answers):

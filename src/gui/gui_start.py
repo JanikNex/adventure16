@@ -29,7 +29,8 @@ class GUIStart(object):
             self.picture.place(x=0, y=0)
             # Button Style generieren
             self.buttonStyle = ttk.Style()
-            self.buttonStyle.configure("C.TButton", foreground='#00a6ff', background='#000038', activebackground='#000038',
+            self.buttonStyle.configure("C.TButton", foreground='#00a6ff', background='#000038',
+                                       activebackground='#000038',
                                        activeforeground='#00a6ff')
             self.buttonStyle.map("C.TButton", foreground=[('pressed', '#00a6ff'), ('active', '#00a6ff'),
                                                           ('!pressed', '!active', 'black')],

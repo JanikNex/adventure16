@@ -113,7 +113,8 @@ class GameController(object):
                                 self.textOutputReset()
                                 self.selectInteraction(int(self.getTextInput()))
                                 if self.game.getPlayer().isInteracting() and not self.game.getDialogueHandler().isInDialogue():
-                                    self.textOutputInteraction(self.game.getPlayer().getInteraction().getActionsAsString())
+                                    self.textOutputInteraction(
+                                        self.game.getPlayer().getInteraction().getActionsAsString())
                                     self.gui.textInput.focus()
                                 else:
                                     self.buttonLook()
@@ -225,7 +226,8 @@ class GameController(object):
         """
         try:
             self.gui.textOutput['state'] = 'normal'
-            self.gui.textOutput.delete(self.gui.textOutput.index(tag+'.first'), self.gui.textOutput.index(tag+'.last'))
+            self.gui.textOutput.delete(self.gui.textOutput.index(tag + '.first'),
+                                       self.gui.textOutput.index(tag + '.last'))
             self.gui.textOutput['state'] = 'disabled'
         except TclError:
             pass
@@ -282,7 +284,7 @@ class GameController(object):
         if tag is None:
             self.gui.textOutput.insert('end', '\n\n' + text)
         else:
-            self.gui.textOutput.insert('end', '\n\n'+text, tag)
+            self.gui.textOutput.insert('end', '\n\n' + text, tag)
         self.gui.textOutput['state'] = 'disabled'
         self.gui.textOutput.see('end')
 
@@ -327,13 +329,16 @@ class GameController(object):
         else:
             self.AnswerButtonsActive = True
             if len(answers) >= 1:
-                self.gui.buttonAnswerA.config(text=answers[0], state='active', cursor='hand2', fg='#00a6ff', bg='#000038')
+                self.gui.buttonAnswerA.config(text=answers[0], state='active', cursor='hand2', fg='#00a6ff',
+                                              bg='#000038')
                 self.gui.buttonAnswerB.config(state='disabled', cursor='no', fg='#00a6ff', bg='#000038')
                 self.gui.buttonAnswerC.config(state='disabled', cursor='no', fg='#00a6ff', bg='#000038')
             if len(answers) >= 2:
-                self.gui.buttonAnswerB.config(text=answers[1], state='active', cursor='hand2', fg='#00a6ff', bg='#000038')
+                self.gui.buttonAnswerB.config(text=answers[1], state='active', cursor='hand2', fg='#00a6ff',
+                                              bg='#000038')
             if len(answers) == 3:
-                self.gui.buttonAnswerC.config(text=answers[2], state='active', cursor='hand2', fg='#00a6ff', bg='#000038')
+                self.gui.buttonAnswerC.config(text=answers[2], state='active', cursor='hand2', fg='#00a6ff',
+                                              bg='#000038')
 
     def setInventory(self):
         """
@@ -342,7 +347,8 @@ class GameController(object):
         for i in range(10):
             if self.game.getPlayer().getInventory().isItemInSlot(i):
                 self.ImageInventorySlot[i] = PhotoImage(file=self.game.player.inventory.getItem(i).getTexture())
-                self.getInventoryButtonWithIndex(i).config(image=self.ImageInventorySlot[i], state='active', cursor='hand2')
+                self.getInventoryButtonWithIndex(i).config(image=self.ImageInventorySlot[i], state='active',
+                                                           cursor='hand2')
             else:
                 self.getInventoryButtonWithIndex(i).config(image=self.ImageNoItem, state='disabled', cursor='no')
 
